@@ -4,12 +4,15 @@ import com.jaggerabney.csci143.week1.*;
 
 public class Client {
     public static void main(String[] args) {
-        MyRectangle r1 = new MyRectangle(4, 40);
-        MyRectangle r2 = new MyRectangle(3.5, 35.9);
-        
-        System.out.println("The area of a rectangle with width " + r1.width + " and height " + r1.height + " is " + r1.getArea());
-        System.out.println("The perimeter of a rectangle is " + r1.getPerimeter());
-        System.out.println("The area of a rectangle with width " + r2.width + " and height " + r2.height + " is " + r2.getArea());
-        System.out.println("The perimeter of a rectangle is " + r2.getPerimeter());
+        RegularPolygon rp1 = new RegularPolygon();
+        RegularPolygon rp2 = new RegularPolygon(6, 4);
+        RegularPolygon rp3 = new RegularPolygon(10, 4, 5.6, 7.8);
+
+        System.out.println("Polygon 1 perimeter: " + rp1.getPerimeter());
+        System.out.println("Polygon 1 area: " + rp1.getArea());
+        System.out.println("Polygon 2 perimeter: " + rp2.getPerimeter());
+        System.out.println("Polygon 2 area: " + rp2.getArea());
+        System.out.println("Polygon 3 perimeter: " + rp3.getPerimeter());
+        System.out.println("Polygon 3 area: " + rp3.getArea());
     }
 }
