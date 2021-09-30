@@ -18,6 +18,7 @@ public class Client {
         columns = Integer.parseInt(tempArray[1]);
 
         double[][] values = new double[rows][columns];
+        System.out.println("Enter the array:\n");
 
         for (int i = 0; i < rows; i++) {
             temp = input.nextLine();
@@ -31,5 +32,6 @@ public class Client {
         maxValue = Location.locateLargest(values);
         System.out.println("The largest element is " + maxValue.maxValue + 
             ", located at (" + maxValue.row + ", " + maxValue.column + ")");
+        input.close();
     }
 }
