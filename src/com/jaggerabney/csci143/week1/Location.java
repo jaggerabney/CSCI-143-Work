@@ -9,4 +9,18 @@ public class Location {
     this.column = column;
     this.maxValue = maxValue;
   }
+
+  public static Location locateLargest(double[][] a) {
+    Location currentMax = new Location(0, 0, a[0][0]);
+
+    for (int i = 0; i < a.length; i++) {
+      for (int j = 0; j < a[i].length; j++) {
+        if (a[i][j] > currentMax.maxValue) {
+          currentMax = new Location(i, j, a[i][j]);
+        }
+      }
+    }
+
+    return currentMax;
+  }
 }
