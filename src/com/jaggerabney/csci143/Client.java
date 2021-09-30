@@ -1,18 +1,35 @@
 package com.jaggerabney.csci143;
 
 import com.jaggerabney.csci143.week1.*;
+import java.util.Scanner;
 
 public class Client {
     public static void main(String[] args) {
-        RegularPolygon rp1 = new RegularPolygon();
-        RegularPolygon rp2 = new RegularPolygon(6, 4);
-        RegularPolygon rp3 = new RegularPolygon(10, 4, 5.6, 7.8);
+        Scanner input = new Scanner(System.in);
+        String temp;
+        String[] tempArray;
+        int rows, columns;
+        Location maxValue;
 
-        System.out.println("Polygon 1 perimeter: " + rp1.getPerimeter());
-        System.out.println("Polygon 1 area: " + rp1.getArea());
-        System.out.println("Polygon 2 perimeter: " + rp2.getPerimeter());
-        System.out.println("Polygon 2 area: " + rp2.getArea());
-        System.out.println("Polygon 3 perimeter: " + rp3.getPerimeter());
-        System.out.println("Polygon 3 area: " + rp3.getArea());
+        System.out.print("Enter the number of rows and columns: ");
+        temp = input.nextLine();
+        tempArray = temp.split(" ");
+        rows = Integer.parseInt(tempArray[0]);
+        columns = Integer.parseInt(tempArray[1]);
+
+        double[][] values = new double[rows][columns];
+
+        for (int i = 0; i < rows; i++) {
+            temp = input.nextLine();
+            tempArray = temp.split(" ");
+
+            for (int j = 0; j < columns; j++) {
+                values[i][j] = Double.parseDouble(tempArray[j]);
+            }
+        }
+
+        maxValue = Location.locateLargest(values);
+        System.out.println("The largest element is " + maxValue.maxValue + 
+            ", located at (" + maxValue.row + ", " + maxValue.column + ")");
     }
 }
