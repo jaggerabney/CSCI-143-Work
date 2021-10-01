@@ -1,4 +1,4 @@
-package com.jaggerabney.csci143.week1;
+package com.jaggerabney.csci143.week1.assignment;
 
 public class MyInteger {
   private int value;

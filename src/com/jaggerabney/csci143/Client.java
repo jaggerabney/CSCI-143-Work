@@ -1,6 +1,6 @@
 package com.jaggerabney.csci143;
 
-import com.jaggerabney.csci143.week1.*;
+import com.jaggerabney.csci143.week1.projects.Location;
 import java.util.Scanner;
 
 public class Client {

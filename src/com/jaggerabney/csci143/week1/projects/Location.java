@@ -1,4 +1,4 @@
-package com.jaggerabney.csci143.week1;
+package com.jaggerabney.csci143.week1.projects;
 
 public class Location {
   public int row, column;
