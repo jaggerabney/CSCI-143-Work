@@ -22,7 +22,6 @@ public class MyInteger {
   public boolean isPrime() {
     return MyInteger.isPrime(value);
   }
-  
 
   public static boolean isEven(int value) {
     return (value % 2 == 0);
@@ -32,6 +31,10 @@ public class MyInteger {
     return !MyInteger.isEven(value);
   }
 
+  public void bruh() {
+
+  }
+
   public static boolean isPrime(int value) {
     boolean isPrime = true;
 
@@ -39,7 +42,7 @@ public class MyInteger {
       for (int i = 2; i < value; i++) {
         if (value % i == 0) { // if value is divisible by anything
           isPrime = false;
-        } 
+        }
       }
     } else {
       isPrime = false; // apparently 0, 1, and negative numbers are not prime
