@@ -38,10 +38,12 @@ public class MyInteger {
     if (value >= 2) {
       for (int i = 2; i < value; i++) {
         if (value % i == 0) { // if value is divisible by anything
-          System.out.println(i);
           isPrime = false;
         } 
       }
+    } else {
+      isPrime = false; // apparently 0, 1, and negative numbers are not prime
+      // this else statement reflects that admittedly weird mathematic behavior
     }
 
     return isPrime;

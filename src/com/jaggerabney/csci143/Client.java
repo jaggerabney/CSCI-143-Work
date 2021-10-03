@@ -1,37 +1,17 @@
 package com.jaggerabney.csci143;
 
-import com.jaggerabney.csci143.week1.projects.Location;
-import java.util.Scanner;
+import com.jaggerabney.csci143.week1.assignment.*;
 
 public class Client {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        String temp;
-        String[] tempArray;
-        int rows, columns;
-        Location maxValue;
+        for (int i = 1; i <= 10; i++) {
+            MyInteger number = new MyInteger(i);
 
-        System.out.print("Enter the number of rows and columns: ");
-        temp = input.nextLine();
-        tempArray = temp.split(" ");
-        rows = Integer.parseInt(tempArray[0]);
-        columns = Integer.parseInt(tempArray[1]);
-
-        double[][] values = new double[rows][columns];
-        System.out.println("Enter the array:\n");
-
-        for (int i = 0; i < rows; i++) {
-            temp = input.nextLine();
-            tempArray = temp.split(" ");
-
-            for (int j = 0; j < columns; j++) {
-                values[i][j] = Double.parseDouble(tempArray[j]);
-            }
+            System.out.println(number.get());
+            System.out.println("n1 is even? " + number.isEven());
+            System.out.println("n1 is prime? " + number.isPrime());
+            System.out.println("n1 is odd? " + number.isOdd());
+            System.out.println();
         }
-
-        maxValue = Location.locateLargest(values);
-        System.out.println("The largest element is " + maxValue.maxValue + 
-            ", located at (" + maxValue.row + ", " + maxValue.column + ")");
-        input.close();
     }
 }
