@@ -4,7 +4,7 @@ import com.jaggerabney.csci143.week1.assignment.*;
 
 public class Client {
   public static void main(String[] args) {
-    for (int i = 1; i <= 10; i++) {
+    for (int i = 1; i <= 11; i++) {
       MyInteger number = new MyInteger(i);
 
       System.out.println(number.get());
