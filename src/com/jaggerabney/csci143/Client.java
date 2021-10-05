@@ -1,17 +1,23 @@
 package com.jaggerabney.csci143;
 
-import com.jaggerabney.csci143.week1.assignment.*;
+import com.jaggerabney.csci143.week2.projects.*;
+import java.util.*;
 
 public class Client {
   public static void main(String[] args) {
-    for (int i = 1; i <= 11; i++) {
-      MyInteger number = new MyInteger(i);
+    Scanner input = new Scanner(System.in);
+    ArrayList<Integer> list = new ArrayList<Integer>();
 
-      System.out.println(number.get());
-      System.out.println("n1 is even? " + number.isEven());
-      System.out.println("n1 is prime? " + number.isPrime());
-      System.out.println("n1 is odd? " + number.isOdd());
-      System.out.println();
+    System.out.print("Enter ten numbers: ");
+    for (int i = 0; i < 10; i++) {
+      list.add(input.nextInt());
     }
+    Project1.removeDuplicate(list);
+
+    System.out.print("\nThe distinct integers are: ");
+    for (int num : list) {
+      System.out.print(num + " ");
+    }
+    input.close();
   }
 }
