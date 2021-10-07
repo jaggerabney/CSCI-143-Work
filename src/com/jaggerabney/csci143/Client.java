@@ -5,8 +5,19 @@ import java.util.*;
 
 public class Client {
   public static void main(String[] args) {
-    double[] points = { -12, 0, -8.5, 10, 0, 11.4, 5.5, 7.8, 6, -5.5, 0, -7, -3.5, -5.5 };
+    Scanner input = new Scanner(System.in);
+    int numPoints;
+    double[] points;
+
+    System.out.println("Enter the number of points: ");
+    numPoints = input.nextInt();
+    points = new double[numPoints * 2];
+    System.out.println("Enter the coordinates of the points: ");
+    for (int i = 0; i < points.length; i++) {
+      points[i] = input.nextDouble();
+    }
+
     ConvexPolygon cp = new ConvexPolygon(points);
-    System.out.println(cp.getArea());
+    System.out.println("The total area is " + cp.getArea());
   }
 }
