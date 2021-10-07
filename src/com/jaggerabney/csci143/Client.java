@@ -5,19 +5,8 @@ import java.util.*;
 
 public class Client {
   public static void main(String[] args) {
-    Scanner input = new Scanner(System.in);
-    ArrayList<Integer> list = new ArrayList<Integer>();
-
-    System.out.print("Enter ten numbers: ");
-    for (int i = 0; i < 10; i++) {
-      list.add(input.nextInt());
-    }
-    Project1.removeDuplicate(list);
-
-    System.out.print("\nThe distinct integers are: ");
-    for (int num : list) {
-      System.out.print(num + " ");
-    }
-    input.close();
+    double[] points = { -12, 0, -8.5, 10, 0, 11.4, 5.5, 7.8, 6, -5.5, 0, -7, -3.5, -5.5 };
+    ConvexPolygon cp = new ConvexPolygon(points);
+    System.out.println(cp.getArea());
   }
 }
