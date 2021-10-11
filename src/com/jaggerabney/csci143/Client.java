@@ -5,9 +5,11 @@ import java.util.*;
 
 public class Client {
   public static void main(String[] args) {
-    int[] primeFactors = PerfectSquare.primeFactorizationsOf(225);
-    for (int factor : primeFactors) {
-      System.out.println(factor);
+    int[] primeFactors = PerfectSquare.primeFactorizationsOf(63);
+    int[] oddOccurences = PerfectSquare.getOddOccurences(primeFactors);
+
+    for (int occurence : oddOccurences) {
+      System.out.println(occurence);
     }
   }
 }
