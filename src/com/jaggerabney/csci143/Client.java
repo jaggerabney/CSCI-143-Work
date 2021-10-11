@@ -5,10 +5,9 @@ import java.util.*;
 
 public class Client {
   public static void main(String[] args) {
-    Scanner input = new Scanner(System.in);
-    int m, n;
-
-    System.out.println("Enter an integer m: ");
-    m = input.nextInt();
+    int[] primeFactors = PerfectSquare.primeFactorizationsOf(225);
+    for (int factor : primeFactors) {
+      System.out.println(factor);
+    }
   }
 }

@@ -33,7 +33,6 @@ public class ConvexPolygon {
     double sum = 0;
 
     if (points != null && points.length >= 6 && points.length % 2 == 0) {
-      double x1, y1, x2, y2;
       Point[] pointsAsPoints = initPointsArray(points);
 
       for (int i = pointsAsPoints.length - 1; i > 0; i--) {

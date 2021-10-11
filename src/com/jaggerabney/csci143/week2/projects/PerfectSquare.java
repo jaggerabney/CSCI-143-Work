@@ -7,7 +7,7 @@ public class PerfectSquare {
     int divisor = 2;
     ArrayList<Integer> primeFactors = new ArrayList<Integer>();
 
-    while (value > 0) {
+    while (value > 1) {
       if ((double) value % (double) divisor == 0.0) {
         primeFactors.add(divisor);
         value /= divisor;
@@ -20,9 +20,10 @@ public class PerfectSquare {
   }
 
   public static int nextPrimeAfter(int value) {
-    while (!isPrime(value)) {
+    do {
       value++;
-    }
+    } while (isPrime(value) == false);
+
     return value;
   }
 
