@@ -5,11 +5,18 @@ import java.util.*;
 
 public class Client {
   public static void main(String[] args) {
-    int[] primeFactors = PerfectSquare.primeFactorizationsOf(63);
-    int[] oddOccurences = PerfectSquare.getOddOccurences(primeFactors);
+    Scanner input = new Scanner(System.in);
+    int m;
 
-    for (int occurence : oddOccurences) {
-      System.out.println(occurence);
-    }
+    System.out.print("Enter an integer m: ");
+    m = input.nextInt();
+
+    int[] primeFactors = PerfectSquare.primeFactorizationsOf(m);
+    int[] oddOccurences = PerfectSquare.getOddOccurences(primeFactors);
+    int n = PerfectSquare.multiplyArrayTogether(oddOccurences);
+    int mByN = m * n;
+
+    System.out.println("The smallest number n for m x n to be a perfect square is " + n);
+    System.out.println("m x n is " + mByN);
   }
 }

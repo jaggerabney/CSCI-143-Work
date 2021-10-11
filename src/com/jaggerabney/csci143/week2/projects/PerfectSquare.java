@@ -3,6 +3,16 @@ package com.jaggerabney.csci143.week2.projects;
 import java.util.ArrayList;
 
 public class PerfectSquare {
+  public static int multiplyArrayTogether(int[] array) {
+    int product = 1;
+
+    for (int value : array) {
+      product *= value;
+    }
+
+    return product;
+  }
+
   public static int[] getOddOccurences(int[] values) {
     ArrayList<Integer> oddOccurences = new ArrayList<Integer>();
 
