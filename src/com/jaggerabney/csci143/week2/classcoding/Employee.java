@@ -16,4 +16,10 @@ public class Employee {
   public String getVacationForm() {
     return "yellow";
   }
+
+  @Override
+  public String toString() {
+    return "This employee works " + getHours() + " a week, is paid " + getSalary() + " a year, gets " + getVacation()
+        + " days of vacation a year, and uses a " + getVacationForm() + " vacation form.";
+  }
 }
