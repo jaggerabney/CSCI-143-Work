@@ -1,22 +1,16 @@
 package com.jaggerabney.csci143;
 
-import com.jaggerabney.csci143.week2.projects.*;
-import java.util.*;
+import com.jaggerabney.csci143.week2.classcoding.*;
 
 public class Client {
   public static void main(String[] args) {
-    Scanner input = new Scanner(System.in);
-    int m;
+    Employee emp = new Employee();
+    Marketer john = new Marketer();
+    Lawyer lisa = new Lawyer();
 
-    System.out.print("Enter an integer m: ");
-    m = input.nextInt();
-
-    int[] primeFactors = PerfectSquare.primeFactorizationsOf(m);
-    int[] oddOccurences = PerfectSquare.getOddOccurences(primeFactors);
-    int n = PerfectSquare.multiplyArrayTogether(oddOccurences);
-    int mByN = m * n;
-
-    System.out.println("The smallest number n for m x n to be a perfect square is " + n);
-    System.out.println("m x n is " + mByN);
+    System.out.println(emp.getSalary());
+    System.out.println(john.getSalary());
+    System.out.println(lisa.getHours());
+    System.out.println(lisa.getVacationForm());
   }
 }
