@@ -1,7 +1,7 @@
 package com.jaggerabney.csci143.week2.classcoding;
 
 public class Employee {
-  private int yearsWorked;
+  protected int yearsWorked;
 
   public Employee(int yearsWorked) {
     this.yearsWorked = yearsWorked;

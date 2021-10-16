@@ -6,6 +6,11 @@ public class Lawyer extends Employee {
   }
 
   @Override
+  public double getSalary() {
+    return super.getSalary() + (5000.0 * yearsWorked);
+  }
+
+  @Override
   public int getVacation() {
     return super.getVacation() + 5;
   }
