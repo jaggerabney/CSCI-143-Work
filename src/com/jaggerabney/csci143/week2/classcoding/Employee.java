@@ -1,6 +1,12 @@
 package com.jaggerabney.csci143.week2.classcoding;
 
 public class Employee {
+  private int yearsWorked;
+
+  public Employee(int yearsWorked) {
+    this.yearsWorked = yearsWorked;
+  }
+
   public int getHours() {
     return 40;
   }
@@ -10,7 +16,7 @@ public class Employee {
   }
 
   public int getVacation() {
-    return 10;
+    return 10 + (yearsWorked * 2);
   }
 
   public String getVacationForm() {
