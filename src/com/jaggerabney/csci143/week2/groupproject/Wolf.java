@@ -35,7 +35,8 @@ public class Wolf implements Critter {
       // OR if the Wolf sees another Wolf, move in a random direction
       if (donc == null) {
         // when the Wolf is not chasing something, it will move in a random direction
-        // every three steps
+        // every three steps; their starting steps before moving, however, is a
+        // random number between one and three, so they don't all move in unison
         if (stepsToMove <= 0) {
           stepsToMove = defaultStepsToMove;
           return cardinalDirections[randomNumberInRange(0, 4)];
@@ -45,8 +46,7 @@ public class Wolf implements Critter {
         }
       } else {
         // if directionOfNearestCritter returned a direction, start moving in it
-        // Wolves only chase critters for 8 steps before returning home, which
-        // is why chasingSteps is subtracted from
+        // Wolves only chase critters for 20 steps
         chasing = true;
         targetCritter = donc.getKey();
         chasingSteps = defaultChasingSteps;
@@ -58,13 +58,17 @@ public class Wolf implements Critter {
       // Wolves will only chase the critter they are already chasing --
       // they won't be distacted by other critters unless they are not
       // actively chasing anything else
+
+      // the exception to this is if another critter of the same type
+      // moves next to the Wolf, in which case the first one to be
+      // found (in clockwise order) will be the one chased
       donc = directionOfNearestCritter(info, targetCritter);
 
       // wolves can only see in the four cardinal directions around them, so if a
       // critter somehow moves to one of its diagonals, directionOfNearestCritter
       // will return 0 -- the Wolf will have "lost sight" of the animal
-      // it stands in place for a step before moving back to its home.
-      // alternatively, Wolves will stop chasing critters after 8 steps, which is
+      // it stands in place for a step before returning to its random movement
+      // alternatively, Wolves will stop chasing critters after 20 steps, which is
       // why it is in the condition here
       if (donc == null || chasingSteps == 0) {
         chasing = false;
@@ -111,8 +115,39 @@ public class Wolf implements Critter {
     return null;
   }
 
+  // helper function that produces a random number in a specified range
   private static int randomNumberInRange(int lowerBound, int upperBound) {
     Random random = new Random();
     return random.nextInt(upperBound - lowerBound) + lowerBound;
+  }
+}
+
+// helper class used by a Wolf when chasing a critter
+// stores a basic key-value pair -- in the case of the Wolf, the key
+// is the critter's character and the value is what direction it is
+// relative to the Wolf
+class Pair<T1, T2> {
+  private T1 key;
+  private T2 value;
+
+  public Pair(T1 key, T2 value) {
+    this.key = key;
+    this.value = value;
+  }
+
+  public void setKey(T1 key) {
+    this.key = key;
+  }
+
+  public T1 getKey() {
+    return key;
+  }
+
+  public void setValue(T2 value) {
+    this.value = value;
+  }
+
+  public T2 getValue() {
+    return value;
   }
 }
