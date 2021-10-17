@@ -10,7 +10,7 @@ public class Turtle implements Critter {
   private Movement movementInfo;
 
   public Turtle() {
-    this.movementInfo = new Movement(5, Critter.SOUTH);
+    this.movementInfo = new Movement(5);
   }
 
   @Override
@@ -30,7 +30,7 @@ public class Turtle implements Critter {
     // and the last direction turned to
     public int defaultSteps, stepsToTurn, lastMoveDirection;
 
-    public Movement(int defaultSteps, int lastMoveDirection) {
+    public Movement(int defaultSteps) {
       this.defaultSteps = defaultSteps;
       this.stepsToTurn = defaultSteps;
       this.lastMoveDirection = randomDirection();
