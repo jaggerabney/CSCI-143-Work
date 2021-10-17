@@ -91,7 +91,7 @@ public class Wolf implements Critter {
 
     for (int i = 0; i < cardinalDirections.length; i++) {
       viewedDirection = info.getNeighbor(cardinalDirections[i]);
-      if (viewedDirection != '.' && viewedDirection != 'W') {
+      if (viewedDirection != '.' && viewedDirection != 'W' && viewedDirection != '!') {
         return new Pair<Character, Integer>(viewedDirection, cardinalDirections[i]);
       }
     }
