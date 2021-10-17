@@ -5,13 +5,15 @@ import java.util.Random;
 public class Wolf implements Critter {
   private boolean chasing;
   private char targetCritter;
-  private int defaultChasingSteps, chasingSteps;
+  private int defaultChasingSteps, chasingSteps, defaultStepsToMove, stepsToMove;
   public static final int[] cardinalDirections = new int[] { Critter.NORTH, Critter.EAST, Critter.SOUTH, Critter.WEST };
 
   public Wolf() {
     this.chasing = false;
-    this.defaultChasingSteps = 8;
+    this.defaultChasingSteps = 20;
+    this.defaultStepsToMove = 3;
     this.chasingSteps = defaultChasingSteps;
+    this.stepsToMove = randomNumberInRange(1, 3);
   }
 
   @Override
@@ -32,10 +34,15 @@ public class Wolf implements Critter {
       // if not (i.e. if directionOfNearestCritter returns 0),
       // OR if the Wolf sees another Wolf, move in a random direction
       if (donc == null) {
-        // find which direction will reduce the distance between this Wolf and its home
-        // the most, and move there
-        Random rng = new Random();
-        return cardinalDirections[rng.nextInt(cardinalDirections.length)];
+        // when the Wolf is not chasing something, it will move in a random direction
+        // every three steps
+        if (stepsToMove <= 0) {
+          stepsToMove = defaultStepsToMove;
+          return cardinalDirections[randomNumberInRange(0, 4)];
+        } else {
+          stepsToMove--;
+          return Critter.CENTER;
+        }
       } else {
         // if directionOfNearestCritter returned a direction, start moving in it
         // Wolves only chase critters for 8 steps before returning home, which
@@ -43,6 +50,7 @@ public class Wolf implements Critter {
         chasing = true;
         targetCritter = donc.getKey();
         chasingSteps = defaultChasingSteps;
+        stepsToMove = defaultStepsToMove;
         return donc.getValue();
       }
     } else {
@@ -61,6 +69,7 @@ public class Wolf implements Critter {
       if (donc == null || chasingSteps == 0) {
         chasing = false;
         targetCritter = '.';
+        stepsToMove = defaultStepsToMove;
         return Critter.CENTER;
       } else {
         // if the Wolf sees the animal, it chases it
@@ -78,7 +87,7 @@ public class Wolf implements Critter {
 
     for (int i = 0; i < cardinalDirections.length; i++) {
       viewedDirection = info.getNeighbor(cardinalDirections[i]);
-      if (viewedDirection != '.') {
+      if (viewedDirection != '.' && viewedDirection != 'W') {
         return new Pair<Character, Integer>(viewedDirection, cardinalDirections[i]);
       }
     }
@@ -100,5 +109,10 @@ public class Wolf implements Critter {
     }
 
     return null;
+  }
+
+  private static int randomNumberInRange(int lowerBound, int upperBound) {
+    Random random = new Random();
+    return random.nextInt(upperBound - lowerBound) + lowerBound;
   }
 }
