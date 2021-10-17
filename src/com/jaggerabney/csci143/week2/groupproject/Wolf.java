@@ -1,13 +1,10 @@
 package com.jaggerabney.csci143.week2.groupproject;
 
-import java.util.*;
-
-import java.awt.Point;
+import java.util.Random;
 
 public class Wolf implements Critter {
   private boolean chasing;
   private char targetCritter;
-  private Point home;
   private int defaultChasingSteps, chasingSteps;
   public static final int[] cardinalDirections = new int[] { Critter.NORTH, Critter.EAST, Critter.SOUTH, Critter.WEST };
 
@@ -19,16 +16,12 @@ public class Wolf implements Critter {
 
   @Override
   public char getChar() {
+    // ! if the wolf is chasing a critter; W otherwise
     return (chasing) ? '!' : 'W';
   }
 
   @Override
   public int getMove(CritterInfo info) {
-    // set "home" (only runs on init)
-    if (home == null) {
-      home = new Point(info.getX(), info.getY());
-    }
-
     Pair<Character, Integer> donc;
 
     if (!chasing) {
@@ -36,12 +29,13 @@ public class Wolf implements Critter {
       // to chase
       donc = directionOfNearestCritter(info);
 
-      // if not (i.e. if directionOfNearestCritter returns 0)
+      // if not (i.e. if directionOfNearestCritter returns 0),
+      // OR if the Wolf sees another Wolf, move in a random direction
       if (donc == null) {
         // find which direction will reduce the distance between this Wolf and its home
         // the most, and move there
-        int directionToMove = findBestDirectionToMove(home, new Point(info.getX(), info.getY()));
-        return directionToMove;
+        Random rng = new Random();
+        return cardinalDirections[rng.nextInt(cardinalDirections.length)];
       } else {
         // if directionOfNearestCritter returned a direction, start moving in it
         // Wolves only chase critters for 8 steps before returning home, which
@@ -49,7 +43,6 @@ public class Wolf implements Critter {
         chasing = true;
         targetCritter = donc.getKey();
         chasingSteps = defaultChasingSteps;
-        chasingSteps--;
         return donc.getValue();
       }
     } else {
@@ -78,6 +71,9 @@ public class Wolf implements Critter {
   }
 
   private Pair<Character, Integer> directionOfNearestCritter(CritterInfo info) {
+    // finds if there is a critter above, to the left of, below, or to the right of
+    // the Wolf, ignoring any periods (which represent blank spaces) and w's (which
+    // represent other Wolves -- after all, they're pack animals)
     char viewedDirection;
 
     for (int i = 0; i < cardinalDirections.length; i++) {
@@ -91,38 +87,18 @@ public class Wolf implements Critter {
   }
 
   private Pair<Character, Integer> directionOfNearestCritter(CritterInfo info, char critter) {
+    // same function as above, but with an extra character parameter
+    // different critters are represented by different characters, so for the
+    // Wolf to give chase to them, it has to make sure it's chasing the correct
+    // critter (by checking it's character)
     char viewedDirection;
-    System.out.println(critter);
     for (int i = 0; i < cardinalDirections.length; i++) {
       viewedDirection = info.getNeighbor(cardinalDirections[i]);
-      System.out.println(viewedDirection);
       if (viewedDirection == critter) {
-        System.out.println(cardinalDirections[i]);
         return new Pair<Character, Integer>(viewedDirection, cardinalDirections[i]);
       }
     }
 
     return null;
-  }
-
-  private double distance(Point point1, Point point2) {
-    return Math.sqrt(Math.pow(point2.getX() - point1.getX(), 2) + Math.pow(point2.getY() - point1.getY(), 2));
-  }
-
-  private int findBestDirectionToMove(Point home, Point critterInfo) {
-    double[] distances = new double[4];
-    double lowestDistance = distance(home, critterInfo);
-    int indexOfLowestDistance = 0;
-
-    for (int i = 0; i < distances.length; i++) {
-      distances[i] = distance(home, critterInfo);
-
-      if (distances[i] < lowestDistance) {
-        lowestDistance = distances[i];
-        indexOfLowestDistance = i;
-      }
-    }
-
-    return cardinalDirections[indexOfLowestDistance];
   }
 }
