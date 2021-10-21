@@ -9,7 +9,7 @@ public class Client {
     ArrayList<String> list = new ArrayList<>();
     list.addAll(Arrays.asList(new String[] { "four", "score", "and", "seven", "years", "ago" }));
     System.out.println(list);
-    PracticeIt.swapPairs(list);
+    PracticeIt.removeEvenLength(list);
     System.out.println(list);
   }
 }
