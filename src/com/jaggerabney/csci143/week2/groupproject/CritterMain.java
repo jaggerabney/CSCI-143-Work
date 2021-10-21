@@ -6,15 +6,15 @@ package com.jaggerabney.csci143.week2.groupproject;
 // CritterMain provides method main for a simple simulation program.
 
 public class CritterMain {
-    public static void main(String[] args) {
-        CritterFrame frame = new CritterFrame();
+    // public static void main(String[] args) {
+    // CritterFrame frame = new CritterFrame();
 
-        frame.add(25, Bird.class);
-        frame.add(25, Frog.class);
-        frame.add(25, Mouse.class);
-        frame.add(25, Turtle.class);
-        frame.add(25, Wolf.class);
+    // frame.add(25, Bird.class);
+    // frame.add(25, Frog.class);
+    // frame.add(25, Mouse.class);
+    // frame.add(25, Turtle.class);
+    // frame.add(25, Wolf.class);
 
-        frame.start();
-    }
+    // frame.start();
+    // }
 }
