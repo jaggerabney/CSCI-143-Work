@@ -47,4 +47,20 @@ public class PracticeIt {
     list.remove(indexOfLowest);
     list.add(0, lowest);
   }
+
+  public static void removeDuplicates(ArrayList<String> list) {
+    ArrayList<String> uniqueElements = new ArrayList<>();
+    String currentElement;
+
+    for (int i = 0; i < list.size(); i++) {
+      currentElement = list.get(i);
+
+      if (uniqueElements.contains(currentElement)) {
+        list.remove(currentElement);
+        i--;
+      } else {
+        uniqueElements.add(currentElement);
+      }
+    }
+  }
 }
