@@ -9,5 +9,7 @@ public class Exercise11_01 {
         System.out.println(triangle);
         System.out.println("The area is " + triangle.getArea());
         System.out.println("The perimeter is " + triangle.getPerimeter());
+        System.out.println("The triangle is filled: " + triangle.isFilled());
+        System.out.println("The triangle's color: " + triangle.getColor());
     }
 }
