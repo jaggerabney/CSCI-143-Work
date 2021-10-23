@@ -1,11 +1,12 @@
 package com.jaggerabney.csci143.week4.groupproject;
 
 public abstract class GeometricObject {
-    private String color = "white";
+    private String color;
     private boolean filled;
 
     // Default constructor
     protected GeometricObject() {
+        this("white", false);
     }
 
     // Construct a geometric object
