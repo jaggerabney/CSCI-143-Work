@@ -86,4 +86,20 @@ public class PracticeIt {
     }
     list.addAll(start, sublist);
   }
+
+  public static void stutter(ArrayList<String> list, int stretchFactor) {
+    String temp;
+
+    if (stretchFactor <= 0) {
+      list.clear();
+    }
+
+    for (int i = 0; i < list.size(); i++) {
+      temp = list.get(i);
+      for (int j = 0; j < stretchFactor - 1; j++) {
+        list.add(i + 1, temp);
+        i++;
+      }
+    }
+  }
 }
