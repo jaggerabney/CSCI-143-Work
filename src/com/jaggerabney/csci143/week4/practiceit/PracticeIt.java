@@ -1,5 +1,6 @@
 package com.jaggerabney.csci143.week4.practiceit;
 
+import java.io.FilterInputStream;
 import java.util.*;
 
 public class PracticeIt {
@@ -108,6 +109,32 @@ public class PracticeIt {
       if (list.get(i).length() == 4) {
         list.add(i, "****");
         i++;
+      }
+    }
+  }
+
+  public static void removeShorterStrings(ArrayList<String> list) {
+    int firstElementLength, secondElementLength, index;
+
+    for (int i = 0; i < list.size() - 1; i += 2) {
+      firstElementLength = list.get(i).length();
+      secondElementLength = list.get(i + 1).length();
+      index = (firstElementLength > secondElementLength) ? i + 1 : i;
+
+      list.remove(index);
+      i--;
+    }
+  }
+
+  public static void filterRange(ArrayList<Integer> list, int min, int max) {
+    int currentElement;
+
+    for (int i = 0; i < list.size(); i++) {
+      currentElement = list.get(i);
+
+      if (currentElement >= min && currentElement <= max) {
+        list.remove(i);
+        i--;
       }
     }
   }
