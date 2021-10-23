@@ -26,6 +26,7 @@ public class CritterModel {
         critterCount = new TreeMap<String, Integer>();
     }
 
+    @SuppressWarnings({ "rawtypes", "deprecation" })
     public void add(int number, Class critter) {
         if (myList.size() + number > myWidth * myHeight)
             throw new RuntimeException("adding too many critters");

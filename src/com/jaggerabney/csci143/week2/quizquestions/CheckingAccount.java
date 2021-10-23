@@ -37,4 +37,9 @@ class BankAccount {
   public void withdraw(double amount) {
     balance -= amount;
   }
+
+  @Override
+  public String toString() {
+    return name + " has $" + balance;
+  }
 }

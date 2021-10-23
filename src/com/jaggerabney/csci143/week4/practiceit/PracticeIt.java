@@ -1,6 +1,5 @@
 package com.jaggerabney.csci143.week4.practiceit;
 
-import java.io.FilterInputStream;
 import java.util.*;
 
 public class PracticeIt {

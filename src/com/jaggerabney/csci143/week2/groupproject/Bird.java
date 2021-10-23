@@ -3,7 +3,7 @@ package com.jaggerabney.csci143.week2.groupproject;
 import java.util.Random;
 
 public class Bird implements Critter {
-
+	@SuppressWarnings("unused")
 	private int x, y;
 
 	// This is our no argument constructor.

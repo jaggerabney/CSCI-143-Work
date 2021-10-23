@@ -76,6 +76,7 @@ public class CritterFrame extends JFrame {
     }
 
     private void setCounts() {
+        @SuppressWarnings("unused")
         Set<Map.Entry<String, Integer>> entries = myModel.getCounts();
         int i = 0;
         for (Map.Entry<String, Integer> entry : myModel.getCounts()) {
@@ -85,6 +86,7 @@ public class CritterFrame extends JFrame {
     }
 
     // add a certain number of critters of a particular class to the simulation
+    @SuppressWarnings("rawtypes")
     public void add(int number, Class c) {
         myModel.add(number, c);
     }

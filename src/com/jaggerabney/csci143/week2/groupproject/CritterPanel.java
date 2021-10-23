@@ -8,7 +8,6 @@ package com.jaggerabney.csci143.week2.groupproject;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class CritterPanel extends JPanel {
     private CritterModel myModel;
