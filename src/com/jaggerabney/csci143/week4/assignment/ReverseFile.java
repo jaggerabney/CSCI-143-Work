@@ -14,24 +14,6 @@ import java.util.stream.Collectors;
 public class ReverseFile {
   public static final String FILE_NAME = "mobydick.txt";
 
-  public static void main(String[] args) {
-    // try/catch block is used because BufferedReader's readLine method can throw an
-    // IOException
-    try {
-      // reads the contents of the file into an ArrayList
-      ArrayList<String> fileContents = readFile(FILE_NAME);
-      // reverses the fileContents ArrayList
-      ArrayList<String> reversedFileContents = reverse(fileContents);
-      // writes the reversed fileContents ArrayList to the file
-      writeToFile(reversedFileContents);
-    } catch (Exception e) {
-      // prints the stack trace if IOException is caught
-      // if this happens, make sure that mobydick.txt is in the same directory as
-      // this file!
-      e.printStackTrace();
-    }
-  }
-
   public static ArrayList<String> readFile(String filename) throws Exception {
     // creates an InputStream, InputStreamReader, and BufferedReader (the former
     // two are used to create the last, which is what is used to read the file)
