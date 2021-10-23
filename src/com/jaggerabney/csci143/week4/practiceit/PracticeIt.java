@@ -25,10 +25,26 @@ public class PracticeIt {
 
   public static void doubleList(ArrayList<String> list) {
     String temp;
+
     for (int i = 0; i < list.size(); i++) {
       temp = list.get(i);
       list.add(i + 1, temp);
       i++;
     }
+  }
+
+  public static void minToFront(ArrayList<Integer> list) {
+    int lowest = list.get(0);
+    int indexOfLowest = 0;
+
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i) < lowest) {
+        lowest = list.get(i);
+        indexOfLowest = i;
+      }
+    }
+
+    list.remove(indexOfLowest);
+    list.add(0, lowest);
   }
 }
