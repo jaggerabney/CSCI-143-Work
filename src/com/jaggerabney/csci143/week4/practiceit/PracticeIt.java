@@ -63,4 +63,27 @@ public class PracticeIt {
       }
     }
   }
+
+  public static void removeInRange(ArrayList<Integer> list, int value, int start, int end) {
+    int currentElement = 0;
+
+    if (end < start) {
+      int temp = start;
+      start = end;
+      end = temp;
+    }
+
+    ArrayList<Integer> sublist = new ArrayList<>(list.subList(start, end));
+
+    list.subList(start, end).clear();
+    for (int i = 0; i < sublist.size(); i++) {
+      currentElement = sublist.get(i);
+
+      if (currentElement == value) {
+        sublist.remove(i);
+        i--;
+      }
+    }
+    list.addAll(start, sublist);
+  }
 }
