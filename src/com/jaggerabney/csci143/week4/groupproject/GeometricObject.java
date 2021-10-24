@@ -1,8 +1,11 @@
 package com.jaggerabney.csci143.week4.groupproject;
 
+import java.util.*;
+
 public abstract class GeometricObject {
     private String color;
     private boolean filled;
+    private Date dateCreated;
 
     // Default constructor
     protected GeometricObject() {
@@ -11,6 +14,7 @@ public abstract class GeometricObject {
 
     // Construct a geometric object
     protected GeometricObject(String color, boolean filled) {
+        dateCreated = new Date();
         this.color = color;
         this.filled = filled;
     }
@@ -34,6 +38,11 @@ public abstract class GeometricObject {
     // Setter method for filled
     public void setFilled(boolean filled) {
         this.filled = filled;
+    }
+
+    // Getter for dateCreated
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
     // Abstract method getArea
