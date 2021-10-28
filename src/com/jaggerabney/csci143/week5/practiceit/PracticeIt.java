@@ -10,4 +10,15 @@ public class PracticeIt {
       throw new IllegalArgumentException("times must be less than zero.");
     }
   }
+
+  public static void writeNums(int times) {
+    if (times == 1) {
+      System.out.print("1");
+    } else if (times > 1) {
+      writeNums(times - 1);
+      System.out.print(", " + times);
+    } else {
+      throw new IllegalArgumentException("times must be greater than one.");
+    }
+  }
 }
