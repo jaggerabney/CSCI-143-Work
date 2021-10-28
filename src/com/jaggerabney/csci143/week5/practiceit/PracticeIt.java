@@ -21,4 +21,18 @@ public class PracticeIt {
       throw new IllegalArgumentException("times must be greater than one.");
     }
   }
+
+  public static void writeSequence(int times) {
+    if (times == 1) {
+      System.out.print("1 ");
+    } else if (times > 1) {
+      System.out.print(((times + 1) / 2) + " ");
+      if (times > 2) {
+        writeSequence(times - 2);
+      }
+      System.out.print(((times + 1) / 2) + " ");
+    } else {
+      throw new IllegalArgumentException("times must be greater than one.");
+    }
+  }
 }
