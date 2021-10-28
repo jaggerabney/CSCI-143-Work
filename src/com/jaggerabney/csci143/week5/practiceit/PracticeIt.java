@@ -35,4 +35,26 @@ public class PracticeIt {
       throw new IllegalArgumentException("times must be greater than one.");
     }
   }
+
+  public static void writeSquares(int n) {
+    if (n == 1) {
+      System.out.print("1");
+    } else if (n > 1) {
+      if (n % 2 == 0) { // n is even
+        System.out.print(((n - 1) * (n - 1)));
+        if (n != 2) {
+          System.out.print(", ");
+          writeSquares(n - 2);
+        }
+        System.out.print(", " + (n * n));
+      } else { // n is odd
+        System.out.print((n * n) + ", ");
+        if (n != 2)
+          writeSquares(n - 2);
+        System.out.print(", " + ((n - 1) * (n - 1)));
+      }
+    } else {
+      throw new IllegalArgumentException("n must be greater than one.");
+    }
+  }
 }
