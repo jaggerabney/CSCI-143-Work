@@ -1,19 +1,14 @@
 package com.jaggerabney.csci143;
 
-import com.jaggerabney.csci143.week5.projects.*;
-import java.util.*;
+import com.jaggerabney.csci143.week5.practiceit.*;
 
 public class Client {
   public static void main(String[] args) {
-    int m, n;
-    Scanner scanner = new Scanner(System.in);
+    int[] testValues = { 1, 2, 3, 4, 5, 6, 7, 8 };
 
-    System.out.print("Enter the first number: ");
-    m = scanner.nextInt();
-    System.out.print("Enter the second number: ");
-    n = scanner.nextInt();
-
-    System.out.println("The GCD of " + m + " and " + n + " is " + Exercise18_03.gcd(m, n));
-    scanner.close();
+    for (int value : testValues) {
+      PracticeIt.writeChars(value);
+      System.out.println();
+    }
   }
 }
