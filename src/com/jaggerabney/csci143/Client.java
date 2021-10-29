@@ -7,7 +7,7 @@ public class Client {
     int[] testValues = { 1, 2, 3, 4 };
 
     for (int value : testValues) {
-      System.out.println(PracticeIt.multiplyEvens(value));
+      System.out.println(PracticeIt.sumTo(value));
     }
   }
 }

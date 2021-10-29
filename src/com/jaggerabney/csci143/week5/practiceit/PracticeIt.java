@@ -81,4 +81,16 @@ public class PracticeIt {
       return (2 * n) * multiplyEvens(n - 1);
     }
   }
+
+  public static double sumTo(int n) {
+    if (n < 0) {
+      throw new IllegalArgumentException("n must be greater than zero");
+    } else if (n == 0) {
+      return 0.0;
+    } else if (n == 1) {
+      return 1.0;
+    } else {
+      return (1.0 / n) + sumTo(n - 1);
+    }
+  }
 }
