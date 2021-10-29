@@ -71,4 +71,14 @@ public class PracticeIt {
       System.out.print(">");
     }
   }
+
+  public static int multiplyEvens(int n) {
+    if (n < 1) {
+      throw new IllegalArgumentException("n must be greater than one");
+    } else if (n == 1) {
+      return 2;
+    } else {
+      return (2 * n) * multiplyEvens(n - 1);
+    }
+  }
 }
