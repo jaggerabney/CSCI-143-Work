@@ -2,7 +2,7 @@ package com.jaggerabney.csci143.week5.projects;
 
 import java.math.BigInteger;
 
-public class BigIntFact {
+public class Exercise18_01 {
   public static BigInteger factorial(int times) {
     if (times == 0) {
       return new BigInteger("1");
