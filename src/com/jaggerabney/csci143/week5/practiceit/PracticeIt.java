@@ -93,4 +93,18 @@ public class PracticeIt {
       return (1.0 / n) + sumTo(n - 1);
     }
   }
+
+  public static int digitMatch(int n1, int n2) {
+    String first = String.valueOf(n1), second = String.valueOf(n2);
+    int firstEnd = first.length() - 1, secondEnd = second.length() - 1;
+    int lastDigitsMatch = (first.charAt(firstEnd) == second.charAt(secondEnd)) ? 1 : 0;
+
+    if (n1 < 0 || n2 < 0) {
+      throw new IllegalArgumentException("arguments must be positive");
+    } else if (first.length() == 1 || second.length() == 1) {
+      return lastDigitsMatch;
+    } else {
+      return lastDigitsMatch + digitMatch(n1 / 10, n2 / 10);
+    }
+  }
 }
