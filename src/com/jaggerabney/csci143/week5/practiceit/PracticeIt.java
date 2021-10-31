@@ -107,4 +107,14 @@ public class PracticeIt {
       return lastDigitsMatch + digitMatch(n1 / 10, n2 / 10);
     }
   }
+
+  public static String repeat(String s, int n) {
+    if (n < 0) {
+      throw new IllegalArgumentException("n must be greater than zero");
+    } else if (n == 0) {
+      return "";
+    } else {
+      return s + repeat(s, n - 1);
+    }
+  }
 }
