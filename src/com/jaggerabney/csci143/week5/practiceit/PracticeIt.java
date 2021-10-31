@@ -145,4 +145,19 @@ public class PracticeIt {
       return indexOf(stringToSearch.substring(1), stringToFind, index);
     }
   }
+
+  public static String dedup(String string) {
+    return dedup(string, 0);
+  }
+
+  private static String dedup(String string, int index) {
+    if (string.length() <= 1 || index >= string.length() - 2) {
+      return string;
+    } else if (string.charAt(index) != string.charAt(index + 1)) {
+      return dedup(string, index + 1);
+    } else {
+      String result = string.substring(0, index) + string.substring(index + 1);
+      return dedup(result, index);
+    }
+  }
 }
