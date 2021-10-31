@@ -130,4 +130,19 @@ public class PracticeIt {
       return result && isReverse(string1.substring(1), string2.substring(0, string2.length() - 1));
     }
   }
+
+  public static int indexOf(String stringToSearch, String stringToFind) {
+    return indexOf(stringToSearch, stringToFind, 0);
+  }
+
+  private static int indexOf(String stringToSearch, String stringToFind, int index) {
+    if (stringToSearch.length() < stringToFind.length()) {
+      return -1;
+    } else if (stringToSearch.substring(0, stringToFind.length()).equals(stringToFind)) {
+      return index;
+    } else {
+      index++;
+      return indexOf(stringToSearch.substring(1), stringToFind, index);
+    }
+  }
 }
