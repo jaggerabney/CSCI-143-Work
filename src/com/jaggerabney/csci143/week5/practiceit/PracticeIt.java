@@ -1,5 +1,8 @@
 package com.jaggerabney.csci143.week5.practiceit;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class PracticeIt {
   public static String starString(int times) {
     if (times == 0) {
@@ -159,5 +162,27 @@ public class PracticeIt {
       String result = string.substring(0, index) + string.substring(index + 1);
       return dedup(result, index);
     }
+  }
+
+  public static String vowelsToEnd(String string) {
+    return vowelsToEnd(string, "", 0);
+  }
+
+  private static String vowelsToEnd(String string, String vowels, int index) {
+    if (index >= string.length()) {
+      return string + vowels;
+    } else if (isVowel(string.charAt(index))) {
+      char vowel = string.charAt(index);
+      String result = string.substring(0, index) + string.substring(index + 1);
+      String newVowels = vowel + vowels;
+      return vowelsToEnd(result, newVowels, index);
+    } else {
+      return vowelsToEnd(string, vowels, index + 1);
+    }
+  }
+
+  private static boolean isVowel(char character) {
+    ArrayList<Character> vowels = new ArrayList<>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
+    return vowels.contains(character);
   }
 }

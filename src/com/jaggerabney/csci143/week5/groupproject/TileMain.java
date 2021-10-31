@@ -6,8 +6,8 @@ package com.jaggerabney.csci143.week5.groupproject;
 // Click and drag a rectangle to move it.
 
 public class TileMain {
-    public static void main(String[] args) {
-        TileFrame frame = new TileFrame();
-        frame.setVisible(true);
-    }
+    // public static void main(String[] args) {
+    // TileFrame frame = new TileFrame();
+    // frame.setVisible(true);
+    // }
 }
