@@ -117,4 +117,17 @@ public class PracticeIt {
       return s + repeat(s, n - 1);
     }
   }
+
+  public static boolean isReverse(String string1, String string2) {
+    if (string1.isEmpty() && string2.isEmpty()) {
+      return true;
+    } else if (string1.length() != string2.length()) {
+      return false;
+    } else {
+      char c1 = Character.toLowerCase(string1.charAt(0));
+      char c2 = Character.toLowerCase(string2.charAt(string2.length() - 1));
+      boolean result = c1 == c2;
+      return result && isReverse(string1.substring(1), string2.substring(0, string2.length() - 1));
+    }
+  }
 }
