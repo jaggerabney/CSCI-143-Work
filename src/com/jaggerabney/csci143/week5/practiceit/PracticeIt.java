@@ -185,4 +185,27 @@ public class PracticeIt {
     ArrayList<Character> vowels = new ArrayList<>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
     return vowels.contains(character);
   }
+
+  public static int evenDigits(int n) {
+    return evenDigits(n, 0) * ((n < 0) ? -1 : 1);
+  }
+
+  private static int evenDigits(int n, int index) {
+    String numberAsString = String.valueOf(n);
+    System.out.println(numberAsString);
+
+    if (index >= numberAsString.length()) {
+      return n;
+    } else if (Character.getNumericValue(numberAsString.charAt(index)) % 2 == 0) {
+      return evenDigits(n, index + 1);
+    } else {
+      String result = numberAsString.substring(0, index) + numberAsString.substring(index + 1);
+
+      if (result.length() >= 1) {
+        return evenDigits(Integer.parseInt(result), index);
+      } else {
+        return 0;
+      }
+    }
+  }
 }

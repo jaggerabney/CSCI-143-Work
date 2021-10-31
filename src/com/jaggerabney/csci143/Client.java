@@ -4,7 +4,6 @@ import com.jaggerabney.csci143.week5.practiceit.*;
 
 public class Client {
   public static void main(String[] args) {
-    String test = "beautifully";
-    System.out.println(PracticeIt.vowelsToEnd(test));
+    System.out.println(PracticeIt.evenDigits(-34512));
   }
 }
