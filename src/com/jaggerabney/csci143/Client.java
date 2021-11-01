@@ -4,6 +4,6 @@ import com.jaggerabney.csci143.week5.practiceit.*;
 
 public class Client {
   public static void main(String[] args) {
-    System.out.println(PracticeIt.evenDigits(-34512));
+    PracticeIt.countBinary(3);
   }
 }

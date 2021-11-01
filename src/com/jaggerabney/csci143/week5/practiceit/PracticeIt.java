@@ -208,4 +208,18 @@ public class PracticeIt {
       }
     }
   }
+
+  public static void countBinary(int n) {
+    countBinary(n, "");
+  }
+
+  private static void countBinary(int n, String result) {
+    if (n > 0) {
+      countBinary(n - 1, result + "0");
+      countBinary(n - 1, result + "1");
+    } else {
+      System.out.println(result);
+      return;
+    }
+  }
 }
