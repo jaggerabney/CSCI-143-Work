@@ -1,7 +1,6 @@
 package com.jaggerabney.csci143.week5.practiceit;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class PracticeIt {
   public static String starString(int times) {
@@ -237,6 +236,21 @@ public class PracticeIt {
     } else {
       System.out.println(result);
       return;
+    }
+  }
+
+  public static void subsets(List<String> list) {
+    subsets(list, 0);
+  }
+
+  private static void subsets(List<String> list, int index) {
+    if (index < list.size()) {
+      subsets(list, index + 1);
+      String temp = list.remove(index);
+      subsets(list, index);
+      list.add(index, temp);
+    } else {
+      System.out.println(list);
     }
   }
 }
