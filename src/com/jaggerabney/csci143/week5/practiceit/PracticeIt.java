@@ -209,6 +209,23 @@ public class PracticeIt {
     }
   }
 
+  public static void waysToClimb(int n) {
+    if (n > 0) {
+      waysToClimb(n, 0, "[");
+    }
+  }
+
+  private static void waysToClimb(int n, int index, String result) {
+    if (n == index) {
+      result += "]";
+      System.out.println(result);
+      return;
+    } else if (index < n) {
+      waysToClimb(n, index + 1, result + ((index + 1 == n) ? "1" : "1, "));
+      waysToClimb(n, index + 2, result + ((index + 2 == n) ? "2" : "2, "));
+    }
+  }
+
   public static void countBinary(int n) {
     countBinary(n, "");
   }

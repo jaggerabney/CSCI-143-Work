@@ -4,6 +4,6 @@ import com.jaggerabney.csci143.week5.practiceit.*;
 
 public class Client {
   public static void main(String[] args) {
-    PracticeIt.countBinary(3);
+    PracticeIt.waysToClimb(3);
   }
 }
