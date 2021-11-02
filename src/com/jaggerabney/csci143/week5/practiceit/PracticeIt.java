@@ -253,4 +253,44 @@ public class PracticeIt {
       System.out.println(list);
     }
   }
+
+  public static int maxSum(List<Integer> list, int limit) {
+    ArrayList<String> permutations = new ArrayList<>();
+    allBinaryPermutations(list.size(), "", permutations);
+    int sum = sumListAccordingToPermutation(list, permutations.get(0), 0); // first sum
+    return maxSum(list, limit, permutations, sum, 0);
+  }
+
+  private static int maxSum(List<Integer> list, int limit, List<String> permutations, int sum, int permutationsIndex) {
+    if (permutationsIndex < permutations.size()) {
+      int permutationSum = sumListAccordingToPermutation(list, permutations.get(permutationsIndex), 0);
+      if (permutationSum > sum && permutationSum <= limit) {
+        sum = permutationSum;
+      }
+      return maxSum(list, limit, permutations, sum, permutationsIndex + 1);
+    } else {
+      return sum;
+    }
+  }
+
+  private static void allBinaryPermutations(int digits, String result, List<String> list) {
+    if (digits > 0) {
+      allBinaryPermutations(digits - 1, result + "0", list);
+      allBinaryPermutations(digits - 1, result + "1", list);
+    } else {
+      list.add(result);
+      return;
+    }
+  }
+
+  private static int sumListAccordingToPermutation(List<Integer> list, String permutation, int index) {
+    if (index < list.size()) {
+      int bit = Character.getNumericValue(permutation.charAt(index));
+      int result = (bit == 1) ? list.get(index) : 0;
+      return result + sumListAccordingToPermutation(list, permutation, index + 1);
+    } else {
+      return 0;
+    }
+  }
+
 }

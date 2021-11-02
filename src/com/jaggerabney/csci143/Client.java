@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Client {
   public static void main(String[] args) {
-    List<String> list = new ArrayList<>(Arrays.asList("Janet", "Robert", "Morgan", "Char"));
-    PracticeIt.subsets(list);
+    List<Integer> list = new ArrayList<>(Arrays.asList(7, 30, 8, 22, 6, 1, 14));
+    System.out.println(PracticeIt.maxSum(list, 19));
   }
 }
