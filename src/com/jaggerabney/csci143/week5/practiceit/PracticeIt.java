@@ -273,7 +273,7 @@ public class PracticeIt {
     }
   }
 
-  private static void allBinaryPermutations(int digits, String result, List<String> list) {
+  public static void allBinaryPermutations(int digits, String result, List<String> list) {
     if (digits > 0) {
       allBinaryPermutations(digits - 1, result + "0", list);
       allBinaryPermutations(digits - 1, result + "1", list);
@@ -293,4 +293,51 @@ public class PracticeIt {
     }
   }
 
+  public static void printSquares(int n) {
+    ArrayList<String> permutations = new ArrayList<>();
+    int sqrtN = (int) Math.sqrt(n);
+    allBinaryPermutations(sqrtN, "", permutations);
+    Collections.reverse(permutations);
+    ArrayList<String> sums = new ArrayList<>();
+    for (String permutation : permutations) {
+      int sum = 0;
+      String result = "";
+
+      for (int i = 0; i < permutation.toCharArray().length; i++) {
+        int bit = Character.getNumericValue(permutation.charAt(i));
+        if (bit == 1) {
+          sum += Math.pow(i + 1, 2);
+          result += (sum == n) ? (i + 1 + "^2") : (i + 1 + "^2 + ");
+        }
+      }
+
+      if (sum == n && !sums.contains(result)) {
+        sums.add(result);
+        System.out.println(result);
+      }
+    }
+    return;
+  }
+
+  private static void allSquareSums(int index, List<String> permutations, List<String> squareSums) {
+    if (index < permutations.size()) {
+      String result = squareSum(permutations.get(index), 0);
+      squareSums.add(result);
+      allSquareSums(index + 1, permutations, squareSums);
+    }
+  }
+
+  private static void printResult(String result) {
+
+  }
+
+  private static String squareSum(String permutation, int index) {
+    if (index < permutation.length()) {
+      int bit = Character.getNumericValue(permutation.charAt(index));
+      String result = (bit == 1) ? (index + 1) + "^2 " : "";
+      return result + squareSum(permutation, index + 1);
+    } else {
+      return "\b";
+    }
+  }
 }
