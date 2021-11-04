@@ -21,9 +21,17 @@ public class PracticeIt {
     stack.addAll(queue);
   }
 
-  public static <T> void reverseQueue(Queue<T> queue) {
-    for (int i = 0; i < queue.size(); i++) {
-      queue.add(queue.remove());
+  public static void stutter(Stack<Integer> stack) {
+    Queue<Integer> queue = new LinkedList<>();
+    int currentElement;
+
+    Collections.reverse(stack);
+    while (!stack.isEmpty()) {
+      queue.add(stack.pop());
+    }
+    while (!queue.isEmpty()) {
+      currentElement = queue.remove();
+      stack.addAll(Arrays.asList(currentElement, currentElement));
     }
   }
 }
