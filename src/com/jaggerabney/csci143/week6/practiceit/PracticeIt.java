@@ -34,4 +34,22 @@ public class PracticeIt {
       stack.addAll(Arrays.asList(currentElement, currentElement));
     }
   }
+
+  public static Stack<Integer> copyStack(Stack<Integer> stack) {
+    Queue<Integer> queue = new LinkedList<>();
+    Stack<Integer> copiedStack = new Stack<Integer>();
+    int currentElement;
+
+    Collections.reverse(stack);
+    while (!stack.isEmpty()) {
+      queue.add(stack.pop());
+    }
+    while (!queue.isEmpty()) {
+      currentElement = queue.remove();
+      stack.push(currentElement);
+      copiedStack.push(currentElement);
+    }
+
+    return copiedStack;
+  }
 }
