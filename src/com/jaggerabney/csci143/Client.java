@@ -9,7 +9,7 @@ public class Client {
     stack.addAll(Arrays.asList(9, 14, 1, 7, 3));
 
     System.out.println(stack);
-    PracticeIt.stutter(stack);
+    PracticeIt.collapse(stack);
     System.out.println(stack);
   }
 }

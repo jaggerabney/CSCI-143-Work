@@ -52,4 +52,65 @@ public class PracticeIt {
 
     return copiedStack;
   }
+
+  public static void collapse(Stack<Integer> stack) {
+    Queue<Integer> queue = new LinkedList<>();
+    int oddElement = 0;
+    boolean oddInLength = false;
+
+    if (stack.size() % 2 != 0) { // stack is odd in length
+      oddElement = stack.pop();
+      oddInLength = true;
+    }
+
+    Collections.reverse(stack);
+    while (stack.size() >= 2) {
+      queue.add(stack.pop() + stack.pop());
+    }
+    while (!queue.isEmpty()) {
+      stack.push(queue.remove());
+    }
+
+    if (oddInLength) {
+      stack.push(oddElement);
+    }
+  }
+
+  public static boolean equals(Stack<Integer> first, Stack<Integer> second) {
+    Stack<Integer> storage = new Stack<>();
+    int currentElementFirst, currentElementSecond, currentElementStorage;
+
+    if (first.size() == second.size()) {
+      while (!first.isEmpty() && !second.isEmpty()) {
+        currentElementFirst = first.peek();
+        currentElementSecond = second.peek();
+
+        if (currentElementFirst == currentElementSecond) {
+          first.pop();
+          second.pop();
+          storage.push(currentElementFirst);
+        } else {
+          if (storage.size() > 0) {
+            while (!storage.isEmpty()) {
+              currentElementStorage = storage.pop();
+              first.push(currentElementStorage);
+              second.push(currentElementStorage);
+            }
+
+            return false;
+          }
+        }
+      }
+
+      while (!storage.isEmpty()) {
+        currentElementStorage = storage.pop();
+        first.push(currentElementStorage);
+        second.push(currentElementStorage);
+      }
+
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
