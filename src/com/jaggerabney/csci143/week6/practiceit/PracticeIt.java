@@ -141,4 +141,28 @@ public class PracticeIt {
   private static boolean isOdd(int value) {
     return value % 2 != 0;
   }
+
+  public static void reverseHalf(Queue<Integer> queue) {
+    Stack<Integer> storage = new Stack<>();
+    int queueLength = queue.size();
+    int currentElement;
+
+    for (int i = 0; i < queueLength; i++) {
+      if (isOdd(i)) {
+        currentElement = queue.poll();
+
+        storage.push(currentElement);
+      } else {
+        queue.offer(queue.poll());
+      }
+    }
+
+    queueLength = queue.size();
+    for (int i = 0; i < queueLength; i++) {
+      queue.offer(queue.poll());
+      if (!storage.isEmpty()) {
+        queue.offer(storage.pop());
+      }
+    }
+  }
 }
