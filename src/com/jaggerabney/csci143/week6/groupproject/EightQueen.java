@@ -17,7 +17,11 @@ public class EightQueen {
   }
 
   private void placeQueens(int row, int col, int numQueens) {
+    placeQueenAt(row, col);
+  }
 
+  private void placeQueenAt(int row, int col) {
+    chessboard[row][col] = true;
   }
 
   @Override

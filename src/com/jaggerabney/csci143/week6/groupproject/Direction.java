@@ -19,4 +19,10 @@ public enum Direction {
   public int colChange() {
     return colChange;
   }
+
+  public Direction turnClockwise() {
+    int nextEnumOrdinalPosition = (this.ordinal() + 1) % values().length;
+
+    return values()[nextEnumOrdinalPosition];
+  }
 }
