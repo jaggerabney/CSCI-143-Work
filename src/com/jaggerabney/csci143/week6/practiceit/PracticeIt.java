@@ -113,4 +113,32 @@ public class PracticeIt {
       return false;
     }
   }
+
+  public static void rearrange(Queue<Integer> queue) {
+    Stack<Integer> storage = new Stack<>();
+    int queueLength = queue.size();
+    int currentElement;
+
+    for (int i = 0; i < queueLength; i++) {
+      currentElement = queue.peek();
+
+      if (isEven(currentElement)) {
+        queue.offer(queue.poll());
+      } else {
+        storage.push(queue.poll());
+      }
+    }
+    Collections.reverse(storage);
+    while (!storage.isEmpty()) {
+      queue.offer(storage.pop());
+    }
+  }
+
+  private static boolean isEven(int value) {
+    return value % 2 == 0;
+  }
+
+  private static boolean isOdd(int value) {
+    return value % 2 != 0;
+  }
 }
