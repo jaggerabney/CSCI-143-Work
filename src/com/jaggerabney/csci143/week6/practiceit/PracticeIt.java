@@ -191,4 +191,10 @@ public class PracticeIt {
 
     return isPalindrome;
   }
+
+  public static void switchPairs(Stack<Integer> stack) {
+    Queue<Integer> storage = new LinkedList<>();
+
+    // TODO: finish this!
+  }
 }
