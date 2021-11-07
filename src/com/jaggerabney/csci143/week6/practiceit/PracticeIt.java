@@ -138,7 +138,7 @@ public class PracticeIt {
     return value % 2 == 0;
   }
 
-  private static boolean isOdd(int value) {
+  public static boolean isOdd(int value) {
     return value % 2 != 0;
   }
 
@@ -164,5 +164,31 @@ public class PracticeIt {
         queue.offer(storage.pop());
       }
     }
+  }
+
+  public static boolean isPalindrome(Queue<Integer> queue) {
+    Stack<Integer> storage = new Stack<>();
+    int queueLength = queue.size();
+    boolean isPalindrome = true;
+    int currentElement;
+
+    for (int i = 0; i < queueLength; i++) {
+      currentElement = queue.poll();
+
+      queue.offer(currentElement);
+      storage.push(currentElement);
+    }
+
+    for (int i = 0; i < queueLength; i++) {
+      currentElement = queue.poll();
+
+      if (currentElement != storage.pop()) {
+        isPalindrome = false;
+      }
+
+      queue.offer(currentElement);
+    }
+
+    return isPalindrome;
   }
 }
