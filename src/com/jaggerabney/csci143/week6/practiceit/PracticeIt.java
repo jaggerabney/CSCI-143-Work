@@ -271,4 +271,42 @@ public class PracticeIt {
     Collections.reverse(storage);
     queue.addAll(storage);
   }
+
+  public static void shift(Stack<Integer> stack, int shift) {
+    Queue<Integer> storage = new LinkedList<>();
+    storage.addAll(stack.subList(shift, stack.size()));
+    stack.removeAll(storage);
+
+    Collections.reverse(stack);
+    storage.addAll(stack);
+
+    stack.clear();
+    stack.addAll(storage);
+  }
+
+  public static void expunge(Stack<Integer> stack) {
+    Stack<Integer> storage = new Stack<>();
+    int currentElement, elementAbove;
+
+    if (stack.size() <= 1) {
+      return;
+    }
+
+    // start process
+    elementAbove = stack.pop();
+    storage.add(elementAbove);
+
+    while (!stack.isEmpty()) {
+      currentElement = stack.pop();
+
+      if (currentElement >= elementAbove && currentElement >= storage.peek()) {
+        storage.push(currentElement);
+      }
+
+      elementAbove = currentElement;
+    }
+
+    Collections.reverse(storage);
+    stack.addAll(storage);
+  }
 }
