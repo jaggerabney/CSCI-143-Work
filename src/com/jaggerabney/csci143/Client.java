@@ -6,11 +6,11 @@ import com.jaggerabney.csci143.week6.practiceit.PracticeIt;
 
 public class Client {
   public static void main(String[] args) {
-    Stack<Integer> stack = new Stack<>();
-    stack.addAll(Arrays.asList(4, 20, 15, 15, 8, 5, 7, 12, 3, 10, 5, 0));
+    Queue<Integer> queue = new LinkedList<>();
+    queue.addAll(Arrays.asList(10, 20, 30, 40, 50, 60, 70, 80, 90));
 
-    System.out.println(stack);
-    PracticeIt.expunge(stack);
-    System.out.println(stack);
+    System.out.println(queue);
+    PracticeIt.reverseFirstK(4, queue);
+    System.out.println(queue);
   }
 }

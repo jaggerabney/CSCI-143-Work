@@ -309,4 +309,23 @@ public class PracticeIt {
     Collections.reverse(storage);
     stack.addAll(storage);
   }
+
+  public static void reverseFirstK(int k, Queue<Integer> queue) {
+    if (k <= 0) {
+      return;
+    } else if (queue == null || queue.size() < k) {
+      throw new IllegalArgumentException();
+    }
+
+    Stack<Integer> storage = new Stack<>();
+
+    for (int i = 0; i < k; i++) {
+      storage.push(queue.poll());
+    }
+    Collections.reverse(storage);
+    storage.addAll(queue);
+
+    queue.clear();
+    queue.addAll(storage);
+  }
 }
