@@ -328,4 +328,51 @@ public class PracticeIt {
     queue.clear();
     queue.addAll(storage);
   }
+
+  public static boolean isSorted(Stack<Integer> stack) {
+    Stack<Integer> storage = new Stack<>();
+    int currentElement, elementAbove;
+    boolean isSorted = true;
+
+    if (stack.size() <= 1) {
+      return isSorted;
+    }
+
+    // start process
+    elementAbove = stack.pop();
+    storage.add(elementAbove);
+
+    while (!stack.isEmpty()) {
+      currentElement = stack.pop();
+      storage.add(currentElement);
+
+      if (currentElement < elementAbove) {
+        isSorted = false;
+      }
+
+      elementAbove = currentElement;
+    }
+
+    Collections.reverse(storage);
+    stack.addAll(storage);
+
+    return isSorted;
+  }
+
+  public static void mirror(Stack<Integer> stack) {
+    if (stack == null)
+      throw new IllegalArgumentException("stack cannot be null");
+
+    Queue<Integer> storage = new LinkedList<>();
+
+    while (!stack.isEmpty()) {
+      storage.offer(stack.pop());
+    }
+    for (int i = 0; i < storage.size(); i++) {
+      stack.push(storage.peek());
+      storage.offer(storage.poll());
+    }
+    Collections.reverse(stack);
+    stack.addAll(storage);
+  }
 }
