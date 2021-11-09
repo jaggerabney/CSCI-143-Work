@@ -194,7 +194,25 @@ public class PracticeIt {
 
   public static void switchPairs(Stack<Integer> stack) {
     Queue<Integer> storage = new LinkedList<>();
+    boolean stackLengthIsOdd = stack.size() % 2 != 0;
+    int oddStackTopElement = 0, currentElement = 0;
 
-    // TODO: finish this!
+    if (stackLengthIsOdd) {
+      oddStackTopElement = stack.pop();
+    }
+
+    Collections.reverse(stack);
+    while (!stack.isEmpty()) {
+      currentElement = stack.pop();
+      storage.offer(stack.pop());
+      storage.offer(currentElement);
+    }
+    while (!storage.isEmpty()) {
+      stack.push(storage.poll());
+    }
+
+    if (stackLengthIsOdd) {
+      stack.push(oddStackTopElement);
+    }
   }
 }
