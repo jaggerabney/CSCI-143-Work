@@ -6,11 +6,12 @@ import com.jaggerabney.csci143.week6.practiceit.PracticeIt;
 
 public class Client {
   public static void main(String[] args) {
-    Stack<Integer> stack = new Stack<>();
-    stack.addAll(Arrays.asList(3, 4, 5, 12, 6, 7, 8, 9, 10));
+    Queue<Integer> queue = new LinkedList<>();
+    queue.addAll(Arrays.asList(1, 2, -2, 4, -5, 8, -8, 12, -15, 23));
 
-    System.out.println(stack);
-    System.out.println(PracticeIt.isConsecutive(stack));
-    System.out.println(stack);
+    System.out.println(queue.peek());
+    System.out.println(queue);
+    PracticeIt.reorder(queue);
+    System.out.println(queue);
   }
 }

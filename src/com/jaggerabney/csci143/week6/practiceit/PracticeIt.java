@@ -242,4 +242,33 @@ public class PracticeIt {
     Collections.reverse(stack);
     return isConsecutive;
   }
+
+  public static void reorder(Queue<Integer> queue) {
+    Stack<Integer> storage = new Stack<>();
+    int highestElement, queueLength;
+
+    while (!queue.isEmpty()) {
+      queueLength = queue.size();
+      highestElement = queue.peek();
+
+      for (int i = 0; i < queueLength; i++) {
+        if (highestElement < queue.peek()) {
+          highestElement = queue.peek();
+        }
+
+        queue.offer(queue.poll());
+      }
+
+      for (int i = 0; i < queueLength; i++) {
+        if (queue.peek() == highestElement) {
+          storage.push(queue.poll());
+        } else {
+          queue.offer(queue.poll());
+        }
+      }
+    }
+
+    Collections.reverse(storage);
+    queue.addAll(storage);
+  }
 }
