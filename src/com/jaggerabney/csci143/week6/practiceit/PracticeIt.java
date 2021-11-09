@@ -215,4 +215,31 @@ public class PracticeIt {
       stack.push(oddStackTopElement);
     }
   }
+
+  public static boolean isConsecutive(Stack<Integer> stack) {
+    Queue<Integer> storage = new LinkedList<>();
+    int currentElement = 0, lastElement = 0;
+    boolean isConsecutive = true;
+
+    // start process
+    lastElement = stack.pop();
+    storage.offer(lastElement);
+
+    while (!stack.isEmpty()) {
+      currentElement = stack.pop();
+      storage.offer(currentElement);
+
+      if (currentElement + 1 != lastElement) {
+        isConsecutive = false;
+      }
+
+      lastElement = currentElement;
+    }
+
+    while (!storage.isEmpty()) {
+      stack.push(storage.poll());
+    }
+    Collections.reverse(stack);
+    return isConsecutive;
+  }
 }
