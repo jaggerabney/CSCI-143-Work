@@ -396,4 +396,33 @@ public class PracticeIt {
     stack.addAll(storage);
     Collections.reverse(stack);
   }
+
+  public static void mirrorHalves(Queue<Integer> queue) {
+    if (queue == null) {
+      throw new IllegalArgumentException("queue cannot be null");
+    } else if (queue.size() % 2 != 0) {
+      throw new IllegalArgumentException("queue must be of even length");
+    }
+
+    Stack<Integer> storage = new Stack<>();
+    int halfQueueLength = queue.size() / 2;
+
+    mirrorHalvesHelper(queue, storage, halfQueueLength);
+    mirrorHalvesHelper(queue, storage, halfQueueLength);
+  }
+
+  private static void mirrorHalvesHelper(Queue<Integer> queue, Stack<Integer> storage, int limit) {
+    int currentElement;
+
+    for (int i = 0; i < limit; i++) {
+      currentElement = queue.poll();
+
+      storage.push(currentElement);
+      queue.offer(currentElement);
+    }
+
+    while (!storage.isEmpty()) {
+      queue.offer(storage.pop());
+    }
+  }
 }
