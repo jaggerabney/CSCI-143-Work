@@ -375,4 +375,25 @@ public class PracticeIt {
     Collections.reverse(stack);
     stack.addAll(storage);
   }
+
+  public static void compressDuplicates(Stack<Integer> stack) {
+    Queue<Integer> storage = new LinkedList<>();
+    int currentElement, numOccurances;
+
+    while (!stack.isEmpty()) {
+      currentElement = stack.pop();
+      numOccurances = 1;
+
+      while (!stack.isEmpty() && stack.peek() == currentElement) {
+        stack.pop();
+        numOccurances++;
+      }
+
+      storage.offer(currentElement);
+      storage.offer(numOccurances);
+    }
+
+    stack.addAll(storage);
+    Collections.reverse(stack);
+  }
 }
