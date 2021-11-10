@@ -425,4 +425,37 @@ public class PracticeIt {
       queue.offer(storage.pop());
     }
   }
+
+  public static int removeMin(Stack<Integer> stack) {
+    Queue<Integer> storage = new LinkedList<>();
+    int lowestElement, currentElement;
+    storage.addAll(stack);
+    stack.clear();
+
+    lowestElement = storage.peek();
+    for (int i = 0; i < storage.size(); i++) {
+      currentElement = storage.peek();
+
+      if (currentElement < lowestElement) {
+        lowestElement = currentElement;
+      }
+
+      storage.offer(storage.poll());
+    }
+
+    for (int i = 0; i < storage.size(); i++) {
+      currentElement = storage.peek();
+
+      if (currentElement == lowestElement) {
+        storage.poll();
+        i--;
+        continue;
+      }
+
+      storage.offer(storage.poll());
+    }
+
+    stack.addAll(storage);
+    return lowestElement;
+  }
 }
