@@ -10,6 +10,6 @@ public class Client {
     lil.add(34);
     lil.add(50);
     lil.add(22);
-    System.out.println(lil);
+    System.out.println(lil.size());
   }
 }

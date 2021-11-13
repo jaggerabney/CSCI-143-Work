@@ -41,4 +41,16 @@ public class LinkedIntList {
       return result;
     }
   }
+
+  public int size() {
+    int size = 0;
+    ListNode current = front;
+
+    while (current != null) {
+      size++;
+      current = current.next;
+    }
+
+    return size;
+  }
 }
