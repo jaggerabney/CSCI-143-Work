@@ -53,4 +53,8 @@ public class LinkedIntList {
 
     return size;
   }
+
+  public boolean isEmpty() {
+    return front == null;
+  }
 }

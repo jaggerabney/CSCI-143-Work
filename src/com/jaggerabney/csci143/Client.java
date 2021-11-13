@@ -10,6 +10,8 @@ public class Client {
     lil.add(34);
     lil.add(50);
     lil.add(22);
-    System.out.println(lil.size());
+    System.out.println(lil.isEmpty());
+    lil = new LinkedIntList();
+    System.out.println(lil.isEmpty());
   }
 }
