@@ -91,4 +91,21 @@ public class PracticeIt extends LinkedIntList {
 
     return duplicates;
   }
+
+  public boolean hasTwoConsecutive() {
+    boolean hasTwoConsecutive = false;
+    ListNode current = front;
+
+    if (current != null) {
+      while (current.next != null) {
+        if (current.data + 1 == current.next.data) {
+          hasTwoConsecutive = true;
+        }
+
+        current = current.next;
+      }
+    }
+
+    return hasTwoConsecutive;
+  }
 }
