@@ -1,5 +1,8 @@
 package com.jaggerabney.csci143.week7.practiceit;
 
+import java.security.NoSuchAlgorithmException;
+import java.util.NoSuchElementException;
+
 import com.jaggerabney.csci143.week7.assignment.*;
 
 public class PracticeIt extends LinkedIntList {
@@ -15,5 +18,23 @@ public class PracticeIt extends LinkedIntList {
       listIndex++;
       current = current.next;
     }
+  }
+
+  public int min() {
+    if (front == null)
+      throw new NoSuchElementException("list cannot be null");
+
+    ListNode current = front;
+    int min = front.data;
+
+    while (current != null) {
+      if (current.data < min) {
+        min = current.data;
+      }
+
+      current = current.next;
+    }
+
+    return min;
   }
 }
