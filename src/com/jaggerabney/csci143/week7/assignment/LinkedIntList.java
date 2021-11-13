@@ -57,4 +57,8 @@ public class LinkedIntList {
   public boolean isEmpty() {
     return front == null;
   }
+
+  public void clear() {
+    this.front = null;
+  }
 }
