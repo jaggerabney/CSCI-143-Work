@@ -10,8 +10,6 @@ public class Client {
     lil.add(34);
     lil.add(50);
     lil.add(22);
-    System.out.println(lil.isEmpty());
-    lil.clear();
-    System.out.println(lil.isEmpty());
+    System.out.println(lil.indexOf(50));
   }
 }
