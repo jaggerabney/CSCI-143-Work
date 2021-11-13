@@ -2,15 +2,14 @@ package com.jaggerabney.csci143;
 
 import java.util.*;
 
-import com.jaggerabney.csci143.week6.practiceit.PracticeIt;
+import com.jaggerabney.csci143.week7.assignment.*;
 
 public class Client {
   public static void main(String[] args) {
-    Stack<Integer> stack = new Stack<>();
-    stack.addAll(Arrays.asList(27, 5, 42, -11, 0, 19));
-
-    System.out.println(stack);
-    PracticeIt.maxToTop(stack);
-    System.out.println(stack);
+    LinkedIntList lil = new LinkedIntList();
+    lil.add(34);
+    lil.add(50);
+    lil.add(22);
+    System.out.println(lil);
   }
 }
