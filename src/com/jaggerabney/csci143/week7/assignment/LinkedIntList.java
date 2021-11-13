@@ -77,4 +77,19 @@ public class LinkedIntList {
 
     return -1;
   }
+
+  public boolean contains(int value) {
+    boolean containsValue = false;
+    ListNode current = front;
+
+    while (current != null) {
+      if (current.data == value) {
+        containsValue = true;
+      }
+
+      current = current.next;
+    }
+
+    return containsValue;
+  }
 }

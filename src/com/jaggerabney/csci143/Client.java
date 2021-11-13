@@ -10,6 +10,7 @@ public class Client {
     lil.add(34);
     lil.add(50);
     lil.add(22);
-    System.out.println(lil.indexOf(50));
+    System.out.println(lil.contains(50));
+    System.out.println(lil.contains(1));
   }
 }
