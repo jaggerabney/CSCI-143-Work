@@ -37,4 +37,21 @@ public class PracticeIt extends LinkedIntList {
 
     return min;
   }
+
+  public boolean isSorted() {
+    boolean isSorted = true;
+    ListNode current = front;
+    int previousData = Integer.MIN_VALUE;
+
+    while (current != null) {
+      if (current.data < previousData) {
+        isSorted = false;
+      }
+
+      previousData = current.data;
+      current = current.next;
+    }
+
+    return isSorted;
+  }
 }

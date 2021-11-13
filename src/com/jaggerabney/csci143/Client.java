@@ -1,14 +1,14 @@
 package com.jaggerabney.csci143;
 
-import com.jaggerabney.csci143.week7.assignment.*;
+import com.jaggerabney.csci143.week7.practiceit.*;
 
 public class Client {
   public static void main(String[] args) {
-    LinkedIntList lil = new LinkedIntList();
-    lil.add(34);
-    lil.add(50);
-    lil.add(22);
-    System.out.println(lil.contains(50));
-    System.out.println(lil.contains(1));
+    PracticeIt pi = new PracticeIt();
+    pi.add(1);
+    pi.add(2);
+    pi.add(3);
+    // pi.add(1);
+    System.out.println(pi.isSorted());
   }
 }
