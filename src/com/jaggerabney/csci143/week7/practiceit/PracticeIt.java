@@ -1,6 +1,5 @@
 package com.jaggerabney.csci143.week7.practiceit;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.NoSuchElementException;
 
 import com.jaggerabney.csci143.week7.assignment.*;
@@ -53,5 +52,22 @@ public class PracticeIt extends LinkedIntList {
     }
 
     return isSorted;
+  }
+
+  public int lastIndexOf(int value) {
+    int index = 0;
+    int result = -1;
+    ListNode current = front;
+
+    while (current != null) {
+      if (current.data == value) {
+        result = index;
+      }
+
+      index++;
+      current = current.next;
+    }
+
+    return result;
   }
 }
