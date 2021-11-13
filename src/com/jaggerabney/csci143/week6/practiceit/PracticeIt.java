@@ -458,4 +458,37 @@ public class PracticeIt {
     stack.addAll(storage);
     return lowestElement;
   }
+
+  public static void maxToTop(Stack<Integer> stack) {
+    Queue<Integer> storage = new LinkedList<>();
+    int highestElement, currentElement;
+    storage.addAll(stack);
+    stack.clear();
+
+    highestElement = storage.peek();
+    for (int i = 0; i < storage.size(); i++) {
+      currentElement = storage.peek();
+
+      if (currentElement > highestElement) {
+        highestElement = currentElement;
+      }
+
+      storage.offer(storage.poll());
+    }
+
+    for (int i = 0; i < storage.size(); i++) {
+      currentElement = storage.peek();
+
+      if (currentElement == highestElement) {
+        storage.poll();
+        i--;
+        continue;
+      }
+
+      storage.offer(storage.poll());
+    }
+
+    stack.addAll(storage);
+    stack.push(highestElement);
+  }
 }
