@@ -5,6 +5,10 @@ import java.util.NoSuchElementException;
 import com.jaggerabney.csci143.week7.assignment.*;
 
 public class PracticeIt extends LinkedIntList {
+  public PracticeIt(int[] values) {
+    super(values);
+  }
+
   public void set(int index, int value) {
     ListNode current = front;
     int listIndex = 0;
@@ -69,5 +73,22 @@ public class PracticeIt extends LinkedIntList {
     }
 
     return result;
+  }
+
+  public int countDuplicates() {
+    int duplicates = 0;
+    ListNode current = front;
+
+    if (current != null) {
+      while (current.next != null) {
+        if (current.data == current.next.data) {
+          duplicates++;
+        }
+
+        current = current.next;
+      }
+    }
+
+    return duplicates;
   }
 }

@@ -10,6 +10,10 @@ public class LinkedIntList {
     this.front = null;
   }
 
+  public LinkedIntList(int[] values) {
+    addAll(values);
+  }
+
   // basic add method
   public void add(int data) {
     // initializes front to a ListNode with the given value if
@@ -120,5 +124,11 @@ public class LinkedIntList {
     }
 
     return containsValue;
+  }
+
+  public void addAll(int[] values) {
+    for (int value : values) {
+      add(value);
+    }
   }
 }
