@@ -143,4 +143,36 @@ public class PracticeIt extends LinkedIntList {
       current = current.next.next;
     }
   }
+
+  public void stutter() {
+    ListNode current = front;
+    ListNode rest = null;
+
+    while (current != null) {
+      if (current.next != null) {
+        rest = current.next;
+      } else {
+        rest = null;
+      }
+
+      current.next = new ListNode(current.data);
+
+      if (rest != null)
+        current.next.next = rest;
+      current = current.next.next;
+    }
+  }
+
+  public void stretch(int n) {
+    ListNode current = front;
+
+    while (current != null) {
+      for (int i = 1; i < n; i++) {
+        current.next = new ListNode(current.data, current.next);
+        current = current.next;
+      }
+
+      current = current.next;
+    }
+  }
 }
