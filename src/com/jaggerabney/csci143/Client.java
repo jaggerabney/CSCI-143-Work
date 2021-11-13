@@ -4,7 +4,7 @@ import com.jaggerabney.csci143.week7.practiceit.*;
 
 public class Client {
   public static void main(String[] args) {
-    PracticeIt pi = new PracticeIt(new int[] { 1, 1, 1, 3, 3, 6, 9, 15, 15, 23, 23, 23, 40, 40 });
-    System.out.println(pi.countDuplicates());
+    PracticeIt pi = new PracticeIt(new int[] { 10, 20, 30, 40, 50 });
+    System.out.println(pi.deleteBack());
   }
 }

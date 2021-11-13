@@ -108,4 +108,26 @@ public class PracticeIt extends LinkedIntList {
 
     return hasTwoConsecutive;
   }
+
+  public int deleteBack() {
+    if (front == null)
+      throw new NoSuchElementException();
+
+    ListNode current = front;
+    int result;
+
+    if (front.next == null) {
+      result = front.data;
+      front = null;
+      return result;
+    }
+
+    while (current.next.next != null) {
+      current = current.next;
+    }
+
+    result = current.next.data;
+    current.next = null;
+    return result;
+  }
 }
