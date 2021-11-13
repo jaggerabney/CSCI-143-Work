@@ -1,7 +1,5 @@
 package com.jaggerabney.csci143;
 
-import java.util.*;
-
 import com.jaggerabney.csci143.week7.assignment.*;
 
 public class Client {
