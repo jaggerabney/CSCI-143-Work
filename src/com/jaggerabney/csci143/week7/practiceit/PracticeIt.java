@@ -130,4 +130,17 @@ public class PracticeIt extends LinkedIntList {
     current.next = null;
     return result;
   }
+
+  public void switchPairs() {
+    ListNode current = front;
+    int storage;
+
+    while (current != null && current.next != null) {
+      storage = current.next.data;
+
+      current.next.data = current.data;
+      current.data = storage;
+      current = current.next.next;
+    }
+  }
 }
