@@ -1,5 +1,6 @@
 package com.jaggerabney.csci143.week7.practiceit;
 
+import java.util.FormatFlagsConversionMismatchException;
 import java.util.NoSuchElementException;
 
 import com.jaggerabney.csci143.week7.assignment.*;
@@ -191,5 +192,40 @@ public class PracticeIt extends LinkedIntList {
 
       current = current.next;
     }
+  }
+
+  public void split() {
+    ListNode current = front;
+    ListNode rest = null;
+
+    while (current != null && current.next != null) {
+      if (current.next.data < 0) {
+        rest = current.next.next;
+        current.next.next = front;
+        front = current.next;
+        current.next = rest;
+      } else {
+        current = current.next;
+      }
+    }
+  }
+
+  public void transferFrom(LinkedIntList list) {
+    if (list.front == null) {
+      return;
+    } else if (front == null) {
+      front = list.front;
+      list.front = null;
+      return;
+    }
+
+    ListNode current = front;
+
+    while (current.next != null) {
+      current = current.next;
+    }
+
+    current.next = list.front;
+    list.front = null;
   }
 }

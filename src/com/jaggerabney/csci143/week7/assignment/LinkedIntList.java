@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
 
 public class LinkedIntList {
   // reference to first ListNode in the LinkedList
-  protected ListNode front;
+  public ListNode front;
 
   public LinkedIntList() {
     this.front = null;
