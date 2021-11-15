@@ -228,4 +228,21 @@ public class PracticeIt extends LinkedIntList {
     current.next = list.front;
     list.front = null;
   }
+
+  public void removeAll(int value) {
+    while (front != null && front.data == value) {
+      front = front.next;
+    }
+
+    ListNode current = front;
+
+    while (current != null && current.next != null) {
+      if (current.next.data == value) {
+        current.next = current.next.next;
+        continue;
+      }
+
+      current = current.next;
+    }
+  }
 }
