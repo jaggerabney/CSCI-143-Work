@@ -321,4 +321,22 @@ public class PracticeIt extends LinkedIntList {
   private boolean inRange(int value, int start, int end) {
     return (start <= value && end >= value);
   }
+
+  public void doubleList() {
+    ListNode current = front;
+    int originalSize = 0;
+
+    while (current != null) {
+      originalSize++;
+      current = current.next;
+    }
+
+    current = front;
+
+    while (originalSize > 0) {
+      add(current.data);
+      originalSize--;
+      current = current.next;
+    }
+  }
 }
