@@ -339,4 +339,30 @@ public class PracticeIt extends LinkedIntList {
       current = current.next;
     }
   }
+
+  public void rotate() {
+    ListNode current = front;
+    ListNode rest = front.next;
+
+    while (current.next != null) {
+      current = current.next;
+    }
+
+    current.next = front;
+    current.next.next = null;
+    front = rest;
+  }
+
+  public void shift() {
+    if (front == null)
+      return;
+
+    ListNode current = front;
+
+    for (int i = 0; i < size() / 2; i++) {
+      add(current.next.data);
+      current.next = current.next.next;
+      current = current.next;
+    }
+  }
 }
