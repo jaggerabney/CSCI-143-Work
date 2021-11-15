@@ -263,4 +263,31 @@ public class PracticeIt extends LinkedIntList {
 
     return true;
   }
+
+  public LinkedIntList removeEvens() {
+    if (front == null)
+      return new LinkedIntList();
+
+    LinkedIntList evens = new LinkedIntList();
+
+    evens.add(front.data);
+    front = front.next;
+
+    ListNode current = front;
+    int position = 2;
+
+    while (current != null && current.next != null) {
+      if (position % 2 == 0) {
+        evens.add(current.next.data);
+        current.next = current.next.next;
+        position++;
+        continue;
+      }
+
+      position++;
+      current = current.next;
+    }
+
+    return evens;
+  }
 }
