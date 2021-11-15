@@ -245,4 +245,22 @@ public class PracticeIt extends LinkedIntList {
       current = current.next;
     }
   }
+
+  public boolean equals2(LinkedIntList list) {
+    ListNode thisListCurrent = front;
+    ListNode otherListCurrent = list.front;
+
+    while (thisListCurrent != null && otherListCurrent != null) {
+      if (thisListCurrent.data != otherListCurrent.data) {
+        return false;
+      } else if ((thisListCurrent.next == null) != (otherListCurrent.next == null)) {
+        return false;
+      }
+
+      thisListCurrent = thisListCurrent.next;
+      otherListCurrent = otherListCurrent.next;
+    }
+
+    return true;
+  }
 }
