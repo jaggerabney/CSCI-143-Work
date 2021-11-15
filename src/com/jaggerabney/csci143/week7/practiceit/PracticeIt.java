@@ -290,4 +290,35 @@ public class PracticeIt extends LinkedIntList {
 
     return evens;
   }
+
+  public void removeRange(int start, int end) {
+    if (start < 0 || end < 0) {
+      throw new IllegalArgumentException("range must be greater than zero");
+    }
+
+    ListNode current = front;
+    ListNode previous = null;
+    int position = 0;
+
+    while (current != null) {
+      if (inRange(position, start, end)) {
+        if (previous != null) {
+          previous.next = current.next;
+        } else {
+          front = front.next;
+        }
+        current = current.next;
+        position++;
+        continue;
+      }
+
+      position++;
+      previous = current;
+      current = current.next;
+    }
+  }
+
+  private boolean inRange(int value, int start, int end) {
+    return (start <= value && end >= value);
+  }
 }
