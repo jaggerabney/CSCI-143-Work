@@ -90,4 +90,16 @@ public class PracticeIt {
 
     return hasOdd;
   }
+
+  public static void removeEvenLength(Set<String> set) {
+    Set<String> stringsToRemove = new HashSet<>();
+
+    for (String element : set) {
+      if (element.length() % 2 == 0) {
+        stringsToRemove.add(element);
+      }
+    }
+
+    set.removeAll(stringsToRemove);
+  }
 }

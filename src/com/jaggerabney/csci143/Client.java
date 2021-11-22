@@ -5,8 +5,10 @@ import java.util.*;
 
 public class Client {
   public static void main(String[] args) {
-    Set<Integer> list = new HashSet<>(Arrays.asList(3, 7, 3, -1, 2, 3, 7, 2, 15, 15));
+    Set<String> set = new HashSet<>(Arrays.asList("foo", "buzz", "bar", "fork", "bort", "spoon", "!", "dude"));
 
-    System.out.println(PracticeIt.hasOdd(list));
+    System.out.println(set);
+    PracticeIt.removeEvenLength(set);
+    System.out.println(set);
   }
 }
