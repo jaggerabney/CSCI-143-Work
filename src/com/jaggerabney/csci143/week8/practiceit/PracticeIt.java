@@ -122,4 +122,19 @@ public class PracticeIt {
 
     return false;
   }
+
+  public static boolean isUnique(Map<String, String> map) {
+    Set<String> uniques = new HashSet<>();
+    boolean isUnique = true;
+
+    for (String value : map.values()) {
+      if (uniques.contains(value)) {
+        isUnique = false;
+      } else {
+        uniques.add(value);
+      }
+    }
+
+    return isUnique;
+  }
 }
