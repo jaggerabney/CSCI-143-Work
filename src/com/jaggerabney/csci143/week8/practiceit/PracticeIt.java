@@ -102,4 +102,24 @@ public class PracticeIt {
 
     set.removeAll(stringsToRemove);
   }
+
+  public static boolean contains3(List<String> list) {
+    Map<String, Integer> storage = new LinkedHashMap<>();
+
+    for (String element : list) {
+      if (storage.containsKey(element)) {
+        storage.put(element, storage.get(element) + 1);
+      } else {
+        storage.put(element, 1);
+      }
+    }
+
+    for (int value : storage.values()) {
+      if (value >= 3) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }
