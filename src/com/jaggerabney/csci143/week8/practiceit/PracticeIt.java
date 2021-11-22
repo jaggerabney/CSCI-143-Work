@@ -66,4 +66,16 @@ public class PracticeIt {
 
     return numUniques;
   }
+
+  public static int maxLength(Set<String> set) {
+    int longestStringLength = 0;
+
+    for (String element : set) {
+      if (element.length() > longestStringLength) {
+        longestStringLength = element.length();
+      }
+    }
+
+    return longestStringLength;
+  }
 }
