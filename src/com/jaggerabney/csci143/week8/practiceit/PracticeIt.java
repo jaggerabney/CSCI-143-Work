@@ -137,4 +137,18 @@ public class PracticeIt {
 
     return isUnique;
   }
+
+  public static Map<String, Integer> intersect(Map<String, Integer> map1, Map<String, Integer> map2) {
+    Map<String, Integer> result = new HashMap<>();
+
+    for (String element : map1.keySet()) {
+      if (map2.containsKey(element)) {
+        if (map2.get(element) == map1.get(element)) {
+          result.put(element, map1.get(element));
+        }
+      }
+    }
+
+    return result;
+  }
 }
