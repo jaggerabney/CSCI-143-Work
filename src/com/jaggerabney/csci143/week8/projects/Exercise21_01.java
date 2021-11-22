@@ -10,8 +10,7 @@ public class Exercise21_01 {
 
     System.out.println("The union of the two sets is " + union(lhs1, lhs2));
     System.out.println("The difference of the two sets is " + difference(lhs1, lhs2));
-    // System.out.println("The intersection of these two sets is " +
-    // intersection(lhs1, lhs2));
+    System.out.println("The intersection of these two sets is " + intersection(lhs1, lhs2));
   }
 
   public static LinkedHashSet<String> union(LinkedHashSet<String> set1, LinkedHashSet<String> set2) {
@@ -51,6 +50,16 @@ public class Exercise21_01 {
   }
 
   public static LinkedHashSet<String> intersection(LinkedHashSet<String> set1, LinkedHashSet<String> set2) {
-    return null;
+    LinkedHashSet<String> workingSet1 = new LinkedHashSet<>(set1);
+    LinkedHashSet<String> workingSet2 = new LinkedHashSet<>(set2);
+    LinkedHashSet<String> elements = new LinkedHashSet<>();
+
+    for (String element : workingSet1) {
+      if (workingSet2.contains(element)) {
+        elements.add(element);
+      }
+    }
+
+    return elements;
   }
 }
