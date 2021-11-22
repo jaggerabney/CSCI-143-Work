@@ -78,4 +78,16 @@ public class PracticeIt {
 
     return longestStringLength;
   }
+
+  public static boolean hasOdd(Set<Integer> set) {
+    boolean hasOdd = false;
+
+    for (int element : set) {
+      if (element % 2 != 0) {
+        hasOdd = true;
+      }
+    }
+
+    return hasOdd;
+  }
 }
