@@ -4,21 +4,6 @@ import java.util.*;
 
 @SuppressWarnings("all")
 public class Exercise20_23 {
-  public static void main(String[] args) {
-    // Create a Scanner
-    Scanner input = new Scanner(System.in);
-
-    // Prompt the user to enter an expression
-    System.out.print("Enter an expression: ");
-    String expression = input.nextLine();
-
-    try {
-      System.out.println(expression + " = " + evaluateExpression(expression));
-    } catch (Exception ex) {
-      System.out.println("Wrong expression: " + expression);
-    }
-  }
-
   /** Evaluate an expression */
   public static int evaluateExpression(String expression) {
     // Create operandStack to store operands
