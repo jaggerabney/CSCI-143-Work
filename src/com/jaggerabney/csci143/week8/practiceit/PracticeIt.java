@@ -19,4 +19,23 @@ public class PracticeIt {
 
     return result;
   }
+
+  public static void removeInRange(List<Integer> list, int value, int start, int end) {
+    if (start < end) {
+      removeInRange(list, value, end, start);
+    }
+
+    ArrayList<Integer> workingList = new ArrayList<>(list);
+
+    for (int i = 0; i < workingList.size(); i++) {
+      if (i >= start && i < end && workingList.get(i) == value) {
+        workingList.remove(i);
+        i--;
+        end--;
+      }
+    }
+
+    list.clear();
+    list.addAll(workingList);
+  }
 }

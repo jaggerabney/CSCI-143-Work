@@ -5,9 +5,10 @@ import java.util.*;
 
 public class Client {
   public static void main(String[] args) {
-    List<Integer> list1 = Arrays.asList(1, 2, 3, 4, 5);
-    List<Integer> list2 = Arrays.asList(6, 7, 8, 9, 10, 11, 12);
+    ArrayList<Integer> list = new ArrayList<>(Arrays.asList(0, 0, 2, 0, 4, 0, 6, 0, 8, 0, 10, 0, 12, 0, 14, 0, 16));
 
-    System.out.println(PracticeIt.alternate(list1, list2));
+    System.out.println(list);
+    PracticeIt.removeInRange(list, 0, 5, 13);
+    System.out.println(list);
   }
 }
