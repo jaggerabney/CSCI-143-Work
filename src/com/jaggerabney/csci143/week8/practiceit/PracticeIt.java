@@ -168,4 +168,16 @@ public class PracticeIt {
 
     return Collections.max(occurences.values());
   }
+
+  public static Map<String, Integer> reverse(Map<Integer, String> map) {
+    Map<String, Integer> result = new HashMap<>();
+
+    for (Map.Entry<Integer, String> entry : map.entrySet()) {
+      if (!result.keySet().contains(entry.getValue())) {
+        result.put(entry.getValue(), entry.getKey());
+      }
+    }
+
+    return result;
+  }
 }
