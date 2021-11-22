@@ -5,8 +5,9 @@ import java.util.*;
 
 public class Client {
   public static void main(String[] args) {
-    ArrayList<Integer> list = new ArrayList<>(Arrays.asList(3, 7, 3, -1, 2, 3, 7, 2, 15, 15));
+    List<Integer> list1 = Arrays.asList(3, 7, 3, -1, 2, 3, 7, 2, 15, 15);
+    List<Integer> list2 = Arrays.asList(-5, 15, 2, -1, 7, 15, 36);
 
-    System.out.println(PracticeIt.countUnique(list));
+    System.out.println(PracticeIt.countCommon(list1, list2));
   }
 }

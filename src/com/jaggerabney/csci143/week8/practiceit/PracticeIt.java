@@ -52,4 +52,18 @@ public class PracticeIt {
 
     return numUniques;
   }
+
+  public static int countCommon(List<Integer> list1, List<Integer> list2) {
+    Set<Integer> list1uniques = new HashSet<>(list1);
+    Set<Integer> list2uniques = new HashSet<>(list2);
+    int numUniques = 0;
+
+    for (int element : list1uniques) {
+      if (list2uniques.contains(element)) {
+        numUniques++;
+      }
+    }
+
+    return numUniques;
+  }
 }
