@@ -151,4 +151,21 @@ public class PracticeIt {
 
     return result;
   }
+
+  public static int maxOccurrences(List<Integer> list) {
+    if (list.isEmpty())
+      return 0;
+
+    Map<Integer, Integer> occurences = new HashMap<>();
+
+    for (int element : list) {
+      if (occurences.containsKey(element)) {
+        occurences.put(element, occurences.get(element) + 1);
+      } else {
+        occurences.put(element, 1);
+      }
+    }
+
+    return Collections.max(occurences.values());
+  }
 }
