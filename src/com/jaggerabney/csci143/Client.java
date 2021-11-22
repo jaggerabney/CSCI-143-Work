@@ -5,10 +5,8 @@ import java.util.*;
 
 public class Client {
   public static void main(String[] args) {
-    Set<String> set = new HashSet<>(Arrays.asList("foo", "buzz", "bar", "fork", "bort", "spoon", "!", "dude"));
+    List<String> list = Arrays.asList("banana", "bends", "i", "mend", "sandy");
 
-    System.out.println(set);
-    PracticeIt.removeEvenLength(set);
-    System.out.println(set);
+    System.out.println(PracticeIt.pairCounts(list));
   }
 }

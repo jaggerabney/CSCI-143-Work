@@ -207,4 +207,25 @@ public class PracticeIt {
 
     return rarestValues.first();
   }
+
+  public static Map<String, Integer> pairCounts(List<String> list) {
+    Map<String, Integer> pairCounts = new TreeMap<>();
+
+    for (String element : list) {
+      if (element.length() >= 2) {
+        for (int i = 0; i < element.length() - 1; i++) {
+          String key = element.substring(i, i + 2);
+
+          if (pairCounts.containsKey(key)) {
+            pairCounts.put(key, pairCounts.get(key) + 1);
+          } else {
+            pairCounts.put(key, 1);
+          }
+        }
+
+      }
+    }
+
+    return pairCounts;
+  }
 }
