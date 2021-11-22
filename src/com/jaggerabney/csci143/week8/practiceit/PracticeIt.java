@@ -156,17 +156,17 @@ public class PracticeIt {
     if (list.isEmpty())
       return 0;
 
-    Map<Integer, Integer> occurences = new HashMap<>();
+    Map<Integer, Integer> occurrences = new HashMap<>();
 
     for (int element : list) {
-      if (occurences.containsKey(element)) {
-        occurences.put(element, occurences.get(element) + 1);
+      if (occurrences.containsKey(element)) {
+        occurrences.put(element, occurrences.get(element) + 1);
       } else {
-        occurences.put(element, 1);
+        occurrences.put(element, 1);
       }
     }
 
-    return Collections.max(occurences.values());
+    return Collections.max(occurrences.values());
   }
 
   public static Map<String, Integer> reverse(Map<Integer, String> map) {
@@ -179,5 +179,32 @@ public class PracticeIt {
     }
 
     return result;
+  }
+
+  public static int rarest(Map<String, Integer> map) {
+    if (map.isEmpty())
+      throw new IllegalArgumentException("map cannot be empty");
+
+    Map<Integer, Integer> occurrences = new HashMap<>();
+    TreeSet<Integer> rarestValues = new TreeSet<>();
+    int rarest;
+
+    for (int value : map.values()) {
+      if (occurrences.containsKey(value)) {
+        occurrences.put(value, occurrences.get(value) + 1);
+      } else {
+        occurrences.put(value, 1);
+      }
+    }
+
+    rarest = Collections.min(occurrences.values());
+
+    for (Map.Entry<Integer, Integer> entry : occurrences.entrySet()) {
+      if (entry.getValue() == rarest) {
+        rarestValues.add(entry.getKey());
+      }
+    }
+
+    return rarestValues.first();
   }
 }
