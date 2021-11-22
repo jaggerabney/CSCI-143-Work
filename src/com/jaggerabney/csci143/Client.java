@@ -5,10 +5,8 @@ import java.util.*;
 
 public class Client {
   public static void main(String[] args) {
-    ArrayList<Integer> list = new ArrayList<>(Arrays.asList(0, 0, 2, 0, 4, 0, 6, 0, 8, 0, 10, 0, 12, 0, 14, 0, 16));
+    ArrayList<Integer> list = new ArrayList<>(Arrays.asList(3, 7, 3, -1, 2, 3, 7, 2, 15, 15));
 
-    System.out.println(list);
-    PracticeIt.removeInRange(list, 0, 5, 13);
-    System.out.println(list);
+    System.out.println(PracticeIt.countUnique(list));
   }
 }

@@ -38,4 +38,18 @@ public class PracticeIt {
     list.clear();
     list.addAll(workingList);
   }
+
+  public static int countUnique(List<Integer> list) {
+    Set<Integer> uniques = new HashSet<>();
+    int numUniques = 0;
+
+    for (int element : list) {
+      if (!uniques.contains(element)) {
+        uniques.add(element);
+        numUniques++;
+      }
+    }
+
+    return numUniques;
+  }
 }
