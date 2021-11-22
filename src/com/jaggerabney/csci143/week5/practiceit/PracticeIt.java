@@ -318,26 +318,4 @@ public class PracticeIt {
     }
     return;
   }
-
-  private static void allSquareSums(int index, List<String> permutations, List<String> squareSums) {
-    if (index < permutations.size()) {
-      String result = squareSum(permutations.get(index), 0);
-      squareSums.add(result);
-      allSquareSums(index + 1, permutations, squareSums);
-    }
-  }
-
-  private static void printResult(String result) {
-
-  }
-
-  private static String squareSum(String permutation, int index) {
-    if (index < permutation.length()) {
-      int bit = Character.getNumericValue(permutation.charAt(index));
-      String result = (bit == 1) ? (index + 1) + "^2 " : "";
-      return result + squareSum(permutation, index + 1);
-    } else {
-      return "\b";
-    }
-  }
 }

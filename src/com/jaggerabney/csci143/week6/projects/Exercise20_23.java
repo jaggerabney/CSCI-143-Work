@@ -2,6 +2,7 @@ package com.jaggerabney.csci143.week6.projects;
 
 import java.util.*;
 
+@SuppressWarnings("all")
 public class Exercise20_23 {
   public static void main(String[] args) {
     // Create a Scanner

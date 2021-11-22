@@ -1,6 +1,5 @@
 package com.jaggerabney.csci143.week7.practiceit;
 
-import java.util.FormatFlagsConversionMismatchException;
 import java.util.NoSuchElementException;
 
 import com.jaggerabney.csci143.week7.assignment.*;
