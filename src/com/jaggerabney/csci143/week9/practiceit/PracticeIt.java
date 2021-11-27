@@ -99,4 +99,22 @@ public class PracticeIt extends IntTree {
       return "";
     }
   }
+
+  public boolean isFull() {
+    return (overallRoot != null) ? isFull(overallRoot) : true;
+  }
+
+  private boolean isFull(IntTreeNode root) {
+    if (root != null && hasTwoChildren(root)) {
+      return isFull(root.left) && isFull(root.right);
+    } else if (isLeaf(root)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  private boolean hasTwoChildren(IntTreeNode node) {
+    return (node.left != null && node.right != null);
+  }
 }
