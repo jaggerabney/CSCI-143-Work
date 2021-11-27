@@ -1,16 +1,21 @@
 import acm.graphics.*;
-import java.awt.event.*;
 
 public class Game extends GCanvas {
-  private GRect rect;
+  private Ball ball;
+  private Paddle paddle;
+  private Bricks bricks;
+  private Powerups powerups;
+  private Scoreboard scoreboard;
 
   public Game() {
     super();
-    this.rect = new GRect(0, 0, 25, 25);
-    this.add(rect);
   }
 
-  public void update(GPoint mousePos) {
-    rect.setLocation(mousePos.getX(), mousePos.getY());
+  public void update() {
+    ball.update();
+    paddle.update();
+    bricks.update();
+    powerups.update();
+    scoreboard.update();
   }
 }
