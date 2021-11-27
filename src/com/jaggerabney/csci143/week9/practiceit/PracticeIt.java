@@ -80,4 +80,23 @@ public class PracticeIt extends IntTree {
       printLevel(root.right, targetLevel, currentLevel + 1);
     }
   }
+
+  public void printLeaves() {
+    String result = printLeaves(overallRoot);
+    if (!result.isEmpty()) {
+      System.out.println("leaves: " + result);
+    } else {
+      System.out.println("no leaves");
+    }
+  }
+
+  private String printLeaves(IntTreeNode root) {
+    if (root != null && isLeaf(root)) {
+      return root.data + " ";
+    } else if (root != null) {
+      return printLeaves(root.right) + printLeaves(root.left);
+    } else {
+      return "";
+    }
+  }
 }
