@@ -63,4 +63,21 @@ public class PracticeIt extends IntTree {
   private boolean isEven(int value) {
     return value % 2 == 0;
   }
+
+  public void printLevel(int level) {
+    if (level >= 1) {
+      printLevel(overallRoot, level, 1);
+    } else {
+      throw new IllegalArgumentException("level cannot be less than one");
+    }
+  }
+
+  private void printLevel(IntTreeNode root, int targetLevel, int currentLevel) {
+    if (currentLevel == targetLevel && root != null) {
+      System.out.println(root.data);
+    } else if (root != null) {
+      printLevel(root.left, targetLevel, currentLevel + 1);
+      printLevel(root.right, targetLevel, currentLevel + 1);
+    }
+  }
 }
