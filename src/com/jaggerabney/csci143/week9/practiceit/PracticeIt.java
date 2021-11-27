@@ -17,4 +17,18 @@ public class PracticeIt extends IntTree {
       return 0;
     }
   }
+
+  public int countEmpty() {
+    return (overallRoot != null) ? countEmpty(overallRoot) : 1;
+  }
+
+  private int countEmpty(IntTreeNode root) {
+    if (root != null) {
+      int leftChildEmpty = (root.left == null) ? 1 : 0;
+      int rightChildEmpty = (root.right == null) ? 1 : 0;
+      return leftChildEmpty + rightChildEmpty + countEmpty(root.left) + countEmpty(root.right);
+    } else {
+      return 0;
+    }
+  }
 }
