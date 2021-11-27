@@ -11,7 +11,6 @@ public class Controls extends MouseInputAdapter {
 
   @Override
   public void mouseMoved(MouseEvent e) {
-    System.out.println(e);
     this.mousePos = new GPoint(e.getX(), e.getY());
   }
 
