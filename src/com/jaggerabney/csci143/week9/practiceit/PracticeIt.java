@@ -117,4 +117,26 @@ public class PracticeIt extends IntTree {
   private boolean hasTwoChildren(IntTreeNode node) {
     return (node.left != null && node.right != null);
   }
+
+  public String toString2() {
+    return toString2(overallRoot);
+  }
+
+  private String toString2(IntTreeNode root) {
+    if (root != null && hasChildren(root)) {
+      return "(" + root.data + ", " + toString2(root.left) + ", " + toString2(root.right) + ")";
+    } else if (root != null && hasNoChildren(root)) {
+      return String.valueOf(root.data);
+    } else {
+      return "empty";
+    }
+  }
+
+  public boolean hasChildren(IntTreeNode node) {
+    return node.left != null || node.right != null;
+  }
+
+  public boolean hasNoChildren(IntTreeNode node) {
+    return node.left == null && node.right == null;
+  }
 }
