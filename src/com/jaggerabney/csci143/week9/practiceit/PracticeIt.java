@@ -43,4 +43,24 @@ public class PracticeIt extends IntTree {
       return 0;
     }
   }
+
+  public int countEvenBranches() {
+    return countEvenBranches(overallRoot);
+  }
+
+  private int countEvenBranches(IntTreeNode root) {
+    if (root != null && !isLeaf(root)) {
+      return (isEven(root.data) ? 1 : 0) + countEvenBranches(root.left) + countEvenBranches(root.right);
+    } else {
+      return 0;
+    }
+  }
+
+  private boolean isLeaf(IntTreeNode node) {
+    return node.left == null && node.right == null;
+  }
+
+  private boolean isEven(int value) {
+    return value % 2 == 0;
+  }
 }
