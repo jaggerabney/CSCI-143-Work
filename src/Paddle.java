@@ -1,8 +1,8 @@
 import acm.graphics.*;
-import java.awt.event.*;
-import javax.swing.event.*;
 
 public class Paddle extends GRect implements Updateable {
+  private Controls controls;
+
   public Paddle(double width, double height) {
     super(width, height);
   }
@@ -11,33 +11,12 @@ public class Paddle extends GRect implements Updateable {
     super(x, y, width, height);
   }
 
+  public void addControls(Controls controls) {
+    this.controls = controls;
+  }
+
   @Override
   public void update() {
     // TODO: add code here!
-  }
-
-  class Controls extends MouseInputAdapter {
-    private GPoint mousePos;
-
-    public Controls() {
-      this.mousePos = new GPoint(0, 0);
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-      this.mousePos = new GPoint(e.getX(), e.getY());
-    }
-
-    public double getMouseX() {
-      return mousePos.getX();
-    }
-
-    public double getMouseY() {
-      return mousePos.getY();
-    }
-
-    public GPoint getMousePos() {
-      return mousePos;
-    }
   }
 }

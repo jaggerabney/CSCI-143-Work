@@ -11,7 +11,7 @@ public class Breakout extends GraphicsProgram {
     @Override
     public void init() {
         this.config = new Config("/resources/config.properties");
-        this.game = new Game();
+        this.game = new Game(config);
         this.isRunning = true;
 
         this.setSize(config.getIntProp("APPLICATION_WIDTH"), config.getIntProp("APPLICATION_HEIGHT"));
