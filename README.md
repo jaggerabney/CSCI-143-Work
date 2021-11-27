@@ -1,18 +1,8 @@
-## Getting Started
+## C SCI& 143 Final Game Project
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+This is the GitHub repo for my group's final game project, _Breakout!_
+It is here for two reasons:
 
-## Folder Structure
-
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+1. For my partners to have some base code to work off
+2. If we are accused of cheating
+3. Because it's always a good idea to use a VCS
