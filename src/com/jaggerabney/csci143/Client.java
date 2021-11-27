@@ -4,8 +4,7 @@ import com.jaggerabney.csci143.week9.practiceit.*;
 
 public class Client {
   public static void main(String[] args) {
-    PracticeIt tree = new PracticeIt(
-        "[0 [4 [3 [4 [1] null] null] null] [6 [0 [3 null [9]] [8]] [1 null [5 [2] [7]]]]]");
-    System.out.println(tree.countEmpty());
+    PracticeIt tree = new PracticeIt("[9 [7 [3] [2 [5] null]] [6 null [4 null [2]]]]");
+    System.out.println(tree.depthSum());
   }
 }

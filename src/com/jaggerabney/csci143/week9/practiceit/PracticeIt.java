@@ -31,4 +31,16 @@ public class PracticeIt extends IntTree {
       return 0;
     }
   }
+
+  public int depthSum() {
+    return depthSum(overallRoot, 1);
+  }
+
+  private int depthSum(IntTreeNode root, int level) {
+    if (root != null) {
+      return (root.data * level) + depthSum(root.left, level + 1) + depthSum(root.right, level + 1);
+    } else {
+      return 0;
+    }
+  }
 }
