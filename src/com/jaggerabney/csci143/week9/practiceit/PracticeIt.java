@@ -381,4 +381,16 @@ public class PracticeIt extends IntTree {
       return 1 + Math.max(height(root.left), height(root.right));
     }
   }
+
+  public int matches(IntTree other) {
+    return matches(overallRoot, other.overallRoot);
+  }
+
+  private int matches(IntTreeNode tree1, IntTreeNode tree2) {
+    if (tree1 != null && tree2 != null) {
+      return (tree1.data == tree2.data ? 1 : 0) + matches(tree1.left, tree2.left) + matches(tree1.right, tree2.right);
+    } else {
+      return 0;
+    }
+  }
 }
