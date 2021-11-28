@@ -139,4 +139,18 @@ public class PracticeIt extends IntTree {
   public boolean hasNoChildren(IntTreeNode node) {
     return node.left == null && node.right == null;
   }
+
+  public boolean equals2(IntTree other) {
+    return equals2(overallRoot, other.overallRoot);
+  }
+
+  private boolean equals2(IntTreeNode root1, IntTreeNode root2) {
+    if (root1 == null && root2 == null) {
+      return true;
+    } else if ((root1 == null && root2 != null) || (root1 != null && root2 == null)) {
+      return false;
+    } else {
+      return (root1.data == root2.data) && equals2(root1.left, root2.left) && equals2(root1.right, root2.right);
+    }
+  }
 }
