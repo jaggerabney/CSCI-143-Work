@@ -153,4 +153,21 @@ public class PracticeIt extends IntTree {
       return (root1.data == root2.data) && equals2(root1.left, root2.left) && equals2(root1.right, root2.right);
     }
   }
+
+  public void doublePositives() {
+    doublePositives(overallRoot);
+  }
+
+  private void doublePositives(IntTreeNode root) {
+    if (root == null) {
+      return;
+    } else {
+      if (root.data > 0) {
+        root.data *= 2;
+      }
+
+      doublePositives(root.left);
+      doublePositives(root.right);
+    }
+  }
 }

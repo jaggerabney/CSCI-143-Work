@@ -4,8 +4,10 @@ import com.jaggerabney.csci143.week9.practiceit.*;
 
 public class Client {
   public static void main(String[] args) {
-    PracticeIt tree = new PracticeIt("[2 [8 [0] null] [1 [7 [4] null] [6 null [9]]]]");
+    PracticeIt tree = new PracticeIt("[-9 [3 [0] null] [15 [12 [6] [-3]] [24]]]");
 
-    System.out.println(tree.toString2());
+    System.out.println(tree);
+    tree.doublePositives();
+    System.out.println(tree);
   }
 }
