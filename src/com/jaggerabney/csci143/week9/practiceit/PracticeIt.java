@@ -348,7 +348,37 @@ public class PracticeIt extends IntTree {
     }
   }
 
-  private boolean isOdd(int value) {
-    return value % 2 == 1;
+  public void makePerfect() {
+    overallRoot = makePerfect(overallRoot, height(), 1);
+  }
+
+  private IntTreeNode makePerfect(IntTreeNode root, int height, int level) {
+    if (level <= height) {
+      if (root.left == null) {
+        root.left = new IntTreeNode(0);
+      }
+
+      if (root.right == null) {
+        root.right = new IntTreeNode(0);
+      }
+
+      root.left = makePerfect(root.left, height, level + 1);
+      root.right = makePerfect(root.right, height, level + 1);
+      return root;
+    } else {
+      return null;
+    }
+  }
+
+  public int height() {
+    return height(overallRoot);
+  }
+
+  private int height(IntTreeNode root) {
+    if (root == null) {
+      return 0;
+    } else {
+      return 1 + Math.max(height(root.left), height(root.right));
+    }
   }
 }
