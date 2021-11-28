@@ -7,10 +7,7 @@ public class Client {
     PracticeIt tree1 = new PracticeIt("[9 [6 [9] [2 [4] null]] [14 null [11]]]");
     PracticeIt tree2 = new PracticeIt("[0 [-3 [8] null] [8 [5 null [1]] [6]]]");
 
-    System.out.println(tree1);
-    System.out.println(tree2);
-
-    IntTree tree3 = tree1.combineWith(tree2);
-    System.out.println(tree3);
+    System.out.println(tree1.inOrderList());
+    System.out.println(tree2.inOrderList());
   }
 }

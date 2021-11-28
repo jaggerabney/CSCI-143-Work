@@ -1,5 +1,7 @@
 package com.jaggerabney.csci143.week9.practiceit;
 
+import java.util.*;
+
 public class PracticeIt extends IntTree {
   public PracticeIt(String s) {
     super(s);
@@ -302,6 +304,21 @@ public class PracticeIt extends IntTree {
       return node;
     } else {
       return null;
+    }
+  }
+
+  public List<Integer> inOrderList() {
+    return inOrderList(overallRoot, new ArrayList<Integer>());
+  }
+
+  private ArrayList<Integer> inOrderList(IntTreeNode root, ArrayList<Integer> list) {
+    if (root != null) {
+      inOrderList(root.left, list);
+      list.add(root.data);
+      inOrderList(root.right, list);
+      return list;
+    } else {
+      return list;
     }
   }
 }
