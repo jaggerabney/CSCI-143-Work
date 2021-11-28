@@ -254,4 +254,27 @@ public class PracticeIt extends IntTree {
       return null;
     }
   }
+
+  public void tighten() {
+    overallRoot = tighten(overallRoot);
+  }
+
+  private IntTreeNode tighten(IntTreeNode root) {
+    if (root != null && hasOneChild(root)) {
+      IntTreeNode child = (root.right == null) ? root.left : root.right;
+      return tighten(child);
+    } else if (root != null && hasTwoChildren(root)) {
+      root.left = tighten(root.left);
+      root.right = tighten(root.right);
+      return root;
+    } else if (root != null && hasNoChildren(root)) {
+      return root;
+    } else {
+      return null;
+    }
+  }
+
+  private boolean hasOneChild(IntTreeNode node) {
+    return (node.left == null) != (node.right == null);
+  }
 }
