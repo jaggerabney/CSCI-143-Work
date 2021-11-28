@@ -4,10 +4,13 @@ import com.jaggerabney.csci143.week9.practiceit.*;
 
 public class Client {
   public static void main(String[] args) {
-    PracticeIt tree = new PracticeIt("[2 [8 [7 [4] [1 null [3]]] null] [9 [6 null [0 [4] [5]]] null]]");
+    PracticeIt tree1 = new PracticeIt("[9 [6 [9] [2 [4] null]] [14 null [11]]]");
+    PracticeIt tree2 = new PracticeIt("[0 [-3 [8] null] [8 [5 null [1]] [6]]]");
 
-    System.out.println(tree);
-    tree.tighten();
-    System.out.println(tree);
+    System.out.println(tree1);
+    System.out.println(tree2);
+
+    IntTree tree3 = tree1.combineWith(tree2);
+    System.out.println(tree3);
   }
 }

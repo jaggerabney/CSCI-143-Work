@@ -277,4 +277,31 @@ public class PracticeIt extends IntTree {
   private boolean hasOneChild(IntTreeNode node) {
     return (node.left == null) != (node.right == null);
   }
+
+  public IntTree combineWith(IntTree other) {
+    return new IntTree(combineWith(overallRoot, other.overallRoot));
+  }
+
+  private IntTreeNode combineWith(IntTreeNode tree1, IntTreeNode tree2) {
+    IntTreeNode node = new IntTreeNode(0);
+
+    if (tree1 != null && tree2 != null) {
+      node.data = 3;
+      node.left = combineWith(tree1.left, tree2.left);
+      node.right = combineWith(tree1.right, tree2.right);
+      return node;
+    } else if (tree1 != null && tree2 == null) {
+      node.data = 1;
+      node.left = combineWith(tree1.left, null);
+      node.right = combineWith(tree1.right, null);
+      return node;
+    } else if (tree1 == null && tree2 != null) {
+      node.data = 2;
+      node.left = combineWith(null, tree2.left);
+      node.right = combineWith(null, tree2.right);
+      return node;
+    } else {
+      return null;
+    }
+  }
 }
