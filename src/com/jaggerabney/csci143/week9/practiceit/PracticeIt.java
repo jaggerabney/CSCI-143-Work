@@ -321,4 +321,34 @@ public class PracticeIt extends IntTree {
       return list;
     }
   }
+
+  public void evenLevels() {
+    if (overallRoot != null) {
+      overallRoot = (isLeaf(overallRoot)) ? null : evenLevels(overallRoot, 1);
+    }
+  }
+
+  private IntTreeNode evenLevels(IntTreeNode root, int level) {
+    if (root != null) {
+      if (isEven(level)) {
+        if (root.left != null && isLeaf(root.left)) {
+          root.left = null;
+        }
+
+        if (root.right != null && isLeaf(root.right)) {
+          root.right = null;
+        }
+      }
+
+      root.left = evenLevels(root.left, level + 1);
+      root.right = evenLevels(root.right, level + 1);
+      return root;
+    } else {
+      return null;
+    }
+  }
+
+  private boolean isOdd(int value) {
+    return value % 2 == 1;
+  }
 }
