@@ -170,4 +170,18 @@ public class PracticeIt extends IntTree {
       doublePositives(root.right);
     }
   }
+
+  public void numberNodes() {
+    numberNodes(overallRoot, 1);
+  }
+
+  private int numberNodes(IntTreeNode root, int index) {
+    if (root != null) {
+      root.data = index;
+      int temp = numberNodes(root.left, index + 1);
+      return 1 + temp + numberNodes(root.right, index + temp + 1);
+    } else {
+      return 0;
+    }
+  }
 }
