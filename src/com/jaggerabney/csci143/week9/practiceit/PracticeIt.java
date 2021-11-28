@@ -184,4 +184,29 @@ public class PracticeIt extends IntTree {
       return 0;
     }
   }
+
+  public void removeLeaves() {
+    if (overallRoot == null) {
+      return;
+    } else if (isLeaf(overallRoot)) {
+      overallRoot = null;
+    } else {
+      removeLeaves(overallRoot);
+    }
+  }
+
+  private void removeLeaves(IntTreeNode root) {
+    if (root != null) {
+      if (root.left != null && isLeaf(root.left)) {
+        root.left = null;
+      }
+
+      if (root.right != null && isLeaf(root.right)) {
+        root.right = null;
+      }
+
+      removeLeaves(root.left);
+      removeLeaves(root.right);
+    }
+  }
 }
