@@ -209,4 +209,29 @@ public class PracticeIt extends IntTree {
       removeLeaves(root.right);
     }
   }
+
+  public void completeToLevel(int level) {
+    if (level < 1) {
+      throw new IllegalArgumentException("level must be greater than one");
+    } else if (overallRoot == null) {
+      overallRoot = new IntTreeNode(-1);
+      completeToLevel(overallRoot, level, 1);
+    } else {
+      completeToLevel(overallRoot, level, 1);
+    }
+  }
+
+  private void completeToLevel(IntTreeNode root, int targetLevel, int currentLevel) {
+    if (currentLevel < targetLevel) {
+      if (root.left == null) {
+        root.left = new IntTreeNode(-1);
+      }
+      if (root.right == null) {
+        root.right = new IntTreeNode(-1);
+      }
+
+      completeToLevel(root.left, targetLevel, currentLevel + 1);
+      completeToLevel(root.right, targetLevel, currentLevel + 1);
+    }
+  }
 }
