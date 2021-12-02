@@ -1,4 +1,5 @@
 import acm.graphics.*;
+import java.awt.*;
 
 public class Game extends GCanvas {
   private Config config;
@@ -14,6 +15,11 @@ public class Game extends GCanvas {
     this.config = config;
     this.controls = new Controls();
     addMouseMotionListener(controls);
+
+    Brick test = new Brick(Color.RED);
+    test.setWidth(config.getIntProp("WIDTH"), config.getIntProp("BRICKS_PER_ROW"), config.getIntProp("BRICK_SEP"));
+    test.setHeight(config.getIntProp("BRICK_HEIGHT"));
+    add(test);
   }
 
   public void update() {

@@ -1,20 +1,41 @@
 import acm.graphics.*;
+import java.awt.*;
 
 public class Brick extends GRect {
-  public Brick() {
+  private boolean destroyed;
+
+  public Brick(Color color) {
     super(0, 0);
+    this.destroyed = false;
+    this.setFilled(true);
+    this.setFillColor(color);
   }
 
+  // these have to be here to prevent compiler errors
   public Brick(double width, double height) {
     super(width, height);
+    this.destroyed = false;
   }
 
   public Brick(double x, double y, double width, double height) {
     super(x, y, width, height);
+    this.destroyed = false;
   }
 
-  public void setWidth(int windowWidth, int numBricksPerRow, int brickSep) {
-    int width = (windowWidth - (numBricksPerRow - 1) * brickSep) / numBricksPerRow;
+  public void setWidth(int windowWidth, int bricksPerRow, int brickSep) {
+    int width = (windowWidth - (bricksPerRow - 1) * brickSep) / bricksPerRow;
     this.setSize(width, this.getHeight());
+  }
+
+  public void setHeight(int height) {
+    this.setSize(this.getWidth(), height);
+  }
+
+  public void destroy() {
+    this.destroyed = true;
+  }
+
+  public boolean isDestroyed() {
+    return destroyed;
   }
 }
