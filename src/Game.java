@@ -16,10 +16,7 @@ public class Game extends GCanvas {
     this.controls = new Controls();
     addMouseMotionListener(controls);
 
-    Brick test = new Brick(Color.RED);
-    test.setWidth(config.getIntProp("WIDTH"), config.getIntProp("BRICKS_PER_ROW"), config.getIntProp("BRICK_SEP"));
-    test.setHeight(config.getIntProp("BRICK_HEIGHT"));
-    add(test);
+    Bricks test = new Bricks(config);
   }
 
   public void update() {
