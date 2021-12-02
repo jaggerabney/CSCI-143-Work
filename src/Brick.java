@@ -4,13 +4,6 @@ import java.awt.*;
 public class Brick extends GRect {
   private boolean destroyed;
 
-  public Brick(Color color) {
-    super(0, 0);
-    this.destroyed = false;
-    this.setFilled(true);
-    this.setFillColor(color);
-  }
-
   // these have to be here to prevent compiler errors
   public Brick(double width, double height) {
     super(width, height);
@@ -20,6 +13,14 @@ public class Brick extends GRect {
   public Brick(double x, double y, double width, double height) {
     super(x, y, width, height);
     this.destroyed = false;
+  }
+
+  // this is the constructor used in Bricks
+  public Brick(double x, double y, double width, double height, Color color) {
+    super(x, y, width, height);
+    this.destroyed = false;
+    this.setFilled(true);
+    this.setColor(color);
   }
 
   public void setWidth(int windowWidth, int bricksPerRow, int brickSep) {

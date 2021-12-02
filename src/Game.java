@@ -17,6 +17,12 @@ public class Game extends GCanvas {
     addMouseMotionListener(controls);
 
     Bricks test = new Bricks(config);
+
+    for (int i = 0; i < config.getIntProp("BRICK_ROWS"); i++) {
+      for (int j = 0; j < config.getIntProp("BRICKS_PER_ROW"); j++) {
+        add(test.getBrick(i, j));
+      }
+    }
   }
 
   public void update() {

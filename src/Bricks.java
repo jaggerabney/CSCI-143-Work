@@ -7,8 +7,9 @@ public class Bricks implements Updateable {
   private Color[] colors;
 
   public Bricks(Config config) {
-    this.bricks = new Brick[config.getIntProp("BRICK_ROWS")][config.getIntProp("BRICKS_PER_ROW")];
-    this.colors = initBrickColors(config.getStringProp("BRICK_COLORS"));
+    initBrickColors(config.getStringProp("BRICK_COLORS"));
+    initBricks(config);
+
   }
 
   @Override
@@ -16,19 +17,43 @@ public class Bricks implements Updateable {
     // TODO: add code here!
   }
 
-  private Color[] initBrickColors(String colorString) {
-    String[] colorStrings = colorString.split(",");
-    Color[] result = new Color[colorStrings.length];
+  private void initBricks(Config config) {
+    int brickHeight = config.getIntProp("BRICK_HEIGHT"),
+        brickRows = config.getIntProp("BRICK_ROWS"),
+        bricksPerRow = config.getIntProp("BRICKS_PER_ROW"),
+        windowWidth = config.getIntProp("WIDTH"),
+        brickSep = config.getIntProp("BRICK_SEP"),
+        brickYOffset = config.getIntProp("BRICK_Y_OFFSET"),
+        brickWidth = (windowWidth - (bricksPerRow - 1) * brickSep) / bricksPerRow;
+    bricks = new Brick[brickRows][bricksPerRow];
+    int brickX, brickY;
 
-    for (int i = 0; i < result.length; i++) {
+    System.out.println(windowWidth);
+
+    for (int i = 0; i < brickRows; i++) {
+      for (int j = 0; j < bricksPerRow; j++) {
+        brickX = (brickWidth + brickSep) * j;
+        brickY = (i * (brickHeight + brickSep)) + brickYOffset;
+        bricks[i][j] = new Brick(brickX, brickY, brickWidth, brickHeight, colors[i]);
+      }
+    }
+  }
+
+  private void initBrickColors(String colorString) {
+    String[] colorStrings = colorString.split(",");
+    colors = new Color[colorStrings.length];
+
+    for (int i = 0; i < colors.length; i++) {
       try {
         Field field = Class.forName("java.awt.Color").getField(colorStrings[i].toUpperCase());
-        result[i] = (Color) field.get(null);
+        colors[i] = (Color) field.get(null);
       } catch (Exception e) {
         e.printStackTrace();
       }
     }
+  }
 
-    return result;
+  public Brick getBrick(int row, int column) {
+    return bricks[row][column];
   }
 }
