@@ -1,5 +1,5 @@
 public class Bricks implements Updateable {
-  private Bricks[][] bricks;
+  private Brick[][] bricks;
 
   public Bricks() {
     // TODO: init bricks!
