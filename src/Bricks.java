@@ -18,21 +18,24 @@ public class Bricks implements Updateable {
   }
 
   private void initBricks(Config config) {
-    int brickHeight = config.getIntProp("BRICK_HEIGHT"),
-        brickRows = config.getIntProp("BRICK_ROWS"),
-        bricksPerRow = config.getIntProp("BRICKS_PER_ROW"),
-        windowWidth = config.getIntProp("WIDTH"),
-        brickSep = config.getIntProp("BRICK_SEP"),
-        brickYOffset = config.getIntProp("BRICK_Y_OFFSET"),
-        brickWidth = (windowWidth - (bricksPerRow - 1) * brickSep) / bricksPerRow;
-    bricks = new Brick[brickRows][bricksPerRow];
-    int brickX, brickY;
+    double brickRows = config.getDoubleProp("BRICK_ROWS"),
+        bricksPerRow = config.getDoubleProp("BRICKS_PER_ROW"),
+        brickHeight = config.getDoubleProp("BRICK_HEIGHT"),
+        windowWidth = config.getDoubleProp("WIDTH"),
+        brickSep = config.getDoubleProp("BRICK_SEP"),
+        brickYOffset = config.getDoubleProp("BRICK_Y_OFFSET"),
+        // 2 pixels are removed from the brick width to account for the brick's borders
+        brickWidth = ((windowWidth - bricksPerRow * brickSep) / bricksPerRow) - 2;
+    bricks = new Brick[(int) brickRows][(int) bricksPerRow];
 
-    System.out.println(windowWidth);
+    System.out.println(Arrays.toString(
+        new double[] { brickRows, bricksPerRow, brickHeight, windowWidth, brickSep, brickYOffset, brickWidth }));
+
+    double brickX, brickY;
 
     for (int i = 0; i < brickRows; i++) {
       for (int j = 0; j < bricksPerRow; j++) {
-        brickX = (brickWidth + brickSep) * j;
+        brickX = ((brickWidth + brickSep) * j) + brickSep;
         brickY = (i * (brickHeight + brickSep)) + brickYOffset;
         bricks[i][j] = new Brick(brickX, brickY, brickWidth, brickHeight, colors[i]);
       }
