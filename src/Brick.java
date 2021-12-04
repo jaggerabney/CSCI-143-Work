@@ -39,4 +39,8 @@ public class Brick extends GRect {
   public boolean isDestroyed() {
     return destroyed;
   }
+
+  public void doRainbowStep() {
+    Color currentColor = this.getColor();
+  }
 }

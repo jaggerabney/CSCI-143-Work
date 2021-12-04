@@ -15,11 +15,12 @@ public class Game extends GCanvas {
     super();
     this.config = config;
     this.controls = new Controls();
+    this.bricks = new Bricks(config);
+    this.scoreboard = new Scoreboard("bruh");
     addMouseMotionListener(controls);
     addMouseListener(controls);
 
-    bricks = new Bricks(config);
-
+    add(scoreboard);
     for (int i = 0; i < config.getIntProp("BRICK_ROWS"); i++) {
       for (int j = 0; j < config.getIntProp("BRICKS_PER_ROW"); j++) {
         add(bricks.getBrick(i, j));
@@ -34,17 +35,26 @@ public class Game extends GCanvas {
       bricks.update();
     // powerups.update();
     // scoreboard.update();
-    destroyBricks();
   }
 
-  public void destroyBricks() {
-    GPoint mousePos = controls.getMousePos();
+  public void windowResizeHandler(ComponentEvent e) {
+    int windowWidth = e.getComponent().getWidth(),
+        windowHeight = e.getComponent().getHeight();
+    Dimension windowSize = new Dimension(windowWidth, windowHeight);
+
+    this.setSize(windowSize);
+    bricks.setBrickWidth(config, windowSize);
+  }
+
+  // helper method
+  public void destroyBricks(MouseEvent e) {
+    GPoint click = controls.getClickPos();
 
     for (int i = 0; i < config.getIntProp("BRICK_ROWS"); i++) {
       for (int j = 0; j < config.getIntProp("BRICKS_PER_ROW"); j++) {
         Brick brick = bricks.getBrick(i, j);
 
-        if (brick.contains(mousePos)) {
+        if (brick.contains(click)) {
           brick.destroy();
         }
       }

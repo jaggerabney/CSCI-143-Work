@@ -2,8 +2,10 @@ import acm.graphics.*;
 import acm.program.GraphicsProgram;
 import java.util.*;
 import java.io.*;
+import java.awt.*;
+import java.awt.event.*;
 
-public class Breakout extends GraphicsProgram {
+public class Breakout extends GraphicsProgram implements ComponentListener {
     private Config config;
     private Game game;
     private boolean isRunning;
@@ -14,11 +16,13 @@ public class Breakout extends GraphicsProgram {
         this.game = new Game(config);
         this.isRunning = true;
 
-        this.setSize(config.getIntProp("APPLICATION_WIDTH"), config.getIntProp("APPLICATION_HEIGHT"));
+        Dimension windowSize = new Dimension(config.getIntProp("WIDTH"), config.getIntProp("HEIGHT"));
+
         this.setTitle(config.getStringProp("TITLE"));
-        game.setSize(config.getIntProp("WIDTH"), config.getIntProp("HEIGHT"));
+        this.setSize(windowSize);
 
         this.add(game, new GPoint(0, 0));
+        addComponentListener(this);
     }
 
     @Override
@@ -51,6 +55,23 @@ public class Breakout extends GraphicsProgram {
                 frameCounter += 1000;
             }
         }
+    }
+
+    @Override
+    public void componentResized(ComponentEvent e) {
+        game.windowResizeHandler(e);
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent e) {
+    }
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e) {
     }
 }
 
