@@ -1,5 +1,6 @@
 import acm.graphics.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class Game extends GCanvas {
   private Config config;
@@ -15,12 +16,13 @@ public class Game extends GCanvas {
     this.config = config;
     this.controls = new Controls();
     addMouseMotionListener(controls);
+    addMouseListener(controls);
 
-    Bricks test = new Bricks(config);
+    bricks = new Bricks(config);
 
     for (int i = 0; i < config.getIntProp("BRICK_ROWS"); i++) {
       for (int j = 0; j < config.getIntProp("BRICKS_PER_ROW"); j++) {
-        add(test.getBrick(i, j));
+        add(bricks.getBrick(i, j));
       }
     }
   }
@@ -28,8 +30,24 @@ public class Game extends GCanvas {
   public void update() {
     // ball.update();
     // paddle.update();
-    // bricks.update();
+    if (bricks != null)
+      bricks.update();
     // powerups.update();
     // scoreboard.update();
+    destroyBricks();
+  }
+
+  public void destroyBricks() {
+    GPoint mousePos = controls.getMousePos();
+
+    for (int i = 0; i < config.getIntProp("BRICK_ROWS"); i++) {
+      for (int j = 0; j < config.getIntProp("BRICKS_PER_ROW"); j++) {
+        Brick brick = bricks.getBrick(i, j);
+
+        if (brick.contains(mousePos)) {
+          brick.destroy();
+        }
+      }
+    }
   }
 }

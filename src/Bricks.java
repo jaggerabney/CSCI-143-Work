@@ -7,14 +7,21 @@ public class Bricks implements Updateable {
   private Color[] colors;
 
   public Bricks(Config config) {
-    initBrickColors(config.getStringProp("BRICK_COLORS"));
+    loadBrickColors(config.getStringProp("BRICK_COLORS"));
     initBricks(config);
 
   }
 
   @Override
   public void update() {
-    // TODO: add code here!
+    for (Brick[] row : bricks) {
+      for (Brick brick : row) {
+        if (brick.isDestroyed()) {
+          brick.setVisible(false);
+          brick = null;
+        }
+      }
+    }
   }
 
   private void initBricks(Config config) {
@@ -27,10 +34,6 @@ public class Bricks implements Updateable {
         // 2 pixels are removed from the brick width to account for the brick's borders
         brickWidth = ((windowWidth - bricksPerRow * brickSep) / bricksPerRow) - 2;
     bricks = new Brick[(int) brickRows][(int) bricksPerRow];
-
-    System.out.println(Arrays.toString(
-        new double[] { brickRows, bricksPerRow, brickHeight, windowWidth, brickSep, brickYOffset, brickWidth }));
-
     double brickX, brickY;
 
     for (int i = 0; i < brickRows; i++) {
@@ -42,7 +45,7 @@ public class Bricks implements Updateable {
     }
   }
 
-  private void initBrickColors(String colorString) {
+  private void loadBrickColors(String colorString) {
     String[] colorStrings = colorString.split(",");
     colors = new Color[colorStrings.length];
 
