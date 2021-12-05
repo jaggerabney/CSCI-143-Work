@@ -44,7 +44,14 @@ public class Ball extends GOval {
         if (ballBoundingBox.intersects(brickBoundingBox) && !intersectingBrick && !brick.isDestroyed()) {
           intersectingBrick = true;
           brick.destroy();
-          flipVelocityY();
+          String soi = findSideOfIntersection(brickBoundingBox);
+
+          if (soi.contentEquals("top") || soi.contentEquals("bottom")) {
+            flipVelocityY();
+          } else {
+            flipVelocityX();
+          }
+
           return;
         }
       }
@@ -54,25 +61,56 @@ public class Ball extends GOval {
 
     if (ballBoundingBox.intersects(paddleBoundingBox) && !intersectingPaddle) {
       intersectingPaddle = true;
-      flipVelocityY();
+      String soi = findSideOfIntersection(paddleBoundingBox);
+
+      if (soi.contentEquals("top") || soi.contentEquals("bottom")) {
+        flipVelocityY();
+      } else {
+        flipVelocityY();
+        flipVelocityX();
+      }
+
       return;
     }
 
-    if ((ballBoundingBox.getX() < 0 || ballBoundingBox.getX() + ballBoundingBox.getWidth() > gameBounds.getWidth())
-        && !intersectingWall) {
-      intersectingWall = true;
-      flipVelocityX();
-      return;
-    } else if (ballBoundingBox.getY() < 0 && !intersectingWall) {
-      intersectingWall = true;
-      flipVelocityY();
-      return;
+    if (gameBounds != null) {
+      if ((ballBoundingBox.getX() < 0 || ballBoundingBox.getX() + ballBoundingBox.getWidth() > gameBounds.getWidth())
+          && !intersectingWall) {
+        intersectingWall = true;
+        flipVelocityX();
+        return;
+      } else if (ballBoundingBox.getY() < 0 && !intersectingWall) {
+        intersectingWall = true;
+        flipVelocityY();
+        return;
+      }
     }
 
     intersectingBrick = false;
     intersectingPaddle = false;
     intersectingWall = false;
     this.move(velocityX, velocityY);
+  }
+
+  public String findSideOfIntersection(GRectangle other) {
+    double wy = (this.getWidth() + other.getWidth())
+        * ((this.getY() + (this.getHeight() / 2)) - (other.getY() + (other.getHeight() / 2)));
+    double hx = (this.getHeight() + other.getHeight())
+        * ((this.getX() + (this.getWidth() / 2)) - (other.getX() + (other.getWidth() / 2)));
+
+    if (wy > hx) {
+      if (wy > -hx) {
+        return "top";
+      } else {
+        return "left";
+      }
+    } else {
+      if (wy > -hx) {
+        return "right";
+      } else {
+        return "bottom";
+      }
+    }
   }
 
   public void flipVelocityX() {
