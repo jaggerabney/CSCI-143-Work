@@ -1,3 +1,5 @@
+import acm.graphics.*;
+
 public interface Updateable {
-  public void update();
+  public void update(GObject other);
 }

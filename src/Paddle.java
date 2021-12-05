@@ -5,10 +5,12 @@ public class Paddle extends GRect implements Updateable {
 
   public Paddle(double width, double height) {
     super(width, height);
+    this.setFilled(true);
   }
 
   public Paddle(double x, double y, double width, double height) {
     super(x, y, width, height);
+    this.setFilled(true);
   }
 
   public void addControls(Controls controls) {
@@ -16,7 +18,8 @@ public class Paddle extends GRect implements Updateable {
   }
 
   @Override
-  public void update() {
+  public void update(GObject other) {
     // TODO: add code here!
+    this.setLocation(this.controls.getMouseX(), this.controls.getMouseY());
   }
 }

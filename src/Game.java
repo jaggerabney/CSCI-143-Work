@@ -9,18 +9,21 @@ public class Game extends GCanvas {
   private Paddle paddle;
   private Bricks bricks;
   private Powerups powerups;
-  private Scoreboard scoreboard;
 
   public Game(Config config) {
     super();
     this.config = config;
     this.controls = new Controls();
-    this.bricks = new Bricks(config);
-    this.scoreboard = new Scoreboard("bruh");
     addMouseMotionListener(controls);
-    addMouseListener(controls);
+    this.paddle = new Paddle(100, this.config.getIntProp("HEIGHT") - this.config.getIntProp("PADDLE_Y_OFFSET"),
+        this.config.getIntProp("PADDLE_WIDTH"), this.config.getIntProp("PADDLE_HEIGHT"));
+    this.paddle.addControls(this.controls);
+    this.ball = new Ball(this.config.getIntProp("WIDTH") / 2, this.config.getIntProp("HEIGHT") / 2,
+        this.config.getIntProp("BALL_RADIUS") * 2, this.config.getIntProp("BALL_RADIUS") * 2);
+    this.bricks = new Bricks(config);
 
-    add(scoreboard);
+    add(ball);
+    add(paddle);
     for (int i = 0; i < config.getIntProp("BRICK_ROWS"); i++) {
       for (int j = 0; j < config.getIntProp("BRICKS_PER_ROW"); j++) {
         add(bricks.getBrick(i, j));
@@ -29,12 +32,11 @@ public class Game extends GCanvas {
   }
 
   public void update() {
-    // ball.update();
-    // paddle.update();
+    ball.update();
+    paddle.update();
     if (bricks != null)
       bricks.update();
     // powerups.update();
-    scoreboard.update();
   }
 
   public void windowResizeHandler(ComponentEvent e) {

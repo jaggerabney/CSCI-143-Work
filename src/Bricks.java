@@ -1,6 +1,6 @@
 import java.awt.*;
 import java.lang.reflect.Field;
-import java.util.*;
+import acm.graphics.*;
 
 public class Bricks implements Updateable {
   private Brick[][] bricks;
@@ -13,7 +13,7 @@ public class Bricks implements Updateable {
   }
 
   @Override
-  public void update() {
+  public void update(GObject other) {
     for (Brick[] row : bricks) {
       for (Brick brick : row) {
         if (brick != null && brick.isDestroyed()) {
