@@ -1,6 +1,6 @@
 import acm.graphics.*;
 
-public class Paddle extends GRect implements Updateable {
+public class Paddle extends GRect {
   private Controls controls;
 
   public Paddle(double width, double height) {
@@ -17,8 +17,7 @@ public class Paddle extends GRect implements Updateable {
     this.controls = controls;
   }
 
-  @Override
-  public void update(GObject other) {
+  public void update(GObject[] others) {
     // TODO: add code here!
     this.setLocation(this.controls.getMouseX(), this.controls.getMouseY());
   }

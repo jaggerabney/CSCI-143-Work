@@ -2,23 +2,20 @@ import java.awt.*;
 import java.lang.reflect.Field;
 import acm.graphics.*;
 
-public class Bricks implements Updateable {
+public class Bricks {
   private Brick[][] bricks;
   private Color[] colors;
 
   public Bricks(Config config) {
     loadBrickColors(config.getStringProp("BRICK_COLORS"));
     initBricks(config);
-
   }
 
-  @Override
-  public void update(GObject other) {
+  public void update(Game game) {
     for (Brick[] row : bricks) {
       for (Brick brick : row) {
         if (brick != null && brick.isDestroyed()) {
-          brick.setVisible(false);
-          brick = null;
+          game.remove(brick);
         }
       }
     }
@@ -54,6 +51,10 @@ public class Bricks implements Updateable {
 
   public Brick getBrick(int row, int column) {
     return bricks[row][column];
+  }
+
+  public Brick[][] getAllBricks() {
+    return bricks;
   }
 
   public void setBrickWidth(Config config, Dimension windowSize) {
