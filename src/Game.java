@@ -21,7 +21,8 @@ public class Game extends GCanvas {
         this.config.getIntProp("PADDLE_WIDTH"), this.config.getIntProp("PADDLE_HEIGHT"));
     this.paddle.addControls(this.controls);
     this.ball = new Ball(this.config.getIntProp("WIDTH") / 2, this.config.getIntProp("HEIGHT") / 2,
-        this.config.getIntProp("BALL_RADIUS") * 2, this.config.getIntProp("BALL_RADIUS") * 2);
+        this.config.getIntProp("BALL_RADIUS") * 2, this.config.getIntProp("BALL_RADIUS") * 2,
+        config.getIntProp("COLLISIONS_THRESHOLD"));
     this.bricks = new Bricks(config);
 
     add(ball);

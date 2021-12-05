@@ -5,21 +5,29 @@ import java.awt.*;
 public class Ball extends GOval {
   private double velocityX, velocityY;
   private boolean intersectingPaddle, intersectingWall, intersectingBrick;
+  private int numCollisions, collisionsThreshold, defaultUpdatesUntilCollidable, updatesUntilCollidable;
 
   public Ball(double width, double height) {
     super(width, height);
     this.intersectingPaddle = false;
     this.intersectingWall = false;
     this.intersectingBrick = false;
+    this.numCollisions = 0;
+    this.defaultUpdatesUntilCollidable = 2;
+    this.updatesUntilCollidable = 0;
     randomVelocity();
     setFilled(true);
   }
 
-  public Ball(double x, double y, double width, double height) {
+  public Ball(double x, double y, double width, double height, int collisionsThreshold) {
     super(x, y, width, height);
     this.intersectingPaddle = false;
     this.intersectingWall = false;
     this.intersectingBrick = false;
+    this.collisionsThreshold = collisionsThreshold;
+    this.numCollisions = 0;
+    this.defaultUpdatesUntilCollidable = 2;
+    this.updatesUntilCollidable = 0;
     randomVelocity();
     this.velocityY = 3.0;
     setFilled(true);
@@ -52,6 +60,7 @@ public class Ball extends GOval {
             flipVelocityX();
           }
 
+          numCollisions++;
           return;
         }
       }
@@ -70,6 +79,7 @@ public class Ball extends GOval {
         flipVelocityX();
       }
 
+      numCollisions++;
       return;
     }
 
@@ -86,9 +96,21 @@ public class Ball extends GOval {
       }
     }
 
-    intersectingBrick = false;
-    intersectingPaddle = false;
-    intersectingWall = false;
+    if (numCollisions > collisionsThreshold) {
+      numCollisions = 0;
+      velocityX *= 1.05;
+      velocityY *= 1.05;
+    }
+
+    if (updatesUntilCollidable == 0) {
+      intersectingBrick = false;
+      intersectingPaddle = false;
+      intersectingWall = false;
+      updatesUntilCollidable = defaultUpdatesUntilCollidable;
+    } else {
+      updatesUntilCollidable--;
+    }
+
     this.move(velocityX, velocityY);
   }
 
