@@ -34,7 +34,7 @@ public class Game extends GCanvas {
     if (bricks != null)
       bricks.update();
     // powerups.update();
-    // scoreboard.update();
+    scoreboard.update();
   }
 
   public void windowResizeHandler(ComponentEvent e) {

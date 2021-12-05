@@ -15,12 +15,18 @@ public class Brick extends GRect {
     this.destroyed = false;
   }
 
-  // this is the constructor used in Bricks
+  // these are the constructors used in Bricks
   public Brick(double x, double y, double width, double height, Color color) {
     super(x, y, width, height);
     this.destroyed = false;
     this.setFilled(true);
     this.setColor(color);
+  }
+
+  public Brick(Color color) {
+    super(0, 0, 0, 0);
+    this.setColor(color);
+    this.setFilled(true);
   }
 
   public void setWidth(int windowWidth, int bricksPerRow, int brickSep) {

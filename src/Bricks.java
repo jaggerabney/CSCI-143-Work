@@ -25,24 +25,16 @@ public class Bricks implements Updateable {
   }
 
   private void initBricks(Config config) {
-    double brickRows = config.getDoubleProp("BRICK_ROWS"),
-        bricksPerRow = config.getDoubleProp("BRICKS_PER_ROW"),
-        brickHeight = config.getDoubleProp("BRICK_HEIGHT"),
-        windowWidth = config.getDoubleProp("WIDTH"),
-        brickSep = config.getDoubleProp("BRICK_SEP"),
-        brickYOffset = config.getDoubleProp("BRICK_Y_OFFSET"),
-        // 2 pixels are removed from the brick width to account for the brick's borders
-        brickWidth = ((windowWidth - bricksPerRow * brickSep) / bricksPerRow);
-    bricks = new Brick[(int) brickRows][(int) bricksPerRow];
-    double brickX, brickY;
+    int brickRows = config.getIntProp("BRICK_ROWS"),
+        bricksPerRow = config.getIntProp("BRICKS_PER_ROW");
+    bricks = new Brick[brickRows][bricksPerRow];
 
-    for (int i = 0; i < brickRows; i++) {
-      for (int j = 0; j < bricksPerRow; j++) {
-        brickX = ((brickWidth + brickSep) * j) + (brickSep * 2);
-        brickY = (i * (brickHeight + brickSep)) + brickYOffset;
-        bricks[i][j] = new Brick(brickX, brickY, brickWidth, brickHeight, colors[i]);
+    for (int i = 0; i < bricks.length; i++) {
+      for (int j = 0; j < bricks[i].length; j++) {
+        bricks[i][j] = new Brick(colors[i]);
       }
     }
+    setBrickWidth(config, new Dimension(config.getIntProp("WIDTH"), config.getIntProp("HEIGHT")));
   }
 
   private void loadBrickColors(String colorString) {
@@ -65,17 +57,15 @@ public class Bricks implements Updateable {
   }
 
   public void setBrickWidth(Config config, Dimension windowSize) {
-    double defaultWindowWidth = config.getDoubleProp("APPLICATION_WIDTH"),
-        defaultWindowHeight = config.getDoubleProp("APPLICATION_HEIGHT"),
+    double defaultWindowHeight = config.getDoubleProp("APPLICATION_HEIGHT"),
         windowWidth = windowSize.getWidth(),
         windowHeight = windowSize.getHeight(),
         brickRows = config.getDoubleProp("BRICK_ROWS"),
         bricksPerRow = config.getDoubleProp("BRICKS_PER_ROW"),
         brickHeight = (config.getDoubleProp("BRICK_HEIGHT") / defaultWindowHeight) * windowHeight,
-        brickSep = (config.getDoubleProp("BRICK_SEP") / defaultWindowWidth) * windowWidth,
+        brickSep = config.getDoubleProp("BRICK_SEP"),
         brickYOffset = (config.getDoubleProp("BRICK_Y_OFFSET") / defaultWindowHeight) * windowHeight,
-        // 2 pixels are removed from the brick width to account for the brick's borders
-        brickWidth = ((windowWidth - bricksPerRow * brickSep) / bricksPerRow) - 1;
+        brickWidth = ((windowWidth - bricksPerRow * brickSep) / bricksPerRow) - .5;
     double brickX, brickY;
 
     for (int i = 0; i < brickRows; i++) {

@@ -10,6 +10,6 @@ public class Scoreboard extends GCanvas implements Updateable {
 
   @Override
   public void update() {
-    // TODO: add code here!
+    repaint();
   }
 }
