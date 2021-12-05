@@ -1,6 +1,5 @@
 import acm.graphics.*;
 import acm.util.RandomGenerator;
-import java.awt.*;
 
 public class Ball extends GOval {
   private double velocityX, velocityY;

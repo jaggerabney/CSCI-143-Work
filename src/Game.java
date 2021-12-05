@@ -44,12 +44,14 @@ public class Game extends GCanvas {
   }
 
   public void windowResizeHandler(ComponentEvent e) {
-    int windowWidth = e.getComponent().getWidth(),
+    int defaultWindowHeight = config.getIntProp("HEIGHT"),
+        windowWidth = e.getComponent().getWidth(),
         windowHeight = e.getComponent().getHeight();
     Dimension windowSize = new Dimension(windowWidth, windowHeight);
 
     this.setSize(windowSize);
     this.bounds = new GRectangle(windowWidth, windowHeight);
     bricks.setBrickWidth(config, windowSize);
+    paddle.setLocation(paddle.getX(), windowHeight - config.getIntProp("PADDLE_Y_OFFSET"));
   }
 }

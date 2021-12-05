@@ -42,7 +42,6 @@ public class Bricks {
       try {
         Field field = Class.forName("java.awt.Color").getField(colorStrings[i].toUpperCase());
         colors[i] = (Color) field.get(null);
-        System.out.println(colors[i].getRGB());
       } catch (Exception e) {
         e.printStackTrace();
       }

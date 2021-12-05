@@ -19,6 +19,6 @@ public class Paddle extends GRect {
 
   public void update(GObject[] others) {
     // TODO: add code here!
-    this.setLocation(this.controls.getMouseX(), this.controls.getMouseY());
+    this.setLocation(this.controls.getMouseX(), this.getY());
   }
 }

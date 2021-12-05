@@ -15,8 +15,8 @@ public class Breakout extends GraphicsProgram implements ComponentListener {
         this.config = new Config("/resources/config.properties");
         this.game = new Game(config);
         this.isRunning = true;
-
-        Dimension windowSize = new Dimension(config.getIntProp("WIDTH"), config.getIntProp("HEIGHT"));
+        Dimension windowSize = new Dimension(config.getIntProp("APPLICATION_WIDTH"),
+                config.getIntProp("APPLICATION_HEIGHT"));
 
         this.setTitle(config.getStringProp("TITLE"));
         this.setSize(windowSize);
