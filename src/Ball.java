@@ -114,7 +114,7 @@ public class Ball extends GOval {
       updatesUntilCollidable--;
     }
 
-    this.move((fastBallActive) ? velocityX * 2 : velocityX, (fastBallActive) ? velocityY * 2 : velocityY);
+    this.move((fastBallActive) ? velocityX * 1.5 : velocityX, (fastBallActive) ? velocityY * 1.5 : velocityY);
   }
 
   public String findSideOfIntersection(GRectangle other) {

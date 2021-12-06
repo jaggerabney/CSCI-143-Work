@@ -12,6 +12,7 @@ public class Game extends GCanvas {
   private Powerups powerups;
   private GRectangle bounds;
   private boolean doublePointsActive, bigPaddleActive, fastBallActive;
+  private GRect test;
 
   public Game(Config config, Scoreboard scoreboard) {
     super();
@@ -36,6 +37,9 @@ public class Game extends GCanvas {
         add(bricks.getBrick(i, j));
       }
     }
+
+    test = new GRect(config.getDoubleProp("WIDTH") / 2, config.getDoubleProp("HEIGHT") / 2, 10, 10);
+    add(test);
   }
 
   public void update() {
@@ -94,5 +98,6 @@ public class Game extends GCanvas {
     this.bounds = new GRectangle(windowWidth, windowHeight);
     bricks.setBrickWidth(config, windowSize);
     paddle.setLocation(paddle.getX(), windowHeight - config.getIntProp("PADDLE_Y_OFFSET"));
+    test.setLocation(windowWidth / 2, windowHeight / 2);
   }
 }

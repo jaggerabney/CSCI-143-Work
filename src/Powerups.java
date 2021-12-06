@@ -24,13 +24,17 @@ public class Powerups {
     if (updatesUntilNextPlacement > 0 && getActivePowerup() == null) {
       updatesUntilNextPlacement--;
     } else if (updatesUntilNextPlacement == 0) {
-      Random rng = new Random();
-      Powerup placedPowerup = powerups[rng.nextInt(powerups.length - 1)];
-      placedPowerup.makeVisible();
+      if (getVisiblePowerup() == null) {
+        Random rng = new Random();
+        Powerup placedPowerup = powerups[rng.nextInt(powerups.length - 1)];
+        placedPowerup.makeVisible();
+        double powerupX = game.getBounds().getCenterX() + rng.nextDouble(game.getBounds().getCenterX() / 2);
+        double powerupY = game.getBounds().getCenterY() + rng.nextDouble(game.getBounds().getCenterY() / 2);
 
-      game.add(placedPowerup, 200, 250);
+        game.add(placedPowerup, powerupX, powerupY);
 
-      updatesUntilNextPlacement = defaultUpdatesUntilPlacement;
+        updatesUntilNextPlacement = defaultUpdatesUntilPlacement;
+      }
     }
 
     for (int i = 0; i < powerups.length; i++) {
@@ -67,5 +71,17 @@ public class Powerups {
     }
 
     return activePowerup;
+  }
+
+  public Powerup getVisiblePowerup() {
+    Powerup visiblePowerup = null;
+
+    for (Powerup powerup : powerups) {
+      if (powerup.isVisible()) {
+        visiblePowerup = powerup;
+      }
+    }
+
+    return visiblePowerup;
   }
 }

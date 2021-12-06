@@ -62,6 +62,22 @@ public class Bricks {
     return bricks;
   }
 
+  public double bottomOfBricks() {
+    double result = 0;
+
+    for (int i = 0; i < bricks.length; i++) {
+      for (int j = 0; j < bricks[i].length; j++) {
+        double bottom = bricks[i][j].getY() + bricks[i][j].getHeight();
+
+        if (bottom > result) {
+          result = bottom;
+        }
+      }
+    }
+
+    return result;
+  }
+
   public void setBrickWidth(Config config, Dimension windowSize) {
     double defaultWindowHeight = config.getDoubleProp("APPLICATION_HEIGHT"),
         windowWidth = windowSize.getWidth(),
