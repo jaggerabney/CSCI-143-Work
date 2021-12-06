@@ -14,10 +14,15 @@ public class Breakout extends GraphicsProgram implements ComponentListener {
 
     @Override
     public void init() {
+        // loads props
         this.config = new Config("/resources/config.properties");
+        // inits Scoreboard, as it is rendered on a different GCanvas than Game
         this.scoreboard = new Scoreboard(config.getIntProp("WIDTH"), MENU_BAR_HEIGHT);
+        // inits Game
         this.game = new Game(config, scoreboard);
         this.isRunning = true;
+
+        // inits variables and adds the necessary components to the window
         Dimension windowSize = new Dimension(config.getIntProp("APPLICATION_WIDTH"),
                 config.getIntProp("APPLICATION_HEIGHT"));
 
@@ -31,6 +36,13 @@ public class Breakout extends GraphicsProgram implements ComponentListener {
 
     @Override
     public void run() {
+        // inits a bunch of variables to do the following:
+        // while the window is running, the time between game updates and
+        // "frames" (invocations of game.repaint()) are kept track of
+        // to ensure that the game doesn't go too fast.
+        // by default, this code makes the game update 60 times a second.
+        // frames are rendered in the meantime, but since no update occurs,
+        // nothing happens, so in effect, this locks the game to 60fps
         final double nsPerUpdate = 1000000000.0 / config.getDoubleProp("FRAME_LIMIT");
         long lastTime = System.nanoTime();
         double unprocessedTime = 0;
@@ -63,6 +75,7 @@ public class Breakout extends GraphicsProgram implements ComponentListener {
 
     @Override
     public void componentResized(ComponentEvent e) {
+        // updates Scoreboard and Game when the window is resized
         scoreboard.windowResize(e.getComponent().getWidth(), MENU_BAR_HEIGHT);
         game.windowResizeHandler(e);
     }
@@ -80,6 +93,7 @@ public class Breakout extends GraphicsProgram implements ComponentListener {
     }
 }
 
+// Helper class used to load constants from config.properties
 class Config {
     private Properties props;
 

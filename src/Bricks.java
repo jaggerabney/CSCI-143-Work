@@ -1,9 +1,10 @@
 import java.awt.*;
 import java.lang.reflect.Field;
-import acm.graphics.*;
 
 public class Bricks {
+  // Bricks are in a grid, so they are stored in a 2D array
   private Brick[][] bricks;
+  // Colors correspond to the rows in bricks: they should be the same length!
   private Color[] colors;
 
   public Bricks(Config config) {
@@ -14,6 +15,10 @@ public class Bricks {
   public void update(Game game, Scoreboard scoreboard, boolean doublePointsActive) {
     Brick brick = null;
 
+    // loops through bricks, looking for any Brick objects that are:
+    // 1. not null, and
+    // 2. destroyed,
+    // and removes them from the screen and awards points accordingly
     for (int i = 0; i < bricks.length; i++) {
       for (int j = 0; j < bricks[i].length; j++) {
         brick = bricks[i][j];
@@ -28,6 +33,7 @@ public class Bricks {
   }
 
   private void initBricks(Config config) {
+    // inits bricks
     int brickRows = config.getIntProp("BRICK_ROWS"),
         bricksPerRow = config.getIntProp("BRICKS_PER_ROW");
     bricks = new Brick[brickRows][bricksPerRow];
@@ -37,10 +43,12 @@ public class Bricks {
         bricks[i][j] = new Brick(colors[i]);
       }
     }
+    // sets the width of the Bricks according to a bunch of variables
     setBrickWidth(config, new Dimension(config.getIntProp("WIDTH"), config.getIntProp("HEIGHT")));
   }
 
   private void loadBrickColors(String colorString) {
+    // uses the COLOR_NAMES prop to load the Colors that will fill the Bricks
     String[] colorStrings = colorString.split(",");
     colors = new Color[colorStrings.length];
 
@@ -54,6 +62,7 @@ public class Bricks {
     }
   }
 
+  // helpers
   public Brick getBrick(int row, int column) {
     return bricks[row][column];
   }
@@ -62,22 +71,12 @@ public class Bricks {
     return bricks;
   }
 
-  public double bottomOfBricks() {
-    double result = 0;
-
-    for (int i = 0; i < bricks.length; i++) {
-      for (int j = 0; j < bricks[i].length; j++) {
-        double bottom = bricks[i][j].getY() + bricks[i][j].getHeight();
-
-        if (bottom > result) {
-          result = bottom;
-        }
-      }
-    }
-
-    return result;
-  }
-
+  // sets the width of the Bricks in bricks according to:
+  // - the ratio between the default window size and the
+  // current window size
+  // - the number of rows of bricks, and the amount of bricks per row
+  // - the amount of seperation between bricks, in pixels
+  // - the brick y offset (AKA how far down the bricks should be drawn)
   public void setBrickWidth(Config config, Dimension windowSize) {
     double defaultWindowHeight = config.getDoubleProp("APPLICATION_HEIGHT"),
         windowWidth = windowSize.getWidth(),

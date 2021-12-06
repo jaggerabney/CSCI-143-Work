@@ -2,6 +2,9 @@ import javax.swing.event.MouseInputAdapter;
 import acm.graphics.*;
 import java.awt.event.*;
 
+// helper class that implements MouseListener and MouseMotionListener
+// by extending MouseInputAdapter. provides the mouse position
+// to the Paddle so that it can be controlled
 public class Controls extends MouseInputAdapter {
   private GPoint mousePos;
   private GPoint clickPos;

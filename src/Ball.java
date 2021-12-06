@@ -2,31 +2,40 @@ import acm.graphics.*;
 import acm.util.RandomGenerator;
 
 public class Ball extends GOval {
+  // velocities in the x and y directions
   private double velocityX, velocityY;
+  // booleans for keeping track of if the ball is intersecting
+  // the paddle, wall, or bricks
   private boolean intersectingPaddle, intersectingWall, intersectingBrick;
+  // int fields used for speeding up the ball after a certain number of collisions
+  // and for (trying to) prevent the ball from bouncing too fast
   private int numCollisions, collisionsThreshold, defaultUpdatesUntilCollidable, updatesUntilCollidable;
 
   public Ball(double width, double height) {
+    // inits fields
     super(width, height);
     this.intersectingPaddle = false;
     this.intersectingWall = false;
     this.intersectingBrick = false;
     this.numCollisions = 0;
-    this.defaultUpdatesUntilCollidable = 5;
+    this.defaultUpdatesUntilCollidable = 0;
     this.updatesUntilCollidable = 0;
+    // "throws" the ball in a random direction, and sets it filled
     randomVelocity();
     setFilled(true);
   }
 
-  public Ball(double x, double y, double width, double height, int collisionsThreshold) {
+  public Ball(double x, double y, double width, double height, int collisionsThreshold, int updatesUntilCollidable) {
+    // inits fields
     super(x, y, width, height);
     this.intersectingPaddle = false;
     this.intersectingWall = false;
     this.intersectingBrick = false;
     this.collisionsThreshold = collisionsThreshold;
     this.numCollisions = 0;
-    this.defaultUpdatesUntilCollidable = 5;
+    this.defaultUpdatesUntilCollidable = updatesUntilCollidable;
     this.updatesUntilCollidable = 0;
+    // "throws" the ball in a random direction, and sets it to filled
     randomVelocity();
     this.velocityY = 3.0;
     setFilled(true);
@@ -40,7 +49,10 @@ public class Ball extends GOval {
     }
   }
 
+  // updates the Ball's velocity by performing collision checks against the
+  // Bricks, Paddle, and walls
   public void update(Brick[][] bricks, Paddle paddle, GRectangle gameBounds, boolean fastBallActive) {
+    // bounding boxes, for convenience
     GRectangle ballBoundingBox = this.getBounds();
     GRectangle brickBoundingBox = null;
 
@@ -48,13 +60,22 @@ public class Ball extends GOval {
       for (Brick brick : row) {
         brickBoundingBox = (brick != null) ? brick.getBounds() : null;
 
+        // if:
+        // 1. the Brick is not null,
+        // 2. the Ball intersects the given Brick,
+        // 3. it is not already intersecting a Brick,
+        // 4. the Brick is not already destroyed, then the brick is destroyed, and
+        // 5. if the Ball is eligible to collide
+        // and the Ball's velocity is flipped accordingly
         if (brickBoundingBox != null && ballBoundingBox.intersects(brickBoundingBox) && !intersectingBrick
-            && !brick.isDestroyed()) {
+            && !brick.isDestroyed() && updatesUntilCollidable == 0) {
           intersectingBrick = true;
           brick.destroy();
           String soi = findSideOfIntersection(brickBoundingBox);
           updatesUntilCollidable = defaultUpdatesUntilCollidable;
 
+          // if the top or bottom of the Brick is intersected, the y velocity
+          // is flipped; otherwise, the x velocity is
           if (soi.contentEquals("top") || soi.contentEquals("bottom")) {
             flipVelocityY();
           } else {
@@ -67,13 +88,21 @@ public class Ball extends GOval {
       }
     }
 
+    // instantiates paddleBoundingBox after to potentially save processing power;
+    // after all, the function returns if the Ball collides with an object, so
+    // there's no point in instantiating this until after you know it's not
+    // intersecting any Bricks
     GRectangle paddleBoundingBox = paddle.getBounds();
 
-    if (ballBoundingBox.intersects(paddleBoundingBox) && !intersectingPaddle) {
+    // if the Ball intersects the Paddle, if it is not already doing so, and
+    // if the Ball is eligible to collide, then reflect it accordingly
+    if (ballBoundingBox.intersects(paddleBoundingBox) && !intersectingPaddle && updatesUntilCollidable == 0) {
       intersectingPaddle = true;
       String soi = findSideOfIntersection(paddleBoundingBox);
       updatesUntilCollidable = defaultUpdatesUntilCollidable;
 
+      // if the top or bottom is hit, then the y velocity is flipped; otherwise,
+      // the x *and* y velocity is flipped
       if (soi.contentEquals("top") || soi.contentEquals("bottom")) {
         flipVelocityY();
       } else {
@@ -85,14 +114,17 @@ public class Ball extends GOval {
       return;
     }
 
+    // checks if the Ball is colliding with the bounds of the window (i.e. the wall)
+    // if it's hitting the side walls, the x velocity is reflected; otherwise, the
+    // y velocity is reflected
     if (gameBounds != null) {
       if ((ballBoundingBox.getX() < 0 || ballBoundingBox.getX() + ballBoundingBox.getWidth() > gameBounds.getWidth())
-          && !intersectingWall) {
+          && !intersectingWall && updatesUntilCollidable == 0) {
         updatesUntilCollidable = defaultUpdatesUntilCollidable;
         intersectingWall = true;
         flipVelocityX();
         return;
-      } else if (ballBoundingBox.getY() < 0 && !intersectingWall) {
+      } else if (ballBoundingBox.getY() < 0 && !intersectingWall && updatesUntilCollidable == 0) {
         intersectingWall = true;
         updatesUntilCollidable = defaultUpdatesUntilCollidable;
         flipVelocityY();
@@ -100,6 +132,8 @@ public class Ball extends GOval {
       }
     }
 
+    // if the number of collisions has surpassed the predetermined threshold
+    // - seven, by default - then the Ball's velocity is increased by 5%
     if (numCollisions > collisionsThreshold) {
       numCollisions = 0;
       velocityX *= 1.05;
@@ -114,9 +148,13 @@ public class Ball extends GOval {
       updatesUntilCollidable--;
     }
 
+    // moves the Ball according to the velocity
+    // if the Fast Ball Powerup is active, then the Ball's velocity is sped up 50%
     this.move((fastBallActive) ? velocityX * 1.5 : velocityX, (fastBallActive) ? velocityY * 1.5 : velocityY);
   }
 
+  // finds the side of intersection between two rectangles using their
+  // Minkowski sum
   public String findSideOfIntersection(GRectangle other) {
     double wy = (this.getWidth() + other.getWidth())
         * ((this.getY() + (this.getHeight() / 2)) - (other.getY() + (other.getHeight() / 2)));
@@ -138,6 +176,7 @@ public class Ball extends GOval {
     }
   }
 
+  // helper methods to better illustrate that velocities are being flipped
   public void flipVelocityX() {
     this.velocityX *= -1;
   }

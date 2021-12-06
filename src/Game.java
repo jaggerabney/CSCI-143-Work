@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Game extends GCanvas {
+  // references to all Game objects
   private Config config;
   private Scoreboard scoreboard;
   private Controls controls;
@@ -11,9 +12,11 @@ public class Game extends GCanvas {
   private Bricks bricks;
   private Powerups powerups;
   private GRectangle bounds;
+  // used for keeping track of Powerup effects
   private boolean doublePointsActive, fastBallActive;
 
   public Game(Config config, Scoreboard scoreboard) {
+    // inits fields
     super();
     this.config = config;
     this.scoreboard = scoreboard;
@@ -25,10 +28,11 @@ public class Game extends GCanvas {
     this.paddle.addControls(this.controls);
     this.ball = new Ball(this.config.getIntProp("WIDTH") / 2, this.config.getIntProp("HEIGHT") / 2,
         this.config.getIntProp("BALL_RADIUS") * 2, this.config.getIntProp("BALL_RADIUS") * 2,
-        config.getIntProp("COLLISIONS_THRESHOLD"));
+        config.getIntProp("COLLISIONS_THRESHOLD"), config.getIntProp("BALL_UPDATES_UNTIL_COLLIDABLE"));
     this.bricks = new Bricks(config);
-    this.powerups = new Powerups(config.getDoubleProp("POWERUP_SIZE"), 1800);
+    this.powerups = new Powerups(config.getDoubleProp("POWERUP_SIZE"), config.getIntProp("POWERUP_PLACEMENT_TIME"));
 
+    // adds the Ball, Paddle, and Bricks to the window
     add(ball);
     add(paddle);
     for (int i = 0; i < config.getIntProp("BRICK_ROWS"); i++) {
@@ -39,6 +43,9 @@ public class Game extends GCanvas {
   }
 
   public void update() {
+    // updates the Game objects - called in Breakout to limit number of updates.
+    // components are tested for null because this can sometimes run
+    // before they're initialized
     ball.update(bricks.getAllBricks(), paddle, bounds, fastBallActive);
     paddle.update();
     if (bricks != null) {
@@ -47,19 +54,21 @@ public class Game extends GCanvas {
     if (scoreboard != null) {
       scoreboard.update(powerups);
     }
-    powerups.update(this, ball);
+    powerups.update(this, ball, config);
   }
 
+  // switches the corresponding boolean for the given Powerup to true
   public void activatePowerup(Powerup powerup) {
     String effect = powerup.getEffect();
-    scoreboard.powerupActivated(effect, 120);
+    scoreboard.powerupActivated(effect, config.getIntProp("POWERUP_NOTIFICATION_TIME"));
 
     switch (effect) {
       case "Double Points":
         doublePointsActive = true;
         break;
       case "Big Paddle":
-        paddle.setSize(config.getDoubleProp("PADDLE_WIDTH") * 3, paddle.getHeight());
+        paddle.setSize(config.getDoubleProp("PADDLE_WIDTH") * config.getDoubleProp("BIG_PADDLE_MULTIPLIER"),
+            paddle.getHeight());
         break;
       case "Fast Ball":
         fastBallActive = true;
@@ -67,6 +76,7 @@ public class Game extends GCanvas {
     }
   }
 
+  // switches the corresponding boolean for the given Powerup to false
   public void deactivatePowerup(Powerup powerup) {
     String effect = powerup.getEffect();
 
@@ -83,6 +93,7 @@ public class Game extends GCanvas {
     }
   }
 
+  // called when the window is resized; resizes components accordingly
   public void windowResizeHandler(ComponentEvent e) {
     int windowWidth = e.getComponent().getWidth(),
         windowHeight = e.getComponent().getHeight();
