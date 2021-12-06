@@ -26,6 +26,7 @@ public class Game extends GCanvas {
         this.config.getIntProp("BALL_RADIUS") * 2, this.config.getIntProp("BALL_RADIUS") * 2,
         config.getIntProp("COLLISIONS_THRESHOLD"));
     this.bricks = new Bricks(config);
+    this.powerups = new Powerups(config.getDoubleProp("POWERUP_SIZE"));
 
     add(ball);
     add(paddle);
@@ -34,6 +35,7 @@ public class Game extends GCanvas {
         add(bricks.getBrick(i, j));
       }
     }
+    add(powerups.getPowerups()[0], 200, 200);
   }
 
   public void update() {
@@ -45,7 +47,7 @@ public class Game extends GCanvas {
     if (scoreboard != null) {
       scoreboard.update();
     }
-    // powerups.update();
+    powerups.update();
   }
 
   public void windowResizeHandler(ComponentEvent e) {

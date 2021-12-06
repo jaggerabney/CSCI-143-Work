@@ -1,14 +1,20 @@
 import java.util.*;
-import acm.graphics.*;
 
 public class Powerups {
   private ArrayList<Powerup> powerups;
+  private double powerupSize;
 
-  public Powerups() {
-    // TODO: init powerups!
+  public Powerups(double powerupSize) {
+    this.powerups = new ArrayList<>();
+    this.powerupSize = powerupSize;
+    powerups.add(new Powerup(powerupSize));
   }
 
-  public void update(GObject[] others) {
+  public Powerup[] getPowerups() {
+    return powerups.toArray(new Powerup[] {});
+  }
+
+  public void update() {
     // TODO: add code here!
   }
 }

@@ -76,10 +76,12 @@ public class Bricks {
 
     for (int i = 0; i < brickRows; i++) {
       for (int j = 0; j < bricksPerRow; j++) {
-        brickX = ((brickWidth + brickSep) * j) + brickSep;
-        brickY = (i * (brickHeight + brickSep)) + brickYOffset;
-        bricks[i][j].setLocation(brickX, brickY);
-        bricks[i][j].setSize(brickWidth, brickHeight);
+        if (bricks[i][j] != null) {
+          brickX = ((brickWidth + brickSep) * j) + brickSep;
+          brickY = (i * (brickHeight + brickSep)) + brickYOffset;
+          bricks[i][j].setLocation(brickX, brickY);
+          bricks[i][j].setSize(brickWidth, brickHeight);
+        }
       }
     }
   }
