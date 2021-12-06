@@ -15,7 +15,7 @@ public class Breakout extends GraphicsProgram implements ComponentListener {
     @Override
     public void init() {
         // loads props
-        this.config = new Config("/resources/config.properties");
+        this.config = new Config("/config.properties");
         // inits Scoreboard, as it is rendered on a different GCanvas than Game
         this.scoreboard = new Scoreboard(config.getIntProp("WIDTH"), MENU_BAR_HEIGHT);
         // inits Game

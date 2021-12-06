@@ -51,8 +51,12 @@ public class Ball extends GOval {
 
   // updates the Ball's velocity by performing collision checks against the
   // Bricks, Paddle, and walls
-  public void update(Brick[][] bricks, Paddle paddle, GRectangle gameBounds, boolean fastBallActive) {
+  public void update(Brick[][] bricks, Paddle paddle, Game game, boolean fastBallActive) {
     // bounding boxes, for convenience
+    if (getY() > game.getGRectangleBounds().getHeight()) {
+      game.serve();
+    }
+
     GRectangle ballBoundingBox = this.getBounds();
     GRectangle brickBoundingBox = null;
 
@@ -117,6 +121,8 @@ public class Ball extends GOval {
     // checks if the Ball is colliding with the bounds of the window (i.e. the wall)
     // if it's hitting the side walls, the x velocity is reflected; otherwise, the
     // y velocity is reflected
+    GRectangle gameBounds = game.getGRectangleBounds();
+
     if (gameBounds != null) {
       if ((ballBoundingBox.getX() < 0 || ballBoundingBox.getX() + ballBoundingBox.getWidth() > gameBounds.getWidth())
           && !intersectingWall && updatesUntilCollidable == 0) {

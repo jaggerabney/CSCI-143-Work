@@ -13,7 +13,8 @@ public class Game extends GCanvas {
   private Powerups powerups;
   private GRectangle bounds;
   // used for keeping track of Powerup effects
-  private boolean doublePointsActive, fastBallActive;
+  private boolean doublePointsActive, fastBallActive, served;
+  private int numLives, updatesUntilServe;
 
   public Game(Config config, Scoreboard scoreboard) {
     // inits fields
@@ -31,6 +32,8 @@ public class Game extends GCanvas {
         config.getIntProp("COLLISIONS_THRESHOLD"), config.getIntProp("BALL_UPDATES_UNTIL_COLLIDABLE"));
     this.bricks = new Bricks(config);
     this.powerups = new Powerups(config.getDoubleProp("POWERUP_SIZE"), config.getIntProp("POWERUP_PLACEMENT_TIME"));
+    this.numLives = config.getIntProp("NUM_LIVES");
+    this.served = true;
 
     // adds the Ball, Paddle, and Bricks to the window
     add(ball);
@@ -46,15 +49,39 @@ public class Game extends GCanvas {
     // updates the Game objects - called in Breakout to limit number of updates.
     // components are tested for null because this can sometimes run
     // before they're initialized
-    ball.update(bricks.getAllBricks(), paddle, bounds, fastBallActive);
-    paddle.update();
-    if (bricks != null) {
-      bricks.update(this, scoreboard, doublePointsActive);
+    if (updatesUntilServe > 0) {
+      updatesUntilServe--;
+      if (numLives == 0) {
+        scoreboard.setText("Thanks for playing!");
+      } else {
+        scoreboard.setText("Too bad! Lives left: " + numLives);
+      }
+    } else if (updatesUntilServe == 0 && !served) {
+      if (numLives == 0) {
+        System.exit(0);
+      } else {
+        ball.setLocation(this.config.getIntProp("WIDTH") / 2, this.config.getIntProp("HEIGHT") / 2);
+        add(ball);
+        served = true;
+      }
+    } else {
+      ball.update(bricks.getAllBricks(), paddle, this, fastBallActive);
+      paddle.update();
+      if (bricks != null) {
+        bricks.update(this, scoreboard, doublePointsActive);
+      }
+      if (scoreboard != null) {
+        scoreboard.update(powerups);
+      }
+      powerups.update(this, ball, config);
     }
-    if (scoreboard != null) {
-      scoreboard.update(powerups);
-    }
-    powerups.update(this, ball, config);
+  }
+
+  public void serve() {
+    served = false;
+    updatesUntilServe = config.getIntProp("SERVE_NOTIFICATION_TIME");
+    numLives--;
+    remove(ball);
   }
 
   // switches the corresponding boolean for the given Powerup to true
@@ -103,5 +130,9 @@ public class Game extends GCanvas {
     this.bounds = new GRectangle(windowWidth, windowHeight);
     bricks.setBrickWidth(config, windowSize);
     paddle.setLocation(paddle.getX(), windowHeight - config.getIntProp("PADDLE_Y_OFFSET"));
+  }
+
+  public GRectangle getGRectangleBounds() {
+    return bounds;
   }
 }

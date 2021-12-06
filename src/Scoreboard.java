@@ -4,7 +4,7 @@ import acm.graphics.*;
 // Displays the player's score, and any Powerup messages
 public class Scoreboard extends GCanvas {
   // fields
-  private int score, updatesUntilTextReset;
+  private int score, updatesUntilTextReset, updatesUntilServe, numLives;
   private String activePowerupEffect;
   private GRect background;
   private GLabel text;
@@ -45,23 +45,28 @@ public class Scoreboard extends GCanvas {
     this.updatesUntilTextReset = updatesUntilTextReset;
   }
 
+  public void serve(int numLives, int updatesUntilServe) {
+    this.updatesUntilServe = updatesUntilServe;
+    this.numLives = numLives;
+  }
+
   // updates according to active powerups
   public void update(Powerups powerups) {
     if (activePowerupEffect != null) {
       if (updatesUntilTextReset > 0) {
-        text.setLabel(activePowerupEffect + " activated!");
-        text.setLocation((background.getWidth() / 2) - (text.getWidth() / 2),
-            (background.getHeight() / 2) + (text.getHeight() / 4));
+        setText(activePowerupEffect + " activated!");
         updatesUntilTextReset--;
       } else {
-        text.setLabel("Score: " + score);
-        text.setLocation((background.getWidth() / 2) - (text.getWidth() / 2),
-            (background.getHeight() / 2) + (text.getHeight() / 4));
+        setText("Score: " + score);
       }
     } else {
-      text.setLabel("Score: " + score);
-      text.setLocation((background.getWidth() / 2) - (text.getWidth() / 2),
-          (background.getHeight() / 2) + (text.getHeight() / 4));
+      setText("Score: " + score);
     }
+  }
+
+  public void setText(String string) {
+    text.setLabel(string);
+    text.setLocation((background.getWidth() / 2) - (text.getWidth() / 2),
+        (background.getHeight() / 2) + (text.getHeight() / 4));
   }
 }
