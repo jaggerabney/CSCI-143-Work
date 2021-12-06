@@ -1,20 +1,27 @@
 import java.util.*;
 
 public class Powerups {
-  private ArrayList<Powerup> powerups;
+  private Powerup[] powerups;
   private double powerupSize;
+  private int updatesActive;
 
   public Powerups(double powerupSize) {
-    this.powerups = new ArrayList<>();
+    this.powerups = new Powerup[3];
     this.powerupSize = powerupSize;
-    powerups.add(new Powerup(powerupSize));
+    this.updatesActive = 0;
+    powerups[0] = new Powerup(powerupSize);
   }
 
   public Powerup[] getPowerups() {
-    return powerups.toArray(new Powerup[] {});
+    return powerups;
   }
 
   public void update() {
-    // TODO: add code here!
+    for (Powerup powerup : powerups) {
+      if (powerup != null) {
+        powerup.rotate(Math.cos(Math.toRadians(updatesActive)));
+      }
+    }
+    updatesActive++;
   }
 }

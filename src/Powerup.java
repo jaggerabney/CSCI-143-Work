@@ -1,4 +1,5 @@
 import acm.graphics.*;
+import java.awt.*;
 
 public class Powerup extends GPolygon {
   public Powerup(double size) {
@@ -13,5 +14,9 @@ public class Powerup extends GPolygon {
       angle -= 72;
     }
     markAsComplete();
+
+    setColor(Color.BLACK);
+    setFillColor(Color.YELLOW);
+    setFilled(true);
   }
 }
