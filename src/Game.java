@@ -4,6 +4,7 @@ import java.awt.event.*;
 
 public class Game extends GCanvas {
   private Config config;
+  private Scoreboard scoreboard;
   private Controls controls;
   private Ball ball;
   private Paddle paddle;
@@ -11,9 +12,10 @@ public class Game extends GCanvas {
   private Powerups powerups;
   private GRectangle bounds;
 
-  public Game(Config config) {
+  public Game(Config config, Scoreboard scoreboard) {
     super();
     this.config = config;
+    this.scoreboard = scoreboard;
     this.controls = new Controls();
     addMouseMotionListener(controls);
 
@@ -38,14 +40,16 @@ public class Game extends GCanvas {
     ball.update(bricks.getAllBricks(), paddle, bounds);
     paddle.update(null);
     if (bricks != null) {
-      bricks.update(this);
+      bricks.update(this, scoreboard);
+    }
+    if (scoreboard != null) {
+      scoreboard.update();
     }
     // powerups.update();
   }
 
   public void windowResizeHandler(ComponentEvent e) {
-    int defaultWindowHeight = config.getIntProp("HEIGHT"),
-        windowWidth = e.getComponent().getWidth(),
+    int windowWidth = e.getComponent().getWidth(),
         windowHeight = e.getComponent().getHeight();
     Dimension windowSize = new Dimension(windowWidth, windowHeight);
 

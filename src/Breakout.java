@@ -8,12 +8,15 @@ import java.awt.event.*;
 public class Breakout extends GraphicsProgram implements ComponentListener {
     private Config config;
     private Game game;
+    private Scoreboard scoreboard;
     private boolean isRunning;
+    public final static int MENU_BAR_HEIGHT = 23;
 
     @Override
     public void init() {
         this.config = new Config("/resources/config.properties");
-        this.game = new Game(config);
+        this.scoreboard = new Scoreboard(config.getIntProp("WIDTH"), MENU_BAR_HEIGHT);
+        this.game = new Game(config, scoreboard);
         this.isRunning = true;
         Dimension windowSize = new Dimension(config.getIntProp("APPLICATION_WIDTH"),
                 config.getIntProp("APPLICATION_HEIGHT"));
@@ -21,7 +24,8 @@ public class Breakout extends GraphicsProgram implements ComponentListener {
         this.setTitle(config.getStringProp("TITLE"));
         this.setSize(windowSize);
 
-        this.add(game, new GPoint(0, 0));
+        this.add(scoreboard, new GPoint(0, 0));
+        this.add(game, new GPoint(0, scoreboard.getHeight()));
         addComponentListener(this);
     }
 
@@ -59,6 +63,7 @@ public class Breakout extends GraphicsProgram implements ComponentListener {
 
     @Override
     public void componentResized(ComponentEvent e) {
+        scoreboard.windowResize(e.getComponent().getWidth(), MENU_BAR_HEIGHT);
         game.windowResizeHandler(e);
     }
 

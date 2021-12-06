@@ -11,11 +11,17 @@ public class Bricks {
     initBricks(config);
   }
 
-  public void update(Game game) {
-    for (Brick[] row : bricks) {
-      for (Brick brick : row) {
+  public void update(Game game, Scoreboard scoreboard) {
+    Brick brick = null;
+
+    for (int i = 0; i < bricks.length; i++) {
+      for (int j = 0; j < bricks[i].length; j++) {
+        brick = bricks[i][j];
+
         if (brick != null && brick.isDestroyed()) {
           game.remove(brick);
+          scoreboard.addScore(100);
+          bricks[i][j] = null;
         }
       }
     }

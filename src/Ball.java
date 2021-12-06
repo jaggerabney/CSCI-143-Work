@@ -12,7 +12,7 @@ public class Ball extends GOval {
     this.intersectingWall = false;
     this.intersectingBrick = false;
     this.numCollisions = 0;
-    this.defaultUpdatesUntilCollidable = 2;
+    this.defaultUpdatesUntilCollidable = 5;
     this.updatesUntilCollidable = 0;
     randomVelocity();
     setFilled(true);
@@ -46,12 +46,14 @@ public class Ball extends GOval {
 
     for (Brick[] row : bricks) {
       for (Brick brick : row) {
-        brickBoundingBox = brick.getBounds();
+        brickBoundingBox = (brick != null) ? brick.getBounds() : null;
 
-        if (ballBoundingBox.intersects(brickBoundingBox) && !intersectingBrick && !brick.isDestroyed()) {
+        if (brickBoundingBox != null && ballBoundingBox.intersects(brickBoundingBox) && !intersectingBrick
+            && !brick.isDestroyed()) {
           intersectingBrick = true;
           brick.destroy();
           String soi = findSideOfIntersection(brickBoundingBox);
+          updatesUntilCollidable = defaultUpdatesUntilCollidable;
 
           if (soi.contentEquals("top") || soi.contentEquals("bottom")) {
             flipVelocityY();
@@ -70,6 +72,7 @@ public class Ball extends GOval {
     if (ballBoundingBox.intersects(paddleBoundingBox) && !intersectingPaddle) {
       intersectingPaddle = true;
       String soi = findSideOfIntersection(paddleBoundingBox);
+      updatesUntilCollidable = defaultUpdatesUntilCollidable;
 
       if (soi.contentEquals("top") || soi.contentEquals("bottom")) {
         flipVelocityY();
@@ -85,11 +88,13 @@ public class Ball extends GOval {
     if (gameBounds != null) {
       if ((ballBoundingBox.getX() < 0 || ballBoundingBox.getX() + ballBoundingBox.getWidth() > gameBounds.getWidth())
           && !intersectingWall) {
+        updatesUntilCollidable = defaultUpdatesUntilCollidable;
         intersectingWall = true;
         flipVelocityX();
         return;
       } else if (ballBoundingBox.getY() < 0 && !intersectingWall) {
         intersectingWall = true;
+        updatesUntilCollidable = defaultUpdatesUntilCollidable;
         flipVelocityY();
         return;
       }
@@ -105,7 +110,6 @@ public class Ball extends GOval {
       intersectingBrick = false;
       intersectingPaddle = false;
       intersectingWall = false;
-      updatesUntilCollidable = defaultUpdatesUntilCollidable;
     } else {
       updatesUntilCollidable--;
     }
