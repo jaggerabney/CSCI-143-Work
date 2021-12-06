@@ -100,4 +100,28 @@ public class Bricks {
       }
     }
   }
+
+  public boolean allBricksDestroyed() {
+    boolean allBricksDestroyed = true;
+
+    for (Brick[] row : bricks) {
+      for (Brick brick : row) {
+        if (brick != null && !brick.isDestroyed()) {
+          allBricksDestroyed = false;
+        }
+      }
+    }
+
+    return allBricksDestroyed;
+  }
+
+  // for debugging only!!
+  public void destroyAllBricks() {
+    for (int i = 0; i < bricks.length; i++) {
+      for (int j = 0; j < bricks[i].length; j++) {
+        if (bricks[i][j] != null)
+          bricks[i][j].destroy();
+      }
+    }
+  }
 }

@@ -37,13 +37,13 @@ public class Ball extends GOval {
     this.updatesUntilCollidable = 0;
     // "throws" the ball in a random direction, and sets it to filled
     randomVelocity();
-    this.velocityY = 3.0;
     setFilled(true);
   }
 
-  private void randomVelocity() {
+  public void randomVelocity() {
     RandomGenerator rg = RandomGenerator.getInstance();
-    this.velocityX = rg.nextDouble(1.0, 3.0);
+    this.velocityX = rg.nextDouble(1.0, 2.0);
+    this.velocityY = 3.0;
     if (rg.nextBoolean(0.5)) {
       velocityX = -velocityX;
     }
@@ -189,5 +189,9 @@ public class Ball extends GOval {
 
   public void flipVelocityY() {
     this.velocityY *= -1;
+  }
+
+  public void resetNumCollisions() {
+    this.numCollisions = 0;
   }
 }

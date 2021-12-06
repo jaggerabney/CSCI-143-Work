@@ -49,18 +49,29 @@ public class Game extends GCanvas {
     // updates the Game objects - called in Breakout to limit number of updates.
     // components are tested for null because this can sometimes run
     // before they're initialized
+    if (bricks.allBricksDestroyed() && served) {
+      win();
+    }
+
     if (updatesUntilServe > 0) {
       updatesUntilServe--;
+
+      System.out.println(updatesUntilServe);
+
       if (numLives == 0) {
         scoreboard.setText("Thanks for playing!");
+      } else if (numLives == -1) {
+        scoreboard.setText("You win!");
       } else {
         scoreboard.setText("Too bad! Lives left: " + numLives);
       }
     } else if (updatesUntilServe == 0 && !served) {
-      if (numLives == 0) {
+      if (numLives <= 0) {
         System.exit(0);
       } else {
         ball.setLocation(this.config.getIntProp("WIDTH") / 2, this.config.getIntProp("HEIGHT") / 2);
+        ball.resetNumCollisions();
+        ball.randomVelocity();
         add(ball);
         served = true;
       }
@@ -82,6 +93,12 @@ public class Game extends GCanvas {
     updatesUntilServe = config.getIntProp("SERVE_NOTIFICATION_TIME");
     numLives--;
     remove(ball);
+  }
+
+  private void win() {
+    served = false;
+    updatesUntilServe = config.getIntProp("SERVE_NOTIFICATION_TIME");
+    numLives = 0;
   }
 
   // switches the corresponding boolean for the given Powerup to true

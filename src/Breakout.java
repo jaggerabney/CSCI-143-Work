@@ -46,8 +46,6 @@ public class Breakout extends GraphicsProgram implements ComponentListener {
         final double nsPerUpdate = 1000000000.0 / config.getDoubleProp("FRAME_LIMIT");
         long lastTime = System.nanoTime();
         double unprocessedTime = 0;
-        int frames = 0;
-        int updates = 0;
         long frameCounter = System.currentTimeMillis();
 
         while (isRunning) {
@@ -58,16 +56,11 @@ public class Breakout extends GraphicsProgram implements ComponentListener {
 
             if (unprocessedTime >= nsPerUpdate) {
                 unprocessedTime = 0;
-                updates++;
                 game.update();
             }
             game.repaint();
-            frames++;
 
             if (System.currentTimeMillis() - frameCounter >= 1000) {
-                System.out.println("Frames: " + frames + ", updates: " + updates);
-                frames = 0;
-                updates = 0;
                 frameCounter += 1000;
             }
         }

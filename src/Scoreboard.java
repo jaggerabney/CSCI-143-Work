@@ -4,7 +4,7 @@ import acm.graphics.*;
 // Displays the player's score, and any Powerup messages
 public class Scoreboard extends GCanvas {
   // fields
-  private int score, updatesUntilTextReset, updatesUntilServe, numLives;
+  private int score, updatesUntilTextReset;
   private String activePowerupEffect;
   private GRect background;
   private GLabel text;
@@ -43,11 +43,6 @@ public class Scoreboard extends GCanvas {
   public void powerupActivated(String activePowerupEffect, int updatesUntilTextReset) {
     this.activePowerupEffect = activePowerupEffect;
     this.updatesUntilTextReset = updatesUntilTextReset;
-  }
-
-  public void serve(int numLives, int updatesUntilServe) {
-    this.updatesUntilServe = updatesUntilServe;
-    this.numLives = numLives;
   }
 
   // updates according to active powerups
