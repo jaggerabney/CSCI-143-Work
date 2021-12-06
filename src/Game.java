@@ -11,6 +11,7 @@ public class Game extends GCanvas {
   private Bricks bricks;
   private Powerups powerups;
   private GRectangle bounds;
+  private boolean doublePointsActive, bigPaddleActive, fastBallActive;
 
   public Game(Config config, Scoreboard scoreboard) {
     super();
@@ -42,12 +43,45 @@ public class Game extends GCanvas {
     ball.update(bricks.getAllBricks(), paddle, bounds);
     paddle.update(null);
     if (bricks != null) {
-      bricks.update(this, scoreboard);
+      bricks.update(this, scoreboard, doublePointsActive);
     }
     if (scoreboard != null) {
-      scoreboard.update();
+      scoreboard.update(powerups);
     }
-    powerups.update();
+    powerups.update(this, ball);
+  }
+
+  public void activatePowerup(Powerup powerup) {
+    String effect = powerup.getEffect();
+    scoreboard.powerupActivated(effect, 120);
+
+    switch (effect) {
+      case "Double Points":
+        doublePointsActive = true;
+        break;
+      case "Big Paddle":
+        bigPaddleActive = true;
+        break;
+      case "Fast Ball":
+        fastBallActive = true;
+        break;
+    }
+  }
+
+  public void deactivatePowerup(Powerup powerup) {
+    String effect = powerup.getEffect();
+
+    switch (effect) {
+      case "Double Points":
+        doublePointsActive = false;
+        break;
+      case "Big Paddle":
+        bigPaddleActive = false;
+        break;
+      case "Fast Ball":
+        fastBallActive = false;
+        break;
+    }
   }
 
   public void windowResizeHandler(ComponentEvent e) {

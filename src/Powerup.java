@@ -2,7 +2,14 @@ import acm.graphics.*;
 import java.awt.*;
 
 public class Powerup extends GPolygon {
-  public Powerup(double size) {
+  private String effect;
+  private boolean active;
+  private int updatesUntilDeactivation;
+
+  public Powerup(double size, String effect) {
+    this.effect = effect;
+    this.active = false;
+
     double sinTheta = GMath.sinDegrees(18);
     double b = 0.5 * sinTheta / (1.0 + sinTheta);
     double edge = (0.5 - b) * size;
@@ -18,5 +25,54 @@ public class Powerup extends GPolygon {
     setColor(Color.BLACK);
     setFillColor(Color.YELLOW);
     setFilled(true);
+  }
+
+  public boolean intersects(GObject other) {
+    GRectangle bounds = other.getBounds();
+    double x0 = bounds.getX(), y0 = bounds.getY(),
+        x1 = bounds.getX() + bounds.getWidth(),
+        y1 = bounds.getY() + bounds.getHeight();
+
+    if (contains(x0, y0)) { // top left corner
+      return true;
+    } else if (contains(x0, y1)) { // top right corner
+      return true;
+    } else if (contains(x1, y0)) { // bottom left corner
+      return true;
+    } else if (contains(x1, y1)) { // bottom right corner
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public String getEffect() {
+    return effect;
+  }
+
+  public void doUpdateTick() {
+    if (updatesUntilDeactivation > 0) {
+      updatesUntilDeactivation--;
+      System.out.println(updatesUntilDeactivation);
+    }
+  }
+
+  public int getUpdateTicks() {
+    return updatesUntilDeactivation;
+  }
+
+  public void activate(int updates) {
+    this.updatesUntilDeactivation = 900;
+    this.active = true;
+  }
+
+  public void deactivate() {
+    this.updatesUntilDeactivation = 0;
+    this.active = false;
+    System.out.println("Deactivated");
+  }
+
+  public boolean isActive() {
+    return active;
   }
 }

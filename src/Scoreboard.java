@@ -2,7 +2,8 @@ import java.awt.*;
 import acm.graphics.*;
 
 public class Scoreboard extends GCanvas {
-  private int score;
+  private int score, updatesUntilTextReset;
+  private String activePowerupEffect;
   private GRect background;
   private GLabel text;
 
@@ -27,11 +28,27 @@ public class Scoreboard extends GCanvas {
     text.setLocation((width / 2) - (text.getWidth() / 2), (height / 2) + (text.getHeight() / 4));
   }
 
-  public void addScore(int scoreToAdd) {
-    score += scoreToAdd;
+  public void addScore(int scoreToAdd, boolean doublePointsActive) {
+    score += (doublePointsActive) ? scoreToAdd * 2 : scoreToAdd;
   }
 
-  public void update() {
-    text.setLabel("Score: " + score);
+  public void powerupActivated(String activePowerupEffect, int updatesUntilTextReset) {
+    this.activePowerupEffect = activePowerupEffect;
+    this.updatesUntilTextReset = updatesUntilTextReset;
+  }
+
+  public void update(Powerups powerups) {
+    if (activePowerupEffect != null) {
+      if (updatesUntilTextReset > 0) {
+        text.setLabel(activePowerupEffect + " activated!");
+        text.setLocation((background.getWidth() / 2) - (text.getWidth() / 2),
+            (background.getHeight() / 2) + (text.getHeight() / 4));
+        updatesUntilTextReset--;
+      } else {
+        text.setLabel("Score: " + score);
+      }
+    } else {
+      text.setLabel("Score: " + score);
+    }
   }
 }

@@ -11,7 +11,7 @@ public class Bricks {
     initBricks(config);
   }
 
-  public void update(Game game, Scoreboard scoreboard) {
+  public void update(Game game, Scoreboard scoreboard, boolean doublePointsActive) {
     Brick brick = null;
 
     for (int i = 0; i < bricks.length; i++) {
@@ -20,7 +20,7 @@ public class Bricks {
 
         if (brick != null && brick.isDestroyed()) {
           game.remove(brick);
-          scoreboard.addScore(100);
+          scoreboard.addScore(100, doublePointsActive);
           bricks[i][j] = null;
         }
       }
