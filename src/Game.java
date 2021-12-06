@@ -11,8 +11,7 @@ public class Game extends GCanvas {
   private Bricks bricks;
   private Powerups powerups;
   private GRectangle bounds;
-  private boolean doublePointsActive, bigPaddleActive, fastBallActive;
-  private GRect test;
+  private boolean doublePointsActive, fastBallActive;
 
   public Game(Config config, Scoreboard scoreboard) {
     super();
@@ -28,7 +27,7 @@ public class Game extends GCanvas {
         this.config.getIntProp("BALL_RADIUS") * 2, this.config.getIntProp("BALL_RADIUS") * 2,
         config.getIntProp("COLLISIONS_THRESHOLD"));
     this.bricks = new Bricks(config);
-    this.powerups = new Powerups(config.getDoubleProp("POWERUP_SIZE"), 300);
+    this.powerups = new Powerups(config.getDoubleProp("POWERUP_SIZE"), 1800);
 
     add(ball);
     add(paddle);
@@ -37,9 +36,6 @@ public class Game extends GCanvas {
         add(bricks.getBrick(i, j));
       }
     }
-
-    test = new GRect(config.getDoubleProp("WIDTH") / 2, config.getDoubleProp("HEIGHT") / 2, 10, 10);
-    add(test);
   }
 
   public void update() {
@@ -63,7 +59,6 @@ public class Game extends GCanvas {
         doublePointsActive = true;
         break;
       case "Big Paddle":
-        bigPaddleActive = true;
         paddle.setSize(config.getDoubleProp("PADDLE_WIDTH") * 3, paddle.getHeight());
         break;
       case "Fast Ball":
@@ -80,7 +75,6 @@ public class Game extends GCanvas {
         doublePointsActive = false;
         break;
       case "Big Paddle":
-        bigPaddleActive = false;
         paddle.setSize(config.getDoubleProp("PADDLE_WIDTH"), paddle.getHeight());
         break;
       case "Fast Ball":
@@ -98,6 +92,5 @@ public class Game extends GCanvas {
     this.bounds = new GRectangle(windowWidth, windowHeight);
     bricks.setBrickWidth(config, windowSize);
     paddle.setLocation(paddle.getX(), windowHeight - config.getIntProp("PADDLE_Y_OFFSET"));
-    test.setLocation(windowWidth / 2, windowHeight / 2);
   }
 }

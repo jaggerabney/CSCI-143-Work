@@ -2,11 +2,9 @@ import java.util.*;
 
 public class Powerups {
   private Powerup[] powerups;
-  private double powerupSize;
   private int updates, defaultUpdatesUntilPlacement, updatesUntilNextPlacement;
 
   public Powerups(double powerupSize, int updatesUntilNextPlacement) {
-    this.powerupSize = powerupSize;
     this.defaultUpdatesUntilPlacement = updatesUntilNextPlacement;
     this.updatesUntilNextPlacement = updatesUntilNextPlacement;
     this.powerups = new Powerup[] { new Powerup(powerupSize, "Double Points"),
@@ -28,8 +26,10 @@ public class Powerups {
         Random rng = new Random();
         Powerup placedPowerup = powerups[rng.nextInt(powerups.length - 1)];
         placedPowerup.makeVisible();
-        double powerupX = game.getBounds().getCenterX() + rng.nextDouble(game.getBounds().getCenterX() / 2);
-        double powerupY = game.getBounds().getCenterY() + rng.nextDouble(game.getBounds().getCenterY() / 2);
+        double powerupX = game.getBounds().getCenterX()
+            + rng.nextDouble(game.getBounds().getCenterX() / 2) * (rng.nextBoolean() ? -1 : 1);
+        double powerupY = game.getBounds().getCenterY()
+            + rng.nextDouble(game.getBounds().getCenterY() / 2) * (rng.nextBoolean() ? -1 : 1);
 
         game.add(placedPowerup, powerupX, powerupY);
 

@@ -25,7 +25,7 @@ public class Ball extends GOval {
     this.intersectingBrick = false;
     this.collisionsThreshold = collisionsThreshold;
     this.numCollisions = 0;
-    this.defaultUpdatesUntilCollidable = 2;
+    this.defaultUpdatesUntilCollidable = 5;
     this.updatesUntilCollidable = 0;
     randomVelocity();
     this.velocityY = 3.0;
