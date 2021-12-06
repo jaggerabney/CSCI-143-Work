@@ -46,9 +46,13 @@ public class Scoreboard extends GCanvas {
         updatesUntilTextReset--;
       } else {
         text.setLabel("Score: " + score);
+        text.setLocation((background.getWidth() / 2) - (text.getWidth() / 2),
+            (background.getHeight() / 2) + (text.getHeight() / 4));
       }
     } else {
       text.setLabel("Score: " + score);
+      text.setLocation((background.getWidth() / 2) - (text.getWidth() / 2),
+          (background.getHeight() / 2) + (text.getHeight() / 4));
     }
   }
 }

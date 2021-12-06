@@ -27,7 +27,7 @@ public class Game extends GCanvas {
         this.config.getIntProp("BALL_RADIUS") * 2, this.config.getIntProp("BALL_RADIUS") * 2,
         config.getIntProp("COLLISIONS_THRESHOLD"));
     this.bricks = new Bricks(config);
-    this.powerups = new Powerups(config.getDoubleProp("POWERUP_SIZE"));
+    this.powerups = new Powerups(config.getDoubleProp("POWERUP_SIZE"), 300);
 
     add(ball);
     add(paddle);
@@ -36,12 +36,11 @@ public class Game extends GCanvas {
         add(bricks.getBrick(i, j));
       }
     }
-    add(powerups.getPowerups()[0], 200, 200);
   }
 
   public void update() {
-    ball.update(bricks.getAllBricks(), paddle, bounds);
-    paddle.update(null);
+    ball.update(bricks.getAllBricks(), paddle, bounds, fastBallActive);
+    paddle.update();
     if (bricks != null) {
       bricks.update(this, scoreboard, doublePointsActive);
     }
@@ -61,6 +60,7 @@ public class Game extends GCanvas {
         break;
       case "Big Paddle":
         bigPaddleActive = true;
+        paddle.setSize(config.getDoubleProp("PADDLE_WIDTH") * 3, paddle.getHeight());
         break;
       case "Fast Ball":
         fastBallActive = true;
@@ -77,6 +77,7 @@ public class Game extends GCanvas {
         break;
       case "Big Paddle":
         bigPaddleActive = false;
+        paddle.setSize(config.getDoubleProp("PADDLE_WIDTH"), paddle.getHeight());
         break;
       case "Fast Ball":
         fastBallActive = false;

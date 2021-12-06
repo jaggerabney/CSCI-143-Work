@@ -40,7 +40,7 @@ public class Ball extends GOval {
     }
   }
 
-  public void update(Brick[][] bricks, Paddle paddle, GRectangle gameBounds) {
+  public void update(Brick[][] bricks, Paddle paddle, GRectangle gameBounds, boolean fastBallActive) {
     GRectangle ballBoundingBox = this.getBounds();
     GRectangle brickBoundingBox = null;
 
@@ -114,7 +114,7 @@ public class Ball extends GOval {
       updatesUntilCollidable--;
     }
 
-    this.move(velocityX, velocityY);
+    this.move((fastBallActive) ? velocityX * 2 : velocityX, (fastBallActive) ? velocityY * 2 : velocityY);
   }
 
   public String findSideOfIntersection(GRectangle other) {

@@ -17,8 +17,11 @@ public class Paddle extends GRect {
     this.controls = controls;
   }
 
-  public void update(GObject[] others) {
-    // TODO: add code here!
+  public void changeWidthBy(int scalingFactor) {
+    this.setSize(getWidth() * scalingFactor, getHeight());
+  }
+
+  public void update() {
     this.setLocation(this.controls.getMouseX(), this.getY());
   }
 }

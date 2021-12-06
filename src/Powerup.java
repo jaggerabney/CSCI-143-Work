@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class Powerup extends GPolygon {
   private String effect;
-  private boolean active;
+  private boolean active, visible;
   private int updatesUntilDeactivation;
 
   public Powerup(double size, String effect) {
@@ -61,15 +61,24 @@ public class Powerup extends GPolygon {
     return updatesUntilDeactivation;
   }
 
-  public void activate(int updates) {
-    this.updatesUntilDeactivation = 900;
+  public void activate() {
+    this.updatesUntilDeactivation = 600;
     this.active = true;
+    this.visible = false;
   }
 
   public void deactivate() {
     this.updatesUntilDeactivation = 0;
     this.active = false;
     System.out.println("Deactivated");
+  }
+
+  public void makeVisible() {
+    this.visible = true;
+  }
+
+  public boolean isVisible() {
+    return visible;
   }
 
   public boolean isActive() {
